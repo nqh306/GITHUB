@@ -45,7 +45,15 @@ Partial Class FormReconcilePaymentInstruction
         Dim FormatConditionRuleValue9 As DevExpress.XtraEditors.FormatConditionRuleValue = New DevExpress.XtraEditors.FormatConditionRuleValue()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormReconcilePaymentInstruction))
         Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject3 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject4 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Dim EditorButtonImageOptions2 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim SerializableAppearanceObject5 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject6 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject7 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject8 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Dim ColumnDefinition7 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
         Dim ColumnDefinition8 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
         Dim ColumnDefinition9 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
@@ -69,6 +77,10 @@ Partial Class FormReconcilePaymentInstruction
         Dim GridFormatRule12 As DevExpress.XtraGrid.GridFormatRule = New DevExpress.XtraGrid.GridFormatRule()
         Dim FormatConditionRuleExpression3 As DevExpress.XtraEditors.FormatConditionRuleExpression = New DevExpress.XtraEditors.FormatConditionRuleExpression()
         Dim EditorButtonImageOptions3 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim SerializableAppearanceObject9 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject10 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject11 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject12 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Dim ColumnDefinition16 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
         Dim ColumnDefinition17 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
         Dim RowDefinition12 As DevExpress.XtraLayout.RowDefinition = New DevExpress.XtraLayout.RowDefinition()
@@ -410,7 +422,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.Processing_GridControl_Queue.MainView = Me.Processing_GridView_Queue1
         Me.Processing_GridControl_Queue.Name = "Processing_GridControl_Queue"
         Me.Processing_GridControl_Queue.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.Processing_Queue_Checkbox, Me.RepositoryItemComboBox_Action})
-        Me.Processing_GridControl_Queue.Size = New System.Drawing.Size(1044, 318)
+        Me.Processing_GridControl_Queue.Size = New System.Drawing.Size(1062, 334)
         Me.Processing_GridControl_Queue.TabIndex = 11
         Me.Processing_GridControl_Queue.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.Processing_GridView_Queue1, Me.Processing_Gridview_Email})
         '
@@ -928,7 +940,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.TabNavigationPage_Home.Caption = "Processing Queue"
         Me.TabNavigationPage_Home.Controls.Add(Me.LayoutControl_PageHome)
         Me.TabNavigationPage_Home.Name = "TabNavigationPage_Home"
-        Me.TabNavigationPage_Home.Size = New System.Drawing.Size(1068, 522)
+        Me.TabNavigationPage_Home.Size = New System.Drawing.Size(1086, 538)
         '
         'LayoutControl_PageHome
         '
@@ -954,15 +966,15 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControl_PageHome.Name = "LayoutControl_PageHome"
         Me.LayoutControl_PageHome.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(212, 276, 450, 400)
         Me.LayoutControl_PageHome.Root = Me.LayoutControlGroup__PageHome
-        Me.LayoutControl_PageHome.Size = New System.Drawing.Size(1068, 522)
+        Me.LayoutControl_PageHome.Size = New System.Drawing.Size(1086, 538)
         Me.LayoutControl_PageHome.TabIndex = 0
         Me.LayoutControl_PageHome.Text = "LayoutControl1"
         '
         'Processing_rbtSearchByText
         '
-        Me.Processing_rbtSearchByText.Location = New System.Drawing.Point(357, 74)
+        Me.Processing_rbtSearchByText.Location = New System.Drawing.Point(363, 74)
         Me.Processing_rbtSearchByText.Name = "Processing_rbtSearchByText"
-        Me.Processing_rbtSearchByText.Size = New System.Drawing.Size(163, 25)
+        Me.Processing_rbtSearchByText.Size = New System.Drawing.Size(166, 25)
         Me.Processing_rbtSearchByText.TabIndex = 5
         Me.Processing_rbtSearchByText.TabStop = True
         Me.Processing_rbtSearchByText.Text = "Search by Text"
@@ -970,9 +982,9 @@ Partial Class FormReconcilePaymentInstruction
         '
         'Processing_btSearch
         '
-        Me.Processing_btSearch.Location = New System.Drawing.Point(357, 128)
+        Me.Processing_btSearch.Location = New System.Drawing.Point(363, 128)
         Me.Processing_btSearch.Name = "Processing_btSearch"
-        Me.Processing_btSearch.Size = New System.Drawing.Size(163, 22)
+        Me.Processing_btSearch.Size = New System.Drawing.Size(166, 22)
         Me.Processing_btSearch.StyleController = Me.LayoutControl_PageHome
         Me.Processing_btSearch.TabIndex = 10
         Me.Processing_btSearch.Text = "Search"
@@ -980,9 +992,9 @@ Partial Class FormReconcilePaymentInstruction
         'Processing_btManualMapping
         '
         Me.Processing_btManualMapping.ImageOptions.Image = CType(resources.GetObject("Processing_btManualMapping.ImageOptions.Image"), System.Drawing.Image)
-        Me.Processing_btManualMapping.Location = New System.Drawing.Point(711, 488)
+        Me.Processing_btManualMapping.Location = New System.Drawing.Point(723, 504)
         Me.Processing_btManualMapping.Name = "Processing_btManualMapping"
-        Me.Processing_btManualMapping.Size = New System.Drawing.Size(170, 22)
+        Me.Processing_btManualMapping.Size = New System.Drawing.Size(173, 22)
         Me.Processing_btManualMapping.StyleController = Me.LayoutControl_PageHome
         Me.Processing_btManualMapping.TabIndex = 16
         Me.Processing_btManualMapping.Text = "Manual Mapping"
@@ -990,9 +1002,9 @@ Partial Class FormReconcilePaymentInstruction
         'Processing_btComplete
         '
         Me.Processing_btComplete.ImageOptions.Image = CType(resources.GetObject("Processing_btComplete.ImageOptions.Image"), System.Drawing.Image)
-        Me.Processing_btComplete.Location = New System.Drawing.Point(12, 488)
+        Me.Processing_btComplete.Location = New System.Drawing.Point(12, 504)
         Me.Processing_btComplete.Name = "Processing_btComplete"
-        Me.Processing_btComplete.Size = New System.Drawing.Size(346, 22)
+        Me.Processing_btComplete.Size = New System.Drawing.Size(352, 22)
         Me.Processing_btComplete.StyleController = Me.LayoutControl_PageHome
         Me.Processing_btComplete.TabIndex = 12
         Me.Processing_btComplete.Text = "Complete without Send Email"
@@ -1002,7 +1014,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.Processing_tbSearchByText.Location = New System.Drawing.Point(24, 128)
         Me.Processing_tbSearchByText.Name = "Processing_tbSearchByText"
         Me.Processing_tbSearchByText.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Repository.ClearButton(), New DevExpress.XtraEditors.Repository.SearchButton()})
-        Me.Processing_tbSearchByText.Size = New System.Drawing.Size(329, 20)
+        Me.Processing_tbSearchByText.Size = New System.Drawing.Size(335, 20)
         Me.Processing_tbSearchByText.StyleController = Me.LayoutControl_PageHome
         Me.Processing_tbSearchByText.TabIndex = 9
         '
@@ -1010,24 +1022,24 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.Processing_cbByStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Processing_cbByStatus.FormattingEnabled = True
-        Me.Processing_cbByStatus.Location = New System.Drawing.Point(413, 103)
+        Me.Processing_cbByStatus.Location = New System.Drawing.Point(418, 103)
         Me.Processing_cbByStatus.Name = "Processing_cbByStatus"
-        Me.Processing_cbByStatus.Size = New System.Drawing.Size(107, 21)
+        Me.Processing_cbByStatus.Size = New System.Drawing.Size(111, 21)
         Me.Processing_cbByStatus.TabIndex = 8
         '
         'Processing_cbSheetName
         '
         Me.Processing_cbSheetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Processing_cbSheetName.FormattingEnabled = True
-        Me.Processing_cbSheetName.Location = New System.Drawing.Point(324, 24)
+        Me.Processing_cbSheetName.Location = New System.Drawing.Point(329, 24)
         Me.Processing_cbSheetName.Name = "Processing_cbSheetName"
-        Me.Processing_cbSheetName.Size = New System.Drawing.Size(96, 21)
+        Me.Processing_cbSheetName.Size = New System.Drawing.Size(98, 21)
         Me.Processing_cbSheetName.TabIndex = 2
         '
         'Processing_cbByDate
         '
         Me.Processing_cbByDate.EditValue = Nothing
-        Me.Processing_cbByDate.Location = New System.Drawing.Point(246, 103)
+        Me.Processing_cbByDate.Location = New System.Drawing.Point(248, 103)
         Me.Processing_cbByDate.Name = "Processing_cbByDate"
         Me.Processing_cbByDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.Processing_cbByDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -1036,16 +1048,16 @@ Partial Class FormReconcilePaymentInstruction
         Me.Processing_cbByDate.Properties.EditFormat.FormatString = "dd/MM/yyyy"
         Me.Processing_cbByDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.Processing_cbByDate.Properties.Mask.EditMask = "dd/MM/yyyy"
-        Me.Processing_cbByDate.Size = New System.Drawing.Size(107, 20)
+        Me.Processing_cbByDate.Size = New System.Drawing.Size(111, 20)
         Me.Processing_cbByDate.StyleController = Me.LayoutControl_PageHome
         Me.Processing_cbByDate.TabIndex = 7
         '
         'Processing_btExportToExcel
         '
         Me.Processing_btExportToExcel.ImageOptions.Image = CType(resources.GetObject("Processing_btExportToExcel.ImageOptions.Image"), System.Drawing.Image)
-        Me.Processing_btExportToExcel.Location = New System.Drawing.Point(885, 488)
+        Me.Processing_btExportToExcel.Location = New System.Drawing.Point(900, 504)
         Me.Processing_btExportToExcel.Name = "Processing_btExportToExcel"
-        Me.Processing_btExportToExcel.Size = New System.Drawing.Size(171, 22)
+        Me.Processing_btExportToExcel.Size = New System.Drawing.Size(174, 22)
         Me.Processing_btExportToExcel.StyleController = Me.LayoutControl_PageHome
         Me.Processing_btExportToExcel.TabIndex = 17
         Me.Processing_btExportToExcel.Text = "Export To Excel"
@@ -1053,20 +1065,20 @@ Partial Class FormReconcilePaymentInstruction
         'Processing_btSendEmail
         '
         Me.Processing_btSendEmail.ImageOptions.Image = CType(resources.GetObject("Processing_btSendEmail.ImageOptions.Image"), System.Drawing.Image)
-        Me.Processing_btSendEmail.Location = New System.Drawing.Point(362, 488)
+        Me.Processing_btSendEmail.Location = New System.Drawing.Point(368, 504)
         Me.Processing_btSendEmail.Name = "Processing_btSendEmail"
-        Me.Processing_btSendEmail.Size = New System.Drawing.Size(345, 22)
+        Me.Processing_btSendEmail.Size = New System.Drawing.Size(351, 22)
         Me.Processing_btSendEmail.StyleController = Me.LayoutControl_PageHome
         Me.Processing_btSendEmail.TabIndex = 15
         Me.Processing_btSendEmail.Text = "Send Email"
         '
         'Processing_GridControl_TaskList
         '
-        Me.Processing_GridControl_TaskList.Location = New System.Drawing.Point(536, 12)
+        Me.Processing_GridControl_TaskList.Location = New System.Drawing.Point(545, 12)
         Me.Processing_GridControl_TaskList.MainView = Me.Processing_GridView_TaskList
         Me.Processing_GridControl_TaskList.Name = "Processing_GridControl_TaskList"
         Me.Processing_GridControl_TaskList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.Processing_TaskList_btShowBatch1, Me.Processing_TaskList_btDeleteBatch})
-        Me.Processing_GridControl_TaskList.Size = New System.Drawing.Size(520, 150)
+        Me.Processing_GridControl_TaskList.Size = New System.Drawing.Size(529, 150)
         Me.Processing_GridControl_TaskList.TabIndex = 4
         Me.Processing_GridControl_TaskList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.Processing_GridView_TaskList})
         '
@@ -1089,7 +1101,7 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.Processing_TaskList_btShowBatch1.AutoHeight = False
         EditorButtonImageOptions1.Image = CType(resources.GetObject("EditorButtonImageOptions1.Image"), System.Drawing.Image)
-        Me.Processing_TaskList_btShowBatch1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(EditorButtonImageOptions1, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, Nothing)})
+        Me.Processing_TaskList_btShowBatch1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, EditorButtonImageOptions1, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, SerializableAppearanceObject2, SerializableAppearanceObject3, SerializableAppearanceObject4, "", Nothing, Nothing, DevExpress.Utils.ToolTipAnchor.[Default])})
         Me.Processing_TaskList_btShowBatch1.Name = "Processing_TaskList_btShowBatch1"
         Me.Processing_TaskList_btShowBatch1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -1105,7 +1117,7 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.Processing_TaskList_btDeleteBatch.AutoHeight = False
         EditorButtonImageOptions2.Image = CType(resources.GetObject("EditorButtonImageOptions2.Image"), System.Drawing.Image)
-        Me.Processing_TaskList_btDeleteBatch.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(EditorButtonImageOptions2, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, Nothing)})
+        Me.Processing_TaskList_btDeleteBatch.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, EditorButtonImageOptions2, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject5, SerializableAppearanceObject6, SerializableAppearanceObject7, SerializableAppearanceObject8, "", Nothing, Nothing, DevExpress.Utils.ToolTipAnchor.[Default])})
         Me.Processing_TaskList_btDeleteBatch.Name = "Processing_TaskList_btDeleteBatch"
         Me.Processing_TaskList_btDeleteBatch.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -1143,9 +1155,9 @@ Partial Class FormReconcilePaymentInstruction
         '
         'Processing_rbtFilter
         '
-        Me.Processing_rbtFilter.Location = New System.Drawing.Point(190, 74)
+        Me.Processing_rbtFilter.Location = New System.Drawing.Point(193, 74)
         Me.Processing_rbtFilter.Name = "Processing_rbtFilter"
-        Me.Processing_rbtFilter.Size = New System.Drawing.Size(163, 25)
+        Me.Processing_rbtFilter.Size = New System.Drawing.Size(166, 25)
         Me.Processing_rbtFilter.TabIndex = 1
         Me.Processing_rbtFilter.Text = "Filter"
         Me.Processing_rbtFilter.UseVisualStyleBackColor = True
@@ -1154,7 +1166,7 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.Processing_rbtSelectAll.Location = New System.Drawing.Point(24, 74)
         Me.Processing_rbtSelectAll.Name = "Processing_rbtSelectAll"
-        Me.Processing_rbtSelectAll.Size = New System.Drawing.Size(162, 25)
+        Me.Processing_rbtSelectAll.Size = New System.Drawing.Size(165, 25)
         Me.Processing_rbtSelectAll.TabIndex = 1
         Me.Processing_rbtSelectAll.Text = "Select All"
         Me.Processing_rbtSelectAll.UseVisualStyleBackColor = True
@@ -1163,27 +1175,27 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.Processing_cbFilter_byUser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Processing_cbFilter_byUser.FormattingEnabled = True
-        Me.Processing_cbFilter_byUser.Location = New System.Drawing.Point(80, 103)
+        Me.Processing_cbFilter_byUser.Location = New System.Drawing.Point(79, 103)
         Me.Processing_cbFilter_byUser.Name = "Processing_cbFilter_byUser"
-        Me.Processing_cbFilter_byUser.Size = New System.Drawing.Size(106, 21)
+        Me.Processing_cbFilter_byUser.Size = New System.Drawing.Size(110, 21)
         Me.Processing_cbFilter_byUser.TabIndex = 6
         '
         'Processing_btImport
         '
         Me.Processing_btImport.ImageOptions.Image = CType(resources.GetObject("Processing_btImport.ImageOptions.Image"), System.Drawing.Image)
-        Me.Processing_btImport.Location = New System.Drawing.Point(424, 24)
+        Me.Processing_btImport.Location = New System.Drawing.Point(431, 24)
         Me.Processing_btImport.Name = "Processing_btImport"
-        Me.Processing_btImport.Size = New System.Drawing.Size(96, 22)
+        Me.Processing_btImport.Size = New System.Drawing.Size(98, 22)
         Me.Processing_btImport.StyleController = Me.LayoutControl_PageHome
         Me.Processing_btImport.TabIndex = 3
         Me.Processing_btImport.Text = "Import"
         '
         'Processing_tbLinkFile
         '
-        Me.Processing_tbLinkFile.Location = New System.Drawing.Point(80, 24)
+        Me.Processing_tbLinkFile.Location = New System.Drawing.Point(79, 24)
         Me.Processing_tbLinkFile.Name = "Processing_tbLinkFile"
         Me.Processing_tbLinkFile.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.Processing_tbLinkFile.Size = New System.Drawing.Size(240, 20)
+        Me.Processing_tbLinkFile.Size = New System.Drawing.Size(246, 20)
         Me.Processing_tbLinkFile.StyleController = Me.LayoutControl_PageHome
         Me.Processing_tbLinkFile.TabIndex = 0
         '
@@ -1193,31 +1205,30 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup__PageHome.GroupBordersVisible = False
         Me.LayoutControlGroup__PageHome.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlGroup_Processing_Filter, Me.LayoutControlItem_Processing_GridControl_Queue, Me.LayoutControlGroup_Processing_Import, Me.LayoutControlItem_Processing_GridView_TaskList, Me.LayoutControlItem_Processing_btComplete, Me.LayoutControlItem_Processing_btManualMapping, Me.LayoutControlItem_Processing_btExportToExcel, Me.LayoutControlItem_Processing_btSendEmail})
         Me.LayoutControlGroup__PageHome.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table
-        Me.LayoutControlGroup__PageHome.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup__PageHome.Name = "Root"
         ColumnDefinition7.SizeType = System.Windows.Forms.SizeType.AutoSize
-        ColumnDefinition7.Width = 175.0R
+        ColumnDefinition7.Width = 178.0R
         ColumnDefinition8.SizeType = System.Windows.Forms.SizeType.AutoSize
-        ColumnDefinition8.Width = 175.0R
+        ColumnDefinition8.Width = 178.0R
         ColumnDefinition9.SizeType = System.Windows.Forms.SizeType.AutoSize
-        ColumnDefinition9.Width = 174.0R
+        ColumnDefinition9.Width = 177.0R
         ColumnDefinition10.SizeType = System.Windows.Forms.SizeType.AutoSize
-        ColumnDefinition10.Width = 175.0R
+        ColumnDefinition10.Width = 178.0R
         ColumnDefinition11.SizeType = System.Windows.Forms.SizeType.AutoSize
-        ColumnDefinition11.Width = 174.0R
+        ColumnDefinition11.Width = 177.0R
         ColumnDefinition12.SizeType = System.Windows.Forms.SizeType.AutoSize
-        ColumnDefinition12.Width = 175.0R
+        ColumnDefinition12.Width = 178.0R
         Me.LayoutControlGroup__PageHome.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(New DevExpress.XtraLayout.ColumnDefinition() {ColumnDefinition7, ColumnDefinition8, ColumnDefinition9, ColumnDefinition10, ColumnDefinition11, ColumnDefinition12})
         RowDefinition5.Height = 50.0R
         RowDefinition5.SizeType = System.Windows.Forms.SizeType.AutoSize
         RowDefinition6.Height = 104.0R
         RowDefinition6.SizeType = System.Windows.Forms.SizeType.AutoSize
-        RowDefinition7.Height = 322.0R
+        RowDefinition7.Height = 338.0R
         RowDefinition7.SizeType = System.Windows.Forms.SizeType.AutoSize
         RowDefinition8.Height = 26.0R
         RowDefinition8.SizeType = System.Windows.Forms.SizeType.AutoSize
         Me.LayoutControlGroup__PageHome.OptionsTableLayoutGroup.RowDefinitions.AddRange(New DevExpress.XtraLayout.RowDefinition() {RowDefinition5, RowDefinition6, RowDefinition7, RowDefinition8})
-        Me.LayoutControlGroup__PageHome.Size = New System.Drawing.Size(1068, 522)
+        Me.LayoutControlGroup__PageHome.Size = New System.Drawing.Size(1086, 538)
         Me.LayoutControlGroup__PageHome.TextVisible = False
         '
         'LayoutControlGroup_Processing_Filter
@@ -1242,7 +1253,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup_Processing_Filter.OptionsTableLayoutGroup.RowDefinitions.AddRange(New DevExpress.XtraLayout.RowDefinition() {RowDefinition1, RowDefinition2, RowDefinition3})
         Me.LayoutControlGroup_Processing_Filter.OptionsTableLayoutItem.ColumnSpan = 3
         Me.LayoutControlGroup_Processing_Filter.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlGroup_Processing_Filter.Size = New System.Drawing.Size(524, 104)
+        Me.LayoutControlGroup_Processing_Filter.Size = New System.Drawing.Size(533, 104)
         Me.LayoutControlGroup_Processing_Filter.TextVisible = False
         '
         'LayoutControlItem_Processing_rbtSelectAll
@@ -1250,17 +1261,17 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_Processing_rbtSelectAll.Control = Me.Processing_rbtSelectAll
         Me.LayoutControlItem_Processing_rbtSelectAll.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem_Processing_rbtSelectAll.Name = "LayoutControlItem_Processing_rbtSelectAll"
-        Me.LayoutControlItem_Processing_rbtSelectAll.Size = New System.Drawing.Size(166, 29)
+        Me.LayoutControlItem_Processing_rbtSelectAll.Size = New System.Drawing.Size(169, 29)
         Me.LayoutControlItem_Processing_rbtSelectAll.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_rbtSelectAll.TextVisible = False
         '
         'LayoutControlItem_Processing_rbtFilter
         '
         Me.LayoutControlItem_Processing_rbtFilter.Control = Me.Processing_rbtFilter
-        Me.LayoutControlItem_Processing_rbtFilter.Location = New System.Drawing.Point(166, 0)
+        Me.LayoutControlItem_Processing_rbtFilter.Location = New System.Drawing.Point(169, 0)
         Me.LayoutControlItem_Processing_rbtFilter.Name = "LayoutControlItem_Processing_rbtFilter"
         Me.LayoutControlItem_Processing_rbtFilter.OptionsTableLayoutItem.ColumnIndex = 1
-        Me.LayoutControlItem_Processing_rbtFilter.Size = New System.Drawing.Size(167, 29)
+        Me.LayoutControlItem_Processing_rbtFilter.Size = New System.Drawing.Size(170, 29)
         Me.LayoutControlItem_Processing_rbtFilter.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_rbtFilter.TextVisible = False
         '
@@ -1270,31 +1281,31 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_Processing_cbFilter_byUser.Location = New System.Drawing.Point(0, 29)
         Me.LayoutControlItem_Processing_cbFilter_byUser.Name = "LayoutControlItem_Processing_cbFilter_byUser"
         Me.LayoutControlItem_Processing_cbFilter_byUser.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_Processing_cbFilter_byUser.Size = New System.Drawing.Size(166, 25)
+        Me.LayoutControlItem_Processing_cbFilter_byUser.Size = New System.Drawing.Size(169, 25)
         Me.LayoutControlItem_Processing_cbFilter_byUser.Text = "by User"
-        Me.LayoutControlItem_Processing_cbFilter_byUser.TextSize = New System.Drawing.Size(53, 13)
+        Me.LayoutControlItem_Processing_cbFilter_byUser.TextSize = New System.Drawing.Size(52, 13)
         '
         'LayoutControlItem_Processing_cbByDate
         '
         Me.LayoutControlItem_Processing_cbByDate.Control = Me.Processing_cbByDate
-        Me.LayoutControlItem_Processing_cbByDate.Location = New System.Drawing.Point(166, 29)
+        Me.LayoutControlItem_Processing_cbByDate.Location = New System.Drawing.Point(169, 29)
         Me.LayoutControlItem_Processing_cbByDate.Name = "LayoutControlItem_Processing_cbByDate"
         Me.LayoutControlItem_Processing_cbByDate.OptionsTableLayoutItem.ColumnIndex = 1
         Me.LayoutControlItem_Processing_cbByDate.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_Processing_cbByDate.Size = New System.Drawing.Size(167, 25)
+        Me.LayoutControlItem_Processing_cbByDate.Size = New System.Drawing.Size(170, 25)
         Me.LayoutControlItem_Processing_cbByDate.Text = "by Date"
-        Me.LayoutControlItem_Processing_cbByDate.TextSize = New System.Drawing.Size(53, 13)
+        Me.LayoutControlItem_Processing_cbByDate.TextSize = New System.Drawing.Size(52, 13)
         '
         'LayoutControlItem_Processing_cbByStatus
         '
         Me.LayoutControlItem_Processing_cbByStatus.Control = Me.Processing_cbByStatus
-        Me.LayoutControlItem_Processing_cbByStatus.Location = New System.Drawing.Point(333, 29)
+        Me.LayoutControlItem_Processing_cbByStatus.Location = New System.Drawing.Point(339, 29)
         Me.LayoutControlItem_Processing_cbByStatus.Name = "LayoutControlItem_Processing_cbByStatus"
         Me.LayoutControlItem_Processing_cbByStatus.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_Processing_cbByStatus.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_Processing_cbByStatus.Size = New System.Drawing.Size(167, 25)
+        Me.LayoutControlItem_Processing_cbByStatus.Size = New System.Drawing.Size(170, 25)
         Me.LayoutControlItem_Processing_cbByStatus.Text = "by Status"
-        Me.LayoutControlItem_Processing_cbByStatus.TextSize = New System.Drawing.Size(53, 13)
+        Me.LayoutControlItem_Processing_cbByStatus.TextSize = New System.Drawing.Size(52, 13)
         '
         'LayoutControlItem_Processing_tbSearchByText
         '
@@ -1303,7 +1314,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_Processing_tbSearchByText.Name = "LayoutControlItem_Processing_tbSearchByText"
         Me.LayoutControlItem_Processing_tbSearchByText.OptionsTableLayoutItem.ColumnSpan = 2
         Me.LayoutControlItem_Processing_tbSearchByText.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_Processing_tbSearchByText.Size = New System.Drawing.Size(333, 26)
+        Me.LayoutControlItem_Processing_tbSearchByText.Size = New System.Drawing.Size(339, 26)
         Me.LayoutControlItem_Processing_tbSearchByText.Text = "by Text"
         Me.LayoutControlItem_Processing_tbSearchByText.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_tbSearchByText.TextVisible = False
@@ -1311,21 +1322,21 @@ Partial Class FormReconcilePaymentInstruction
         'LayoutControlItem_Processing_btSearch
         '
         Me.LayoutControlItem_Processing_btSearch.Control = Me.Processing_btSearch
-        Me.LayoutControlItem_Processing_btSearch.Location = New System.Drawing.Point(333, 54)
+        Me.LayoutControlItem_Processing_btSearch.Location = New System.Drawing.Point(339, 54)
         Me.LayoutControlItem_Processing_btSearch.Name = "LayoutControlItem_Processing_btSearch"
         Me.LayoutControlItem_Processing_btSearch.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_Processing_btSearch.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_Processing_btSearch.Size = New System.Drawing.Size(167, 26)
+        Me.LayoutControlItem_Processing_btSearch.Size = New System.Drawing.Size(170, 26)
         Me.LayoutControlItem_Processing_btSearch.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_btSearch.TextVisible = False
         '
         'LayoutControlItem_Processing_rbtSearchByText
         '
         Me.LayoutControlItem_Processing_rbtSearchByText.Control = Me.Processing_rbtSearchByText
-        Me.LayoutControlItem_Processing_rbtSearchByText.Location = New System.Drawing.Point(333, 0)
+        Me.LayoutControlItem_Processing_rbtSearchByText.Location = New System.Drawing.Point(339, 0)
         Me.LayoutControlItem_Processing_rbtSearchByText.Name = "LayoutControlItem_Processing_rbtSearchByText"
         Me.LayoutControlItem_Processing_rbtSearchByText.OptionsTableLayoutItem.ColumnIndex = 2
-        Me.LayoutControlItem_Processing_rbtSearchByText.Size = New System.Drawing.Size(167, 29)
+        Me.LayoutControlItem_Processing_rbtSearchByText.Size = New System.Drawing.Size(170, 29)
         Me.LayoutControlItem_Processing_rbtSearchByText.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_rbtSearchByText.TextVisible = False
         '
@@ -1336,7 +1347,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_Processing_GridControl_Queue.Name = "LayoutControlItem_Processing_GridControl_Queue"
         Me.LayoutControlItem_Processing_GridControl_Queue.OptionsTableLayoutItem.ColumnSpan = 6
         Me.LayoutControlItem_Processing_GridControl_Queue.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_Processing_GridControl_Queue.Size = New System.Drawing.Size(1048, 322)
+        Me.LayoutControlItem_Processing_GridControl_Queue.Size = New System.Drawing.Size(1066, 338)
         Me.LayoutControlItem_Processing_GridControl_Queue.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_GridControl_Queue.TextVisible = False
         '
@@ -1357,7 +1368,7 @@ Partial Class FormReconcilePaymentInstruction
         RowDefinition4.SizeType = System.Windows.Forms.SizeType.AutoSize
         Me.LayoutControlGroup_Processing_Import.OptionsTableLayoutGroup.RowDefinitions.AddRange(New DevExpress.XtraLayout.RowDefinition() {RowDefinition4})
         Me.LayoutControlGroup_Processing_Import.OptionsTableLayoutItem.ColumnSpan = 3
-        Me.LayoutControlGroup_Processing_Import.Size = New System.Drawing.Size(524, 50)
+        Me.LayoutControlGroup_Processing_Import.Size = New System.Drawing.Size(533, 50)
         Me.LayoutControlGroup_Processing_Import.Text = "Import Payment Instruction"
         Me.LayoutControlGroup_Processing_Import.TextVisible = False
         '
@@ -1366,84 +1377,84 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_Processing_tbLinkFile.Control = Me.Processing_tbLinkFile
         Me.LayoutControlItem_Processing_tbLinkFile.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem_Processing_tbLinkFile.Name = "LayoutControlItem_Processing_tbLinkFile"
-        Me.LayoutControlItem_Processing_tbLinkFile.Size = New System.Drawing.Size(300, 26)
+        Me.LayoutControlItem_Processing_tbLinkFile.Size = New System.Drawing.Size(305, 26)
         Me.LayoutControlItem_Processing_tbLinkFile.Text = "Source File"
-        Me.LayoutControlItem_Processing_tbLinkFile.TextSize = New System.Drawing.Size(53, 13)
+        Me.LayoutControlItem_Processing_tbLinkFile.TextSize = New System.Drawing.Size(52, 13)
         '
         'LayoutControlItem_Processing_btImport
         '
         Me.LayoutControlItem_Processing_btImport.Control = Me.Processing_btImport
-        Me.LayoutControlItem_Processing_btImport.Location = New System.Drawing.Point(400, 0)
+        Me.LayoutControlItem_Processing_btImport.Location = New System.Drawing.Point(407, 0)
         Me.LayoutControlItem_Processing_btImport.Name = "LayoutControlItem_Processing_btImport"
         Me.LayoutControlItem_Processing_btImport.OptionsTableLayoutItem.ColumnIndex = 2
-        Me.LayoutControlItem_Processing_btImport.Size = New System.Drawing.Size(100, 26)
+        Me.LayoutControlItem_Processing_btImport.Size = New System.Drawing.Size(102, 26)
         Me.LayoutControlItem_Processing_btImport.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_btImport.TextVisible = False
         '
         'LayoutControlItem_Processing_cbSheetName
         '
         Me.LayoutControlItem_Processing_cbSheetName.Control = Me.Processing_cbSheetName
-        Me.LayoutControlItem_Processing_cbSheetName.Location = New System.Drawing.Point(300, 0)
+        Me.LayoutControlItem_Processing_cbSheetName.Location = New System.Drawing.Point(305, 0)
         Me.LayoutControlItem_Processing_cbSheetName.Name = "LayoutControlItem_Processing_cbSheetName"
         Me.LayoutControlItem_Processing_cbSheetName.OptionsTableLayoutItem.ColumnIndex = 1
-        Me.LayoutControlItem_Processing_cbSheetName.Size = New System.Drawing.Size(100, 26)
+        Me.LayoutControlItem_Processing_cbSheetName.Size = New System.Drawing.Size(102, 26)
         Me.LayoutControlItem_Processing_cbSheetName.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_cbSheetName.TextVisible = False
         '
         'LayoutControlItem_Processing_GridView_TaskList
         '
         Me.LayoutControlItem_Processing_GridView_TaskList.Control = Me.Processing_GridControl_TaskList
-        Me.LayoutControlItem_Processing_GridView_TaskList.Location = New System.Drawing.Point(524, 0)
+        Me.LayoutControlItem_Processing_GridView_TaskList.Location = New System.Drawing.Point(533, 0)
         Me.LayoutControlItem_Processing_GridView_TaskList.Name = "LayoutControlItem_Processing_GridView_TaskList"
         Me.LayoutControlItem_Processing_GridView_TaskList.OptionsTableLayoutItem.ColumnIndex = 3
         Me.LayoutControlItem_Processing_GridView_TaskList.OptionsTableLayoutItem.ColumnSpan = 3
         Me.LayoutControlItem_Processing_GridView_TaskList.OptionsTableLayoutItem.RowSpan = 2
-        Me.LayoutControlItem_Processing_GridView_TaskList.Size = New System.Drawing.Size(524, 154)
+        Me.LayoutControlItem_Processing_GridView_TaskList.Size = New System.Drawing.Size(533, 154)
         Me.LayoutControlItem_Processing_GridView_TaskList.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_GridView_TaskList.TextVisible = False
         '
         'LayoutControlItem_Processing_btComplete
         '
         Me.LayoutControlItem_Processing_btComplete.Control = Me.Processing_btComplete
-        Me.LayoutControlItem_Processing_btComplete.Location = New System.Drawing.Point(0, 476)
+        Me.LayoutControlItem_Processing_btComplete.Location = New System.Drawing.Point(0, 492)
         Me.LayoutControlItem_Processing_btComplete.Name = "LayoutControlItem_Processing_btComplete"
         Me.LayoutControlItem_Processing_btComplete.OptionsTableLayoutItem.ColumnSpan = 2
         Me.LayoutControlItem_Processing_btComplete.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_Processing_btComplete.Size = New System.Drawing.Size(350, 26)
+        Me.LayoutControlItem_Processing_btComplete.Size = New System.Drawing.Size(356, 26)
         Me.LayoutControlItem_Processing_btComplete.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_btComplete.TextVisible = False
         '
         'LayoutControlItem_Processing_btManualMapping
         '
         Me.LayoutControlItem_Processing_btManualMapping.Control = Me.Processing_btManualMapping
-        Me.LayoutControlItem_Processing_btManualMapping.Location = New System.Drawing.Point(699, 476)
+        Me.LayoutControlItem_Processing_btManualMapping.Location = New System.Drawing.Point(711, 492)
         Me.LayoutControlItem_Processing_btManualMapping.Name = "LayoutControlItem_Processing_btManualMapping"
         Me.LayoutControlItem_Processing_btManualMapping.OptionsTableLayoutItem.ColumnIndex = 4
         Me.LayoutControlItem_Processing_btManualMapping.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_Processing_btManualMapping.Size = New System.Drawing.Size(174, 26)
+        Me.LayoutControlItem_Processing_btManualMapping.Size = New System.Drawing.Size(177, 26)
         Me.LayoutControlItem_Processing_btManualMapping.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_btManualMapping.TextVisible = False
         '
         'LayoutControlItem_Processing_btExportToExcel
         '
         Me.LayoutControlItem_Processing_btExportToExcel.Control = Me.Processing_btExportToExcel
-        Me.LayoutControlItem_Processing_btExportToExcel.Location = New System.Drawing.Point(873, 476)
+        Me.LayoutControlItem_Processing_btExportToExcel.Location = New System.Drawing.Point(888, 492)
         Me.LayoutControlItem_Processing_btExportToExcel.Name = "LayoutControlItem_Processing_btExportToExcel"
         Me.LayoutControlItem_Processing_btExportToExcel.OptionsTableLayoutItem.ColumnIndex = 5
         Me.LayoutControlItem_Processing_btExportToExcel.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_Processing_btExportToExcel.Size = New System.Drawing.Size(175, 26)
+        Me.LayoutControlItem_Processing_btExportToExcel.Size = New System.Drawing.Size(178, 26)
         Me.LayoutControlItem_Processing_btExportToExcel.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_btExportToExcel.TextVisible = False
         '
         'LayoutControlItem_Processing_btSendEmail
         '
         Me.LayoutControlItem_Processing_btSendEmail.Control = Me.Processing_btSendEmail
-        Me.LayoutControlItem_Processing_btSendEmail.Location = New System.Drawing.Point(350, 476)
+        Me.LayoutControlItem_Processing_btSendEmail.Location = New System.Drawing.Point(356, 492)
         Me.LayoutControlItem_Processing_btSendEmail.Name = "LayoutControlItem_Processing_btSendEmail"
         Me.LayoutControlItem_Processing_btSendEmail.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_Processing_btSendEmail.OptionsTableLayoutItem.ColumnSpan = 2
         Me.LayoutControlItem_Processing_btSendEmail.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_Processing_btSendEmail.Size = New System.Drawing.Size(349, 26)
+        Me.LayoutControlItem_Processing_btSendEmail.Size = New System.Drawing.Size(355, 26)
         Me.LayoutControlItem_Processing_btSendEmail.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_Processing_btSendEmail.TextVisible = False
         '
@@ -1553,12 +1564,12 @@ Partial Class FormReconcilePaymentInstruction
         Me.TabPane2.Controls.Add(Me.TabNavigationPage_ImportLog)
         Me.TabPane2.Controls.Add(Me.TabNavigationPage_Internal_Transfer)
         Me.TabPane2.Controls.Add(Me.TabNavigationPage_Maintenance_VSD)
-        Me.TabPane2.Location = New System.Drawing.Point(12, 138)
+        Me.TabPane2.Location = New System.Drawing.Point(12, 137)
         Me.TabPane2.Name = "TabPane2"
         Me.TabPane2.Pages.AddRange(New DevExpress.XtraBars.Navigation.NavigationPageBase() {Me.TabNavigationPage_VSD_Report, Me.TabNavigationPage_Internal_Transfer, Me.TabNavigationPage_Maintenance_VSD, Me.TabNavigationPage_ImportLog})
         Me.TabPane2.RegularSize = New System.Drawing.Size(1044, 372)
         Me.TabPane2.SelectedPage = Me.TabNavigationPage_VSD_Report
-        Me.TabPane2.Size = New System.Drawing.Size(1044, 372)
+        Me.TabPane2.Size = New System.Drawing.Size(1044, 373)
         Me.TabPane2.TabIndex = 7
         Me.TabPane2.Text = "TabPane2"
         '
@@ -1567,7 +1578,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.TabNavigationPage_VSD_Report.Caption = "VSD Report"
         Me.TabNavigationPage_VSD_Report.Controls.Add(Me.LayoutControl_GridView_VSD_Report)
         Me.TabNavigationPage_VSD_Report.Name = "TabNavigationPage_VSD_Report"
-        Me.TabNavigationPage_VSD_Report.Size = New System.Drawing.Size(1026, 327)
+        Me.TabNavigationPage_VSD_Report.Size = New System.Drawing.Size(1044, 344)
         '
         'LayoutControl_GridView_VSD_Report
         '
@@ -1576,7 +1587,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControl_GridView_VSD_Report.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControl_GridView_VSD_Report.Name = "LayoutControl_GridView_VSD_Report"
         Me.LayoutControl_GridView_VSD_Report.Root = Me.LayoutControlGroup_GridView_VSDReport
-        Me.LayoutControl_GridView_VSD_Report.Size = New System.Drawing.Size(1026, 327)
+        Me.LayoutControl_GridView_VSD_Report.Size = New System.Drawing.Size(1044, 344)
         Me.LayoutControl_GridView_VSD_Report.TabIndex = 0
         Me.LayoutControl_GridView_VSD_Report.Text = "LayoutControl1"
         '
@@ -1586,7 +1597,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.ImportVSD_GridControl1.MainView = Me.ImportVSD_GridView1
         Me.ImportVSD_GridControl1.Name = "ImportVSD_GridControl1"
         Me.ImportVSD_GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemComboBox_VSD_REPORT_CASE_STATUS})
-        Me.ImportVSD_GridControl1.Size = New System.Drawing.Size(1002, 303)
+        Me.ImportVSD_GridControl1.Size = New System.Drawing.Size(1020, 320)
         Me.ImportVSD_GridControl1.TabIndex = 0
         Me.ImportVSD_GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.ImportVSD_GridView1})
         '
@@ -1813,9 +1824,8 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup_GridView_VSDReport.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup_GridView_VSDReport.GroupBordersVisible = False
         Me.LayoutControlGroup_GridView_VSDReport.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_ImportVSD_GridControl1})
-        Me.LayoutControlGroup_GridView_VSDReport.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup_GridView_VSDReport.Name = "LayoutControlGroup_GridView_VSDReport"
-        Me.LayoutControlGroup_GridView_VSDReport.Size = New System.Drawing.Size(1026, 327)
+        Me.LayoutControlGroup_GridView_VSDReport.Size = New System.Drawing.Size(1044, 344)
         Me.LayoutControlGroup_GridView_VSDReport.TextVisible = False
         '
         'LayoutControlItem_ImportVSD_GridControl1
@@ -1823,7 +1833,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_ImportVSD_GridControl1.Control = Me.ImportVSD_GridControl1
         Me.LayoutControlItem_ImportVSD_GridControl1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem_ImportVSD_GridControl1.Name = "LayoutControlItem_ImportVSD_GridControl1"
-        Me.LayoutControlItem_ImportVSD_GridControl1.Size = New System.Drawing.Size(1006, 307)
+        Me.LayoutControlItem_ImportVSD_GridControl1.Size = New System.Drawing.Size(1024, 324)
         Me.LayoutControlItem_ImportVSD_GridControl1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_ImportVSD_GridControl1.TextVisible = False
         '
@@ -1922,7 +1932,6 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup_GridViewImportLog.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup_GridViewImportLog.GroupBordersVisible = False
         Me.LayoutControlGroup_GridViewImportLog.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_ImportVSD_GridControl_ImportLog})
-        Me.LayoutControlGroup_GridViewImportLog.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup_GridViewImportLog.Name = "LayoutControlGroup_GridViewImportLog"
         Me.LayoutControlGroup_GridViewImportLog.Size = New System.Drawing.Size(1026, 327)
         Me.LayoutControlGroup_GridViewImportLog.TextVisible = False
@@ -2102,7 +2111,6 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup__GridView_InternalTransfer.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup__GridView_InternalTransfer.GroupBordersVisible = False
         Me.LayoutControlGroup__GridView_InternalTransfer.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_GridView_Internal_Transfer})
-        Me.LayoutControlGroup__GridView_InternalTransfer.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup__GridView_InternalTransfer.Name = "LayoutControlGroup__GridView_InternalTransfer"
         Me.LayoutControlGroup__GridView_InternalTransfer.Size = New System.Drawing.Size(1026, 327)
         Me.LayoutControlGroup__GridView_InternalTransfer.TextVisible = False
@@ -2167,7 +2175,7 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.Maintenance_VSD_btDelete.AutoHeight = False
         EditorButtonImageOptions3.Image = CType(resources.GetObject("EditorButtonImageOptions3.Image"), System.Drawing.Image)
-        Me.Maintenance_VSD_btDelete.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(EditorButtonImageOptions3, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, Nothing)})
+        Me.Maintenance_VSD_btDelete.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, EditorButtonImageOptions3, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject9, SerializableAppearanceObject10, SerializableAppearanceObject11, SerializableAppearanceObject12, "", Nothing, Nothing, DevExpress.Utils.ToolTipAnchor.[Default])})
         Me.Maintenance_VSD_btDelete.Name = "Maintenance_VSD_btDelete"
         Me.Maintenance_VSD_btDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -2200,7 +2208,6 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
         Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1})
-        Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "LayoutControlGroup1"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(1026, 327)
         Me.LayoutControlGroup1.TextVisible = False
@@ -2216,9 +2223,10 @@ Partial Class FormReconcilePaymentInstruction
         '
         'ListView1
         '
+        Me.ListView1.HideSelection = False
         Me.ListView1.Location = New System.Drawing.Point(536, 12)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(520, 122)
+        Me.ListView1.Size = New System.Drawing.Size(520, 121)
         Me.ListView1.TabIndex = 6
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -2234,7 +2242,7 @@ Partial Class FormReconcilePaymentInstruction
         '
         'ImportVSD_lb_Status
         '
-        Me.ImportVSD_lb_Status.Location = New System.Drawing.Point(536, 138)
+        Me.ImportVSD_lb_Status.Location = New System.Drawing.Point(536, 137)
         Me.ImportVSD_lb_Status.Name = "ImportVSD_lb_Status"
         Me.ImportVSD_lb_Status.Size = New System.Drawing.Size(520, 13)
         Me.ImportVSD_lb_Status.StyleController = Me.LayoutControl_ImportVSD
@@ -2253,7 +2261,7 @@ Partial Class FormReconcilePaymentInstruction
         'ImportVSD_tbDate
         '
         Me.ImportVSD_tbDate.EditValue = Nothing
-        Me.ImportVSD_tbDate.Location = New System.Drawing.Point(79, 24)
+        Me.ImportVSD_tbDate.Location = New System.Drawing.Point(78, 24)
         Me.ImportVSD_tbDate.Name = "ImportVSD_tbDate"
         Me.ImportVSD_tbDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.ImportVSD_tbDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -2262,16 +2270,16 @@ Partial Class FormReconcilePaymentInstruction
         Me.ImportVSD_tbDate.Properties.EditFormat.FormatString = "dd/MM/yyyy"
         Me.ImportVSD_tbDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.ImportVSD_tbDate.Properties.Mask.EditMask = "dd/MM/yyyy"
-        Me.ImportVSD_tbDate.Size = New System.Drawing.Size(441, 20)
+        Me.ImportVSD_tbDate.Size = New System.Drawing.Size(442, 20)
         Me.ImportVSD_tbDate.StyleController = Me.LayoutControl_ImportVSD
         Me.ImportVSD_tbDate.TabIndex = 0
         '
         'ImportVSD_tbLinkFile
         '
-        Me.ImportVSD_tbLinkFile.Location = New System.Drawing.Point(79, 48)
+        Me.ImportVSD_tbLinkFile.Location = New System.Drawing.Point(78, 48)
         Me.ImportVSD_tbLinkFile.Name = "ImportVSD_tbLinkFile"
         Me.ImportVSD_tbLinkFile.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.ImportVSD_tbLinkFile.Size = New System.Drawing.Size(441, 20)
+        Me.ImportVSD_tbLinkFile.Size = New System.Drawing.Size(442, 20)
         Me.ImportVSD_tbLinkFile.StyleController = Me.LayoutControl_ImportVSD
         Me.ImportVSD_tbLinkFile.TabIndex = 2
         '
@@ -2281,7 +2289,6 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup_ImportVSD.GroupBordersVisible = False
         Me.LayoutControlGroup_ImportVSD.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_ImportVSD_lb_Status, Me.LayoutControlGroup_ImportVSD_Input, Me.LayoutControlItem_ListView1, Me.LayoutControlItem_TabPane2})
         Me.LayoutControlGroup_ImportVSD.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table
-        Me.LayoutControlGroup_ImportVSD.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup_ImportVSD.Name = "LayoutControlGroup_ImportVSD"
         ColumnDefinition16.SizeType = System.Windows.Forms.SizeType.Percent
         ColumnDefinition16.Width = 50.0R
@@ -2299,11 +2306,11 @@ Partial Class FormReconcilePaymentInstruction
         'LayoutControlItem_ImportVSD_lb_Status
         '
         Me.LayoutControlItem_ImportVSD_lb_Status.Control = Me.ImportVSD_lb_Status
-        Me.LayoutControlItem_ImportVSD_lb_Status.Location = New System.Drawing.Point(524, 126)
+        Me.LayoutControlItem_ImportVSD_lb_Status.Location = New System.Drawing.Point(524, 125)
         Me.LayoutControlItem_ImportVSD_lb_Status.Name = "LayoutControlItem_ImportVSD_lb_Status"
         Me.LayoutControlItem_ImportVSD_lb_Status.OptionsTableLayoutItem.ColumnIndex = 1
         Me.LayoutControlItem_ImportVSD_lb_Status.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_ImportVSD_lb_Status.Size = New System.Drawing.Size(524, 376)
+        Me.LayoutControlItem_ImportVSD_lb_Status.Size = New System.Drawing.Size(524, 377)
         Me.LayoutControlItem_ImportVSD_lb_Status.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_ImportVSD_lb_Status.TextVisible = False
         '
@@ -2324,10 +2331,10 @@ Partial Class FormReconcilePaymentInstruction
         RowDefinition9.SizeType = System.Windows.Forms.SizeType.AutoSize
         RowDefinition10.Height = 24.0R
         RowDefinition10.SizeType = System.Windows.Forms.SizeType.AutoSize
-        RowDefinition11.Height = 54.0R
+        RowDefinition11.Height = 53.0R
         RowDefinition11.SizeType = System.Windows.Forms.SizeType.AutoSize
         Me.LayoutControlGroup_ImportVSD_Input.OptionsTableLayoutGroup.RowDefinitions.AddRange(New DevExpress.XtraLayout.RowDefinition() {RowDefinition9, RowDefinition10, RowDefinition11})
-        Me.LayoutControlGroup_ImportVSD_Input.Size = New System.Drawing.Size(524, 126)
+        Me.LayoutControlGroup_ImportVSD_Input.Size = New System.Drawing.Size(524, 125)
         Me.LayoutControlGroup_ImportVSD_Input.TextVisible = False
         '
         'LayoutControlItem_ImportVSD_tbDate
@@ -2338,7 +2345,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_ImportVSD_tbDate.OptionsTableLayoutItem.ColumnSpan = 3
         Me.LayoutControlItem_ImportVSD_tbDate.Size = New System.Drawing.Size(500, 24)
         Me.LayoutControlItem_ImportVSD_tbDate.Text = "Date"
-        Me.LayoutControlItem_ImportVSD_tbDate.TextSize = New System.Drawing.Size(52, 13)
+        Me.LayoutControlItem_ImportVSD_tbDate.TextSize = New System.Drawing.Size(51, 13)
         '
         'LayoutControlItem_ImportVSD_tbLinkFile
         '
@@ -2349,7 +2356,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_ImportVSD_tbLinkFile.OptionsTableLayoutItem.RowIndex = 1
         Me.LayoutControlItem_ImportVSD_tbLinkFile.Size = New System.Drawing.Size(500, 24)
         Me.LayoutControlItem_ImportVSD_tbLinkFile.Text = "Link Folder"
-        Me.LayoutControlItem_ImportVSD_tbLinkFile.TextSize = New System.Drawing.Size(52, 13)
+        Me.LayoutControlItem_ImportVSD_tbLinkFile.TextSize = New System.Drawing.Size(51, 13)
         '
         'LayoutControlItem_ImportVSD_btImport
         '
@@ -2358,7 +2365,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_ImportVSD_btImport.Name = "LayoutControlItem_ImportVSD_btImport"
         Me.LayoutControlItem_ImportVSD_btImport.OptionsTableLayoutItem.ColumnIndex = 1
         Me.LayoutControlItem_ImportVSD_btImport.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_ImportVSD_btImport.Size = New System.Drawing.Size(167, 54)
+        Me.LayoutControlItem_ImportVSD_btImport.Size = New System.Drawing.Size(167, 53)
         Me.LayoutControlItem_ImportVSD_btImport.Text = "Import"
         Me.LayoutControlItem_ImportVSD_btImport.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_ImportVSD_btImport.TextVisible = False
@@ -2369,7 +2376,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_DropDownButton_RefreshAll.Location = New System.Drawing.Point(0, 48)
         Me.LayoutControlItem_DropDownButton_RefreshAll.Name = "LayoutControlItem_DropDownButton_RefreshAll"
         Me.LayoutControlItem_DropDownButton_RefreshAll.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_DropDownButton_RefreshAll.Size = New System.Drawing.Size(166, 54)
+        Me.LayoutControlItem_DropDownButton_RefreshAll.Size = New System.Drawing.Size(166, 53)
         Me.LayoutControlItem_DropDownButton_RefreshAll.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_DropDownButton_RefreshAll.TextVisible = False
         '
@@ -2380,7 +2387,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_ImportVSD_btExportToExcel.Name = "LayoutControlItem_ImportVSD_btExportToExcel"
         Me.LayoutControlItem_ImportVSD_btExportToExcel.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_ImportVSD_btExportToExcel.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_ImportVSD_btExportToExcel.Size = New System.Drawing.Size(167, 54)
+        Me.LayoutControlItem_ImportVSD_btExportToExcel.Size = New System.Drawing.Size(167, 53)
         Me.LayoutControlItem_ImportVSD_btExportToExcel.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_ImportVSD_btExportToExcel.TextVisible = False
         '
@@ -2390,18 +2397,18 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_ListView1.Location = New System.Drawing.Point(524, 0)
         Me.LayoutControlItem_ListView1.Name = "LayoutControlItem_ListView1"
         Me.LayoutControlItem_ListView1.OptionsTableLayoutItem.ColumnIndex = 1
-        Me.LayoutControlItem_ListView1.Size = New System.Drawing.Size(524, 126)
+        Me.LayoutControlItem_ListView1.Size = New System.Drawing.Size(524, 125)
         Me.LayoutControlItem_ListView1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_ListView1.TextVisible = False
         '
         'LayoutControlItem_TabPane2
         '
         Me.LayoutControlItem_TabPane2.Control = Me.TabPane2
-        Me.LayoutControlItem_TabPane2.Location = New System.Drawing.Point(0, 126)
+        Me.LayoutControlItem_TabPane2.Location = New System.Drawing.Point(0, 125)
         Me.LayoutControlItem_TabPane2.Name = "LayoutControlItem_TabPane2"
         Me.LayoutControlItem_TabPane2.OptionsTableLayoutItem.ColumnSpan = 2
         Me.LayoutControlItem_TabPane2.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_TabPane2.Size = New System.Drawing.Size(1048, 376)
+        Me.LayoutControlItem_TabPane2.Size = New System.Drawing.Size(1048, 377)
         Me.LayoutControlItem_TabPane2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_TabPane2.TextVisible = False
         '
@@ -2457,9 +2464,9 @@ Partial Class FormReconcilePaymentInstruction
         '
         Me.DataMaintenance_cbTableName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.DataMaintenance_cbTableName.FormattingEnabled = True
-        Me.DataMaintenance_cbTableName.Location = New System.Drawing.Point(73, 12)
+        Me.DataMaintenance_cbTableName.Location = New System.Drawing.Point(71, 12)
         Me.DataMaintenance_cbTableName.Name = "DataMaintenance_cbTableName"
-        Me.DataMaintenance_cbTableName.Size = New System.Drawing.Size(459, 21)
+        Me.DataMaintenance_cbTableName.Size = New System.Drawing.Size(461, 21)
         Me.DataMaintenance_cbTableName.TabIndex = 4
         '
         'LayoutControlGroup_DataMaintenance
@@ -2468,7 +2475,6 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup_DataMaintenance.GroupBordersVisible = False
         Me.LayoutControlGroup_DataMaintenance.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_DataMaintenance_cbTableName, Me.LayoutControlItem_DataMaintenance_GridView__DataMaintenance, Me.LayoutControlItem2})
         Me.LayoutControlGroup_DataMaintenance.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table
-        Me.LayoutControlGroup_DataMaintenance.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup_DataMaintenance.Name = "LayoutControlGroup_DataMaintenance"
         ColumnDefinition18.SizeType = System.Windows.Forms.SizeType.Percent
         ColumnDefinition18.Width = 50.0R
@@ -2492,7 +2498,7 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlItem_DataMaintenance_cbTableName.Name = "LayoutControlItem_DataMaintenance_cbTableName"
         Me.LayoutControlItem_DataMaintenance_cbTableName.Size = New System.Drawing.Size(524, 26)
         Me.LayoutControlItem_DataMaintenance_cbTableName.Text = "Table Name"
-        Me.LayoutControlItem_DataMaintenance_cbTableName.TextSize = New System.Drawing.Size(58, 13)
+        Me.LayoutControlItem_DataMaintenance_cbTableName.TextSize = New System.Drawing.Size(56, 13)
         '
         'LayoutControlItem_DataMaintenance_GridView__DataMaintenance
         '
@@ -2520,7 +2526,6 @@ Partial Class FormReconcilePaymentInstruction
         Me.LayoutControlGroup_Main.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup_Main.GroupBordersVisible = False
         Me.LayoutControlGroup_Main.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_TabPane1})
-        Me.LayoutControlGroup_Main.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup_Main.Name = "LayoutControlGroup_Main"
         Me.LayoutControlGroup_Main.Size = New System.Drawing.Size(1110, 591)
         Me.LayoutControlGroup_Main.TextVisible = False

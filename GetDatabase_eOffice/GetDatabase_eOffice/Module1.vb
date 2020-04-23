@@ -50,7 +50,7 @@ Module Module1
                 SQLiteConnection.CreateFile(link_folder_database)
             End If
 
-            SQL_QUERY(link_folder_database, False, "CREATE TABLE IF NOT EXISTS DATABASE_EOFFICE(CASEID VARCHAR NOT NULL, SOTOTRINH VARCHAR, NGAYTOTRINH VARCHAR, BANTRINH VARCHAR, NOIDUNGTRINH VARCHAR, SOVANBAN VARCHAR, SONGHIQUYET VARCHAR, NGAYNGHIQUYET VARCHAR, SOQUYETDINH_VANBAN VARCHAR, NGAYQUYETDINH_VANBAN VARCHAR, YKIEN_HDTV VARCHAR, NGAY_YKIEN_HDTV_GANNHAT VARCHAR, NGUOITHUCHIEN VARCHAR, NGAYTHUCHIEN VARCHAR, THOIGIANXULY INTEGER, GHICHU VARCHAR, LOG VARCHAR, STATUS VARCHAR, USER_CREATED VARCHAR, LAST_USER_MODIFIED VARCHAR, REMARKS VARCHAR)")
+            SQL_QUERY(link_folder_database, False, "CREATE TABLE IF NOT EXISTS DATABASE_EOFFICE(CASEID VARCHAR NOT NULL, SOTOTRINH VARCHAR, NGAYTOTRINH VARCHAR, BANTRINH VARCHAR, NOIDUNGTRINH VARCHAR, SOVANBAN VARCHAR, SONGHIQUYET VARCHAR, NGAYNGHIQUYET VARCHAR, SOQUYETDINH_VANBAN VARCHAR, NGAYQUYETDINH_VANBAN VARCHAR, YKIEN_HDTV VARCHAR, NGAY_YKIEN_HDTV_GANNHAT VARCHAR, NGUOITHUCHIEN VARCHAR, NGAYTHUCHIEN VARCHAR, THOIGIANXULY INTEGER, GHICHU VARCHAR, LOG VARCHAR, STATUS VARCHAR, USER_CREATED VARCHAR, LAST_USER_MODIFIED VARCHAR, REMARKS VARCHAR, STATUS_DELETED VARCHAR)")
 
             SQL_QUERY(link_folder_database, False, "CREATE TABLE IF NOT EXISTS DATABASE_VANBAN_PHATHANH(CASEID VARCHAR NOT NULL, SOVANBAN VARCHAR, NGAYVANBAN VARCHAR, TRICHYEU VARCHAR, NOINHAN VARCHAR, NGAYPHATHANH VARCHAR, NGUOIDANGKY VARCHAR, USER_CREATED VARCHAR, USER_MODIFIED VARCHAR, REMARK VARCHAR)")
 
@@ -189,18 +189,9 @@ Module Module1
                         Dim NGAYTOTRINH As Date = Format(DateTime.ParseExact(ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[5]").Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
 
                         If SOTOTRINH.Length > 0 Then
-                            If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
+                            If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE STATUS_DELETED <> 'Yêu cầu tự động lấy lại' AND NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
                                 js.ExecuteScript("document.getElementById('" & ELEMENT_ID & "').click();")
 
-                                '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl06_pnThongTinVanBan"]/div[1]/table/tbody/tr/td[1]/div[1]/div/b
-                                '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl90_pnThongTinVanBan"]/div[1]/table/tbody/tr/td[1]/div[1]/div/b
-                                '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl93_pnThongTinVanBan"]/div[1]/table/tbody/tr/td[1]/div[1]/div/b
-
-
-
-
-
-                                'Dim element_check_click_success As String = "/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/ul/li/a"
                                 Dim element_check_click_success As String = "//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & (i * 3) + 6 & "_pnThongTinVanBan']/div[1]/table/tbody/tr/td[1]/div[1]/div/b"
                                 Do
 
@@ -384,8 +375,12 @@ Module Module1
                                     End If
                                 End If
 
-                                'SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, NGAYNGHIQUYET, SOQUYETDINH_VANBAN, NGAYQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
-                                '                    "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & NGAYNGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & NGAYQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
+                                SOTOTRINH = Replace(Replace(SOTOTRINH, Chr(34), ""), "'", "")
+                                BANTRINH = Replace(Replace(SOTOTRINH, Chr(34), ""), "'", "")
+                                NOIDUNGTRINH = Replace(Replace(NOIDUNGTRINH, Chr(34), ""), "'", "")
+                                NOIDUNGTRINH = Replace(Replace(NOIDUNGTRINH, Chr(34), ""), "'", "")
+                                YKIEN_HDTV = Replace(Replace(YKIEN_HDTV, Chr(34), ""), "'", "")
+                                GHICHU = Replace(Replace(GHICHU, Chr(34), ""), "'", "")
 
                                 If NGAYNGHIQUYET = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
                                     If NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then

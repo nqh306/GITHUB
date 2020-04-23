@@ -21,6 +21,10 @@ Partial Class XuLyToTrinh
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(XuLyToTrinh))
+        Dim GridFormatRule1 As DevExpress.XtraGrid.GridFormatRule = New DevExpress.XtraGrid.GridFormatRule()
+        Dim FormatConditionRuleValue1 As DevExpress.XtraEditors.FormatConditionRuleValue = New DevExpress.XtraEditors.FormatConditionRuleValue()
+        Dim GridFormatRule2 As DevExpress.XtraGrid.GridFormatRule = New DevExpress.XtraGrid.GridFormatRule()
+        Dim FormatConditionRuleValue2 As DevExpress.XtraEditors.FormatConditionRuleValue = New DevExpress.XtraEditors.FormatConditionRuleValue()
         Dim ColumnDefinition5 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
         Dim ColumnDefinition6 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
         Dim ColumnDefinition7 As DevExpress.XtraLayout.ColumnDefinition = New DevExpress.XtraLayout.ColumnDefinition()
@@ -40,6 +44,7 @@ Partial Class XuLyToTrinh
         Dim RowDefinition4 As DevExpress.XtraLayout.RowDefinition = New DevExpress.XtraLayout.RowDefinition()
         Dim RowDefinition5 As DevExpress.XtraLayout.RowDefinition = New DevExpress.XtraLayout.RowDefinition()
         Dim RowDefinition6 As DevExpress.XtraLayout.RowDefinition = New DevExpress.XtraLayout.RowDefinition()
+        Me.STATUS = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.barManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.bar2 = New DevExpress.XtraBars.Bar()
         Me.cbFilterNguoiXuLy = New DevExpress.XtraBars.BarEditItem()
@@ -54,6 +59,7 @@ Partial Class XuLyToTrinh
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.tbSoToTrinh = New DevExpress.XtraEditors.TextEdit()
         Me.LayoutControl_Home = New DevExpress.XtraLayout.LayoutControl()
+        Me.tbNgayToTrinh = New DevExpress.XtraEditors.DateEdit()
         Me.btXuLyNhanh = New DevExpress.XtraEditors.SimpleButton()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -74,7 +80,6 @@ Partial Class XuLyToTrinh
         Me.THOIGIANXULY = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GHICHU = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LOG = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.STATUS = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.USER_CREATED = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LAST_USER_MODIFIED = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.REMARKS = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -95,7 +100,6 @@ Partial Class XuLyToTrinh
         Me.tbSoNghiQuyet = New DevExpress.XtraEditors.TextEdit()
         Me.tbNoiDungTrinh = New DevExpress.XtraEditors.TextEdit()
         Me.tbBanTrinh = New DevExpress.XtraEditors.TextEdit()
-        Me.tbNgayToTrinh = New DevExpress.XtraEditors.TextEdit()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.Root_Home = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem_btEdit = New DevExpress.XtraLayout.LayoutControlItem()
@@ -105,7 +109,6 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_tbLog = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem_tbSoToTrinh = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem_tbNgayToTrinh = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_tbBanTrinh = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_tbNoiDungTrinh = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_tbSoNghiQuyet = New DevExpress.XtraLayout.LayoutControlItem()
@@ -118,6 +121,7 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_tbYKienHDTV = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_tbThoiGianXuLy = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_tbCaseID = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem_tbNgayToTrinh = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_GridControl = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem_btXuLyNhanh = New DevExpress.XtraLayout.LayoutControlItem()
         Me.RepositoryItemTimeEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit()
@@ -127,6 +131,8 @@ Partial Class XuLyToTrinh
         CType(Me.tbSoToTrinh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl_Home, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl_Home.SuspendLayout()
+        CType(Me.tbNgayToTrinh.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbNgayToTrinh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbLog.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,7 +151,6 @@ Partial Class XuLyToTrinh
         CType(Me.tbSoNghiQuyet.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbNoiDungTrinh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbBanTrinh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbNgayToTrinh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Root_Home, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_btEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_btDelete, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,7 +159,6 @@ Partial Class XuLyToTrinh
         CType(Me.LayoutControlItem_tbLog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_tbSoToTrinh, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem_tbNgayToTrinh, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_tbBanTrinh, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_tbNoiDungTrinh, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_tbSoNghiQuyet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -167,10 +171,19 @@ Partial Class XuLyToTrinh
         CType(Me.LayoutControlItem_tbYKienHDTV, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_tbThoiGianXuLy, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_tbCaseID, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem_tbNgayToTrinh, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_GridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem_btXuLyNhanh, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTimeEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'STATUS
+        '
+        Me.STATUS.Caption = "Tình trạng"
+        Me.STATUS.FieldName = "STATUS"
+        Me.STATUS.Name = "STATUS"
+        Me.STATUS.Visible = True
+        Me.STATUS.VisibleIndex = 7
         '
         'barManager1
         '
@@ -249,15 +262,15 @@ Partial Class XuLyToTrinh
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
         Me.barDockControlTop.Manager = Me.barManager1
-        Me.barDockControlTop.Size = New System.Drawing.Size(854, 26)
+        Me.barDockControlTop.Size = New System.Drawing.Size(859, 26)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 418)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 422)
         Me.barDockControlBottom.Manager = Me.barManager1
-        Me.barDockControlBottom.Size = New System.Drawing.Size(854, 18)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(859, 18)
         '
         'barDockControlLeft
         '
@@ -265,27 +278,28 @@ Partial Class XuLyToTrinh
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 26)
         Me.barDockControlLeft.Manager = Me.barManager1
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 392)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 396)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(854, 26)
+        Me.barDockControlRight.Location = New System.Drawing.Point(859, 26)
         Me.barDockControlRight.Manager = Me.barManager1
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 392)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 396)
         '
         'tbSoToTrinh
         '
         Me.tbSoToTrinh.Location = New System.Drawing.Point(108, 24)
         Me.tbSoToTrinh.MenuManager = Me.barManager1
         Me.tbSoToTrinh.Name = "tbSoToTrinh"
-        Me.tbSoToTrinh.Size = New System.Drawing.Size(114, 20)
+        Me.tbSoToTrinh.Size = New System.Drawing.Size(115, 20)
         Me.tbSoToTrinh.StyleController = Me.LayoutControl_Home
         Me.tbSoToTrinh.TabIndex = 5
         '
         'LayoutControl_Home
         '
+        Me.LayoutControl_Home.Controls.Add(Me.tbNgayToTrinh)
         Me.LayoutControl_Home.Controls.Add(Me.btXuLyNhanh)
         Me.LayoutControl_Home.Controls.Add(Me.GridControl1)
         Me.LayoutControl_Home.Controls.Add(Me.tbLog)
@@ -305,23 +319,35 @@ Partial Class XuLyToTrinh
         Me.LayoutControl_Home.Controls.Add(Me.tbSoNghiQuyet)
         Me.LayoutControl_Home.Controls.Add(Me.tbNoiDungTrinh)
         Me.LayoutControl_Home.Controls.Add(Me.tbBanTrinh)
-        Me.LayoutControl_Home.Controls.Add(Me.tbNgayToTrinh)
         Me.LayoutControl_Home.Controls.Add(Me.tbSoToTrinh)
         Me.LayoutControl_Home.Controls.Add(Me.SimpleButton1)
         Me.LayoutControl_Home.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl_Home.Location = New System.Drawing.Point(0, 26)
         Me.LayoutControl_Home.Name = "LayoutControl_Home"
         Me.LayoutControl_Home.Root = Me.Root_Home
-        Me.LayoutControl_Home.Size = New System.Drawing.Size(854, 392)
+        Me.LayoutControl_Home.Size = New System.Drawing.Size(859, 396)
         Me.LayoutControl_Home.TabIndex = 4
         Me.LayoutControl_Home.Text = "LayoutControl1"
+        '
+        'tbNgayToTrinh
+        '
+        Me.tbNgayToTrinh.EditValue = Nothing
+        Me.tbNgayToTrinh.Location = New System.Drawing.Point(311, 24)
+        Me.tbNgayToTrinh.MenuManager = Me.barManager1
+        Me.tbNgayToTrinh.Name = "tbNgayToTrinh"
+        Me.tbNgayToTrinh.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayToTrinh.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayToTrinh.Properties.Mask.EditMask = "dd/MM/yyyy"
+        Me.tbNgayToTrinh.Size = New System.Drawing.Size(116, 20)
+        Me.tbNgayToTrinh.StyleController = Me.LayoutControl_Home
+        Me.tbNgayToTrinh.TabIndex = 35
         '
         'btXuLyNhanh
         '
         Me.btXuLyNhanh.ImageOptions.Image = CType(resources.GetObject("btXuLyNhanh.ImageOptions.Image"), System.Drawing.Image)
         Me.btXuLyNhanh.Location = New System.Drawing.Point(12, 152)
         Me.btXuLyNhanh.Name = "btXuLyNhanh"
-        Me.btXuLyNhanh.Size = New System.Drawing.Size(129, 22)
+        Me.btXuLyNhanh.Size = New System.Drawing.Size(130, 22)
         Me.btXuLyNhanh.StyleController = Me.LayoutControl_Home
         Me.btXuLyNhanh.TabIndex = 34
         Me.btXuLyNhanh.Text = "Xử lý nhanh"
@@ -332,16 +358,35 @@ Partial Class XuLyToTrinh
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.MenuManager = Me.barManager1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(830, 202)
+        Me.GridControl1.Size = New System.Drawing.Size(835, 206)
         Me.GridControl1.TabIndex = 29
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
         'GridView1
         '
         Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CASEID, Me.SOTOTRINH, Me.NGAYTOTRINH, Me.BANTRINH, Me.NOIDUNGTRINH, Me.SOVANBAN, Me.SONGHIQUYET, Me.NGAYNGHIQUYET, Me.SOQUYETDINH_VANBAN, Me.NGAYQUYETDINH_VANBAN, Me.YKIEN_HDTV, Me.NGAY_YKIEN_HDTV_GANNHAT, Me.NGUOITHUCHIEN, Me.NGAYTHUCHIEN, Me.THOIGIANXULY, Me.GHICHU, Me.LOG, Me.STATUS, Me.USER_CREATED, Me.LAST_USER_MODIFIED, Me.REMARKS})
+        GridFormatRule1.ApplyToRow = True
+        GridFormatRule1.Column = Me.STATUS
+        GridFormatRule1.Name = "CHECK GIAI TRINH"
+        FormatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal
+        FormatConditionRuleValue1.PredefinedName = "Red Bold Text"
+        FormatConditionRuleValue1.Value1 = "Chờ giải trình"
+        GridFormatRule1.Rule = FormatConditionRuleValue1
+        GridFormatRule2.ApplyToRow = True
+        GridFormatRule2.Column = Me.STATUS
+        GridFormatRule2.Name = "CHECK XU LY"
+        FormatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Equal
+        FormatConditionRuleValue2.PredefinedName = "Green Bold Text"
+        FormatConditionRuleValue2.Value1 = "Chờ xử lý"
+        GridFormatRule2.Rule = FormatConditionRuleValue2
+        Me.GridView1.FormatRules.Add(GridFormatRule1)
+        Me.GridView1.FormatRules.Add(GridFormatRule2)
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsSelection.MultiSelect = True
+        Me.GridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect
+        Me.GridView1.OptionsView.ShowAutoFilterRow = True
         Me.GridView1.OptionsView.ShowFooter = True
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
@@ -356,8 +401,9 @@ Partial Class XuLyToTrinh
         Me.SOTOTRINH.Caption = "Số tờ trình"
         Me.SOTOTRINH.FieldName = "SOTOTRINH"
         Me.SOTOTRINH.Name = "SOTOTRINH"
+        Me.SOTOTRINH.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "SOTOTRINH", "Count: {0}")})
         Me.SOTOTRINH.Visible = True
-        Me.SOTOTRINH.VisibleIndex = 0
+        Me.SOTOTRINH.VisibleIndex = 1
         '
         'NGAYTOTRINH
         '
@@ -365,7 +411,7 @@ Partial Class XuLyToTrinh
         Me.NGAYTOTRINH.FieldName = "NGAYTOTRINH"
         Me.NGAYTOTRINH.Name = "NGAYTOTRINH"
         Me.NGAYTOTRINH.Visible = True
-        Me.NGAYTOTRINH.VisibleIndex = 1
+        Me.NGAYTOTRINH.VisibleIndex = 2
         '
         'BANTRINH
         '
@@ -373,7 +419,7 @@ Partial Class XuLyToTrinh
         Me.BANTRINH.FieldName = "BANTRINH"
         Me.BANTRINH.Name = "BANTRINH"
         Me.BANTRINH.Visible = True
-        Me.BANTRINH.VisibleIndex = 2
+        Me.BANTRINH.VisibleIndex = 3
         '
         'NOIDUNGTRINH
         '
@@ -381,7 +427,7 @@ Partial Class XuLyToTrinh
         Me.NOIDUNGTRINH.FieldName = "NOIDUNGTRINH"
         Me.NOIDUNGTRINH.Name = "NOIDUNGTRINH"
         Me.NOIDUNGTRINH.Visible = True
-        Me.NOIDUNGTRINH.VisibleIndex = 3
+        Me.NOIDUNGTRINH.VisibleIndex = 4
         '
         'SOVANBAN
         '
@@ -431,7 +477,7 @@ Partial Class XuLyToTrinh
         Me.NGUOITHUCHIEN.FieldName = "NGUOITHUCHIEN"
         Me.NGUOITHUCHIEN.Name = "NGUOITHUCHIEN"
         Me.NGUOITHUCHIEN.Visible = True
-        Me.NGUOITHUCHIEN.VisibleIndex = 4
+        Me.NGUOITHUCHIEN.VisibleIndex = 5
         '
         'NGAYTHUCHIEN
         '
@@ -444,8 +490,9 @@ Partial Class XuLyToTrinh
         Me.THOIGIANXULY.Caption = "Thời gian giải quyết"
         Me.THOIGIANXULY.FieldName = "THOIGIANXULY"
         Me.THOIGIANXULY.Name = "THOIGIANXULY"
+        Me.THOIGIANXULY.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "THOIGIANXULY", "Avg={0:0.##}")})
         Me.THOIGIANXULY.Visible = True
-        Me.THOIGIANXULY.VisibleIndex = 5
+        Me.THOIGIANXULY.VisibleIndex = 6
         '
         'GHICHU
         '
@@ -458,14 +505,6 @@ Partial Class XuLyToTrinh
         Me.LOG.Caption = "LOG"
         Me.LOG.FieldName = "LOG"
         Me.LOG.Name = "LOG"
-        '
-        'STATUS
-        '
-        Me.STATUS.Caption = "Tình trạng"
-        Me.STATUS.FieldName = "STATUS"
-        Me.STATUS.Name = "STATUS"
-        Me.STATUS.Visible = True
-        Me.STATUS.VisibleIndex = 6
         '
         'USER_CREATED
         '
@@ -485,14 +524,15 @@ Partial Class XuLyToTrinh
         Me.REMARKS.FieldName = "REMARKS"
         Me.REMARKS.Name = "REMARKS"
         Me.REMARKS.Visible = True
-        Me.REMARKS.VisibleIndex = 7
+        Me.REMARKS.VisibleIndex = 8
         '
         'tbLog
         '
-        Me.tbLog.Location = New System.Drawing.Point(761, 152)
+        Me.tbLog.Location = New System.Drawing.Point(766, 152)
         Me.tbLog.MenuManager = Me.barManager1
         Me.tbLog.Name = "tbLog"
         Me.tbLog.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbLog.Properties.ReadOnly = True
         Me.tbLog.Size = New System.Drawing.Size(81, 20)
         Me.tbLog.StyleController = Me.LayoutControl_Home
         Me.tbLog.TabIndex = 28
@@ -500,9 +540,9 @@ Partial Class XuLyToTrinh
         'btDelete
         '
         Me.btDelete.ImageOptions.Image = CType(resources.GetObject("btDelete.ImageOptions.Image"), System.Drawing.Image)
-        Me.btDelete.Location = New System.Drawing.Point(544, 152)
+        Me.btDelete.Location = New System.Drawing.Point(548, 152)
         Me.btDelete.Name = "btDelete"
-        Me.btDelete.Size = New System.Drawing.Size(129, 22)
+        Me.btDelete.Size = New System.Drawing.Size(130, 22)
         Me.btDelete.StyleController = Me.LayoutControl_Home
         Me.btDelete.TabIndex = 27
         Me.btDelete.Text = "Xóa"
@@ -510,9 +550,9 @@ Partial Class XuLyToTrinh
         'btRefresh
         '
         Me.btRefresh.ImageOptions.Image = CType(resources.GetObject("btRefresh.ImageOptions.Image"), System.Drawing.Image)
-        Me.btRefresh.Location = New System.Drawing.Point(145, 152)
+        Me.btRefresh.Location = New System.Drawing.Point(146, 152)
         Me.btRefresh.Name = "btRefresh"
-        Me.btRefresh.Size = New System.Drawing.Size(129, 22)
+        Me.btRefresh.Size = New System.Drawing.Size(130, 22)
         Me.btRefresh.StyleController = Me.LayoutControl_Home
         Me.btRefresh.TabIndex = 26
         Me.btRefresh.Text = "Làm mới"
@@ -520,9 +560,9 @@ Partial Class XuLyToTrinh
         'btEdit
         '
         Me.btEdit.ImageOptions.Image = CType(resources.GetObject("btEdit.ImageOptions.Image"), System.Drawing.Image)
-        Me.btEdit.Location = New System.Drawing.Point(278, 152)
+        Me.btEdit.Location = New System.Drawing.Point(280, 152)
         Me.btEdit.Name = "btEdit"
-        Me.btEdit.Size = New System.Drawing.Size(129, 22)
+        Me.btEdit.Size = New System.Drawing.Size(130, 22)
         Me.btEdit.StyleController = Me.LayoutControl_Home
         Me.btEdit.TabIndex = 25
         Me.btEdit.Text = "Xử lý"
@@ -530,16 +570,16 @@ Partial Class XuLyToTrinh
         'btAdd
         '
         Me.btAdd.ImageOptions.Image = CType(resources.GetObject("btAdd.ImageOptions.Image"), System.Drawing.Image)
-        Me.btAdd.Location = New System.Drawing.Point(411, 152)
+        Me.btAdd.Location = New System.Drawing.Point(414, 152)
         Me.btAdd.Name = "btAdd"
-        Me.btAdd.Size = New System.Drawing.Size(129, 22)
+        Me.btAdd.Size = New System.Drawing.Size(130, 22)
         Me.btAdd.StyleController = Me.LayoutControl_Home
         Me.btAdd.TabIndex = 24
         Me.btAdd.Text = "Thêm"
         '
         'tbCaseID
         '
-        Me.tbCaseID.Location = New System.Drawing.Point(714, 24)
+        Me.tbCaseID.Location = New System.Drawing.Point(719, 24)
         Me.tbCaseID.MenuManager = Me.barManager1
         Me.tbCaseID.Name = "tbCaseID"
         Me.tbCaseID.Size = New System.Drawing.Size(116, 20)
@@ -549,21 +589,25 @@ Partial Class XuLyToTrinh
         'tbThoiGianXuLy
         '
         Me.tbThoiGianXuLy.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.tbThoiGianXuLy.Location = New System.Drawing.Point(714, 96)
+        Me.tbThoiGianXuLy.Location = New System.Drawing.Point(719, 96)
         Me.tbThoiGianXuLy.MenuManager = Me.barManager1
         Me.tbThoiGianXuLy.Name = "tbThoiGianXuLy"
         Me.tbThoiGianXuLy.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbThoiGianXuLy.Properties.Mask.EditMask = "n0"
         Me.tbThoiGianXuLy.Size = New System.Drawing.Size(116, 20)
         Me.tbThoiGianXuLy.StyleController = Me.LayoutControl_Home
         Me.tbThoiGianXuLy.TabIndex = 22
         '
         'tbYKienHDTV
         '
-        Me.tbYKienHDTV.Location = New System.Drawing.Point(512, 96)
+        Me.tbYKienHDTV.EditValue = ""
+        Me.tbYKienHDTV.Location = New System.Drawing.Point(515, 96)
         Me.tbYKienHDTV.MenuManager = Me.barManager1
         Me.tbYKienHDTV.Name = "tbYKienHDTV"
-        Me.tbYKienHDTV.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.tbYKienHDTV.Size = New System.Drawing.Size(114, 20)
+        Me.tbYKienHDTV.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.DropDown)})
+        Me.tbYKienHDTV.Properties.ReadOnly = True
+        Me.tbYKienHDTV.Properties.ShowIcon = False
+        Me.tbYKienHDTV.Size = New System.Drawing.Size(116, 20)
         Me.tbYKienHDTV.StyleController = Me.LayoutControl_Home
         Me.tbYKienHDTV.TabIndex = 21
         '
@@ -572,18 +616,19 @@ Partial Class XuLyToTrinh
         Me.tbGhiChu.Location = New System.Drawing.Point(108, 120)
         Me.tbGhiChu.MenuManager = Me.barManager1
         Me.tbGhiChu.Name = "tbGhiChu"
-        Me.tbGhiChu.Size = New System.Drawing.Size(722, 16)
+        Me.tbGhiChu.Size = New System.Drawing.Size(727, 16)
         Me.tbGhiChu.StyleController = Me.LayoutControl_Home
         Me.tbGhiChu.TabIndex = 19
         '
         'tbNgayQuyetDinh
         '
         Me.tbNgayQuyetDinh.EditValue = Nothing
-        Me.tbNgayQuyetDinh.Location = New System.Drawing.Point(630, 72)
+        Me.tbNgayQuyetDinh.Location = New System.Drawing.Point(635, 72)
         Me.tbNgayQuyetDinh.MenuManager = Me.barManager1
         Me.tbNgayQuyetDinh.Name = "tbNgayQuyetDinh"
         Me.tbNgayQuyetDinh.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayQuyetDinh.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayQuyetDinh.Properties.Mask.EditMask = "dd/MM/yyyy"
         Me.tbNgayQuyetDinh.Size = New System.Drawing.Size(200, 20)
         Me.tbNgayQuyetDinh.StyleController = Me.LayoutControl_Home
         Me.tbNgayQuyetDinh.TabIndex = 18
@@ -591,24 +636,26 @@ Partial Class XuLyToTrinh
         'tbNgayThucHien
         '
         Me.tbNgayThucHien.EditValue = Nothing
-        Me.tbNgayThucHien.Location = New System.Drawing.Point(310, 96)
+        Me.tbNgayThucHien.Location = New System.Drawing.Point(311, 96)
         Me.tbNgayThucHien.MenuManager = Me.barManager1
         Me.tbNgayThucHien.Name = "tbNgayThucHien"
         Me.tbNgayThucHien.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayThucHien.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.tbNgayThucHien.Size = New System.Drawing.Size(114, 20)
+        Me.tbNgayThucHien.Properties.Mask.EditMask = "dd/MM/yyyy"
+        Me.tbNgayThucHien.Size = New System.Drawing.Size(116, 20)
         Me.tbNgayThucHien.StyleController = Me.LayoutControl_Home
         Me.tbNgayThucHien.TabIndex = 17
         '
         'tbNgayNghiQuyet
         '
         Me.tbNgayNghiQuyet.EditValue = Nothing
-        Me.tbNgayNghiQuyet.Location = New System.Drawing.Point(226, 72)
+        Me.tbNgayNghiQuyet.Location = New System.Drawing.Point(227, 72)
         Me.tbNgayNghiQuyet.MenuManager = Me.barManager1
         Me.tbNgayNghiQuyet.Name = "tbNgayNghiQuyet"
         Me.tbNgayNghiQuyet.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayNghiQuyet.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.tbNgayNghiQuyet.Size = New System.Drawing.Size(198, 20)
+        Me.tbNgayNghiQuyet.Properties.Mask.EditMask = "dd/MM/yyyy"
+        Me.tbNgayNghiQuyet.Size = New System.Drawing.Size(200, 20)
         Me.tbNgayNghiQuyet.StyleController = Me.LayoutControl_Home
         Me.tbNgayNghiQuyet.TabIndex = 16
         '
@@ -618,16 +665,16 @@ Partial Class XuLyToTrinh
         Me.cbNguoiThucHien.MenuManager = Me.barManager1
         Me.cbNguoiThucHien.Name = "cbNguoiThucHien"
         Me.cbNguoiThucHien.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cbNguoiThucHien.Size = New System.Drawing.Size(114, 20)
+        Me.cbNguoiThucHien.Size = New System.Drawing.Size(115, 20)
         Me.cbNguoiThucHien.StyleController = Me.LayoutControl_Home
         Me.cbNguoiThucHien.TabIndex = 15
         '
         'tbSoQuyetDinh
         '
-        Me.tbSoQuyetDinh.Location = New System.Drawing.Point(512, 72)
+        Me.tbSoQuyetDinh.Location = New System.Drawing.Point(515, 72)
         Me.tbSoQuyetDinh.MenuManager = Me.barManager1
         Me.tbSoQuyetDinh.Name = "tbSoQuyetDinh"
-        Me.tbSoQuyetDinh.Size = New System.Drawing.Size(114, 20)
+        Me.tbSoQuyetDinh.Size = New System.Drawing.Size(116, 20)
         Me.tbSoQuyetDinh.StyleController = Me.LayoutControl_Home
         Me.tbSoQuyetDinh.TabIndex = 11
         '
@@ -636,7 +683,7 @@ Partial Class XuLyToTrinh
         Me.tbSoNghiQuyet.Location = New System.Drawing.Point(108, 72)
         Me.tbSoNghiQuyet.MenuManager = Me.barManager1
         Me.tbSoNghiQuyet.Name = "tbSoNghiQuyet"
-        Me.tbSoNghiQuyet.Size = New System.Drawing.Size(114, 20)
+        Me.tbSoNghiQuyet.Size = New System.Drawing.Size(115, 20)
         Me.tbSoNghiQuyet.StyleController = Me.LayoutControl_Home
         Me.tbSoNghiQuyet.TabIndex = 9
         '
@@ -645,27 +692,18 @@ Partial Class XuLyToTrinh
         Me.tbNoiDungTrinh.Location = New System.Drawing.Point(108, 48)
         Me.tbNoiDungTrinh.MenuManager = Me.barManager1
         Me.tbNoiDungTrinh.Name = "tbNoiDungTrinh"
-        Me.tbNoiDungTrinh.Size = New System.Drawing.Size(722, 20)
+        Me.tbNoiDungTrinh.Size = New System.Drawing.Size(727, 20)
         Me.tbNoiDungTrinh.StyleController = Me.LayoutControl_Home
         Me.tbNoiDungTrinh.TabIndex = 8
         '
         'tbBanTrinh
         '
-        Me.tbBanTrinh.Location = New System.Drawing.Point(512, 24)
+        Me.tbBanTrinh.Location = New System.Drawing.Point(515, 24)
         Me.tbBanTrinh.MenuManager = Me.barManager1
         Me.tbBanTrinh.Name = "tbBanTrinh"
-        Me.tbBanTrinh.Size = New System.Drawing.Size(114, 20)
+        Me.tbBanTrinh.Size = New System.Drawing.Size(116, 20)
         Me.tbBanTrinh.StyleController = Me.LayoutControl_Home
         Me.tbBanTrinh.TabIndex = 7
-        '
-        'tbNgayToTrinh
-        '
-        Me.tbNgayToTrinh.Location = New System.Drawing.Point(310, 24)
-        Me.tbNgayToTrinh.MenuManager = Me.barManager1
-        Me.tbNgayToTrinh.Name = "tbNgayToTrinh"
-        Me.tbNgayToTrinh.Size = New System.Drawing.Size(114, 20)
-        Me.tbNgayToTrinh.StyleController = Me.LayoutControl_Home
-        Me.tbNgayToTrinh.TabIndex = 6
         '
         'SimpleButton1
         '
@@ -700,60 +738,60 @@ Partial Class XuLyToTrinh
         RowDefinition7.SizeType = System.Windows.Forms.SizeType.AutoSize
         RowDefinition8.Height = 26.0R
         RowDefinition8.SizeType = System.Windows.Forms.SizeType.AutoSize
-        RowDefinition9.Height = 206.0R
+        RowDefinition9.Height = 210.0R
         RowDefinition9.SizeType = System.Windows.Forms.SizeType.AutoSize
         Me.Root_Home.OptionsTableLayoutGroup.RowDefinitions.AddRange(New DevExpress.XtraLayout.RowDefinition() {RowDefinition7, RowDefinition8, RowDefinition9})
-        Me.Root_Home.Size = New System.Drawing.Size(854, 392)
+        Me.Root_Home.Size = New System.Drawing.Size(859, 396)
         Me.Root_Home.TextVisible = False
         '
         'LayoutControlItem_btEdit
         '
         Me.LayoutControlItem_btEdit.Control = Me.btEdit
-        Me.LayoutControlItem_btEdit.Location = New System.Drawing.Point(266, 140)
+        Me.LayoutControlItem_btEdit.Location = New System.Drawing.Point(268, 140)
         Me.LayoutControlItem_btEdit.Name = "LayoutControlItem_btEdit"
         Me.LayoutControlItem_btEdit.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_btEdit.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_btEdit.Size = New System.Drawing.Size(133, 26)
+        Me.LayoutControlItem_btEdit.Size = New System.Drawing.Size(134, 26)
         Me.LayoutControlItem_btEdit.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_btEdit.TextVisible = False
         '
         'LayoutControlItem_btDelete
         '
         Me.LayoutControlItem_btDelete.Control = Me.btDelete
-        Me.LayoutControlItem_btDelete.Location = New System.Drawing.Point(532, 140)
+        Me.LayoutControlItem_btDelete.Location = New System.Drawing.Point(536, 140)
         Me.LayoutControlItem_btDelete.Name = "LayoutControlItem_btDelete"
         Me.LayoutControlItem_btDelete.OptionsTableLayoutItem.ColumnIndex = 4
         Me.LayoutControlItem_btDelete.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_btDelete.Size = New System.Drawing.Size(133, 26)
+        Me.LayoutControlItem_btDelete.Size = New System.Drawing.Size(134, 26)
         Me.LayoutControlItem_btDelete.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_btDelete.TextVisible = False
         '
         'LayoutControlItem_btRefresh
         '
         Me.LayoutControlItem_btRefresh.Control = Me.btRefresh
-        Me.LayoutControlItem_btRefresh.Location = New System.Drawing.Point(133, 140)
+        Me.LayoutControlItem_btRefresh.Location = New System.Drawing.Point(134, 140)
         Me.LayoutControlItem_btRefresh.Name = "LayoutControlItem_btRefresh"
         Me.LayoutControlItem_btRefresh.OptionsTableLayoutItem.ColumnIndex = 1
         Me.LayoutControlItem_btRefresh.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_btRefresh.Size = New System.Drawing.Size(133, 26)
+        Me.LayoutControlItem_btRefresh.Size = New System.Drawing.Size(134, 26)
         Me.LayoutControlItem_btRefresh.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_btRefresh.TextVisible = False
         '
         'LayoutControlItem_btAdd
         '
         Me.LayoutControlItem_btAdd.Control = Me.btAdd
-        Me.LayoutControlItem_btAdd.Location = New System.Drawing.Point(399, 140)
+        Me.LayoutControlItem_btAdd.Location = New System.Drawing.Point(402, 140)
         Me.LayoutControlItem_btAdd.Name = "LayoutControlItem_btAdd"
         Me.LayoutControlItem_btAdd.OptionsTableLayoutItem.ColumnIndex = 3
         Me.LayoutControlItem_btAdd.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_btAdd.Size = New System.Drawing.Size(133, 26)
+        Me.LayoutControlItem_btAdd.Size = New System.Drawing.Size(134, 26)
         Me.LayoutControlItem_btAdd.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_btAdd.TextVisible = False
         '
         'LayoutControlItem_tbLog
         '
         Me.LayoutControlItem_tbLog.Control = Me.tbLog
-        Me.LayoutControlItem_tbLog.Location = New System.Drawing.Point(665, 140)
+        Me.LayoutControlItem_tbLog.Location = New System.Drawing.Point(670, 140)
         Me.LayoutControlItem_tbLog.Name = "LayoutControlItem_tbLog"
         Me.LayoutControlItem_tbLog.OptionsTableLayoutItem.ColumnIndex = 5
         Me.LayoutControlItem_tbLog.OptionsTableLayoutItem.RowIndex = 1
@@ -763,7 +801,7 @@ Partial Class XuLyToTrinh
         '
         'LayoutControlGroup1
         '
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_tbSoToTrinh, Me.LayoutControlItem_tbNgayToTrinh, Me.LayoutControlItem_tbBanTrinh, Me.LayoutControlItem_tbNoiDungTrinh, Me.LayoutControlItem_tbSoNghiQuyet, Me.LayoutControlItem_tbSoQuyetDinh, Me.LayoutControlItem_cbNguoiThucHien, Me.LayoutControlItem_tbNgayNghiQuyet, Me.LayoutControlItem_tbNgayThucHien, Me.LayoutControlItem_tbNgayQuyetDinh, Me.LayoutControlItem_tbGhiChu, Me.LayoutControlItem_tbYKienHDTV, Me.LayoutControlItem_tbThoiGianXuLy, Me.LayoutControlItem_tbCaseID})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem_tbSoToTrinh, Me.LayoutControlItem_tbBanTrinh, Me.LayoutControlItem_tbNoiDungTrinh, Me.LayoutControlItem_tbSoNghiQuyet, Me.LayoutControlItem_tbSoQuyetDinh, Me.LayoutControlItem_cbNguoiThucHien, Me.LayoutControlItem_tbNgayNghiQuyet, Me.LayoutControlItem_tbNgayThucHien, Me.LayoutControlItem_tbNgayQuyetDinh, Me.LayoutControlItem_tbGhiChu, Me.LayoutControlItem_tbYKienHDTV, Me.LayoutControlItem_tbThoiGianXuLy, Me.LayoutControlItem_tbCaseID, Me.LayoutControlItem_tbNgayToTrinh})
         Me.LayoutControlGroup1.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "LayoutControlGroup1"
@@ -790,7 +828,7 @@ Partial Class XuLyToTrinh
         RowDefinition6.SizeType = System.Windows.Forms.SizeType.AutoSize
         Me.LayoutControlGroup1.OptionsTableLayoutGroup.RowDefinitions.AddRange(New DevExpress.XtraLayout.RowDefinition() {RowDefinition1, RowDefinition2, RowDefinition3, RowDefinition4, RowDefinition5, RowDefinition6})
         Me.LayoutControlGroup1.OptionsTableLayoutItem.ColumnSpan = 6
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(834, 140)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(839, 140)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'LayoutControlItem_tbSoToTrinh
@@ -798,27 +836,17 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_tbSoToTrinh.Control = Me.tbSoToTrinh
         Me.LayoutControlItem_tbSoToTrinh.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem_tbSoToTrinh.Name = "LayoutControlItem_tbSoToTrinh"
-        Me.LayoutControlItem_tbSoToTrinh.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbSoToTrinh.Size = New System.Drawing.Size(203, 24)
         Me.LayoutControlItem_tbSoToTrinh.Text = "Số Tờ Trình"
         Me.LayoutControlItem_tbSoToTrinh.TextSize = New System.Drawing.Size(81, 13)
-        '
-        'LayoutControlItem_tbNgayToTrinh
-        '
-        Me.LayoutControlItem_tbNgayToTrinh.Control = Me.tbNgayToTrinh
-        Me.LayoutControlItem_tbNgayToTrinh.Location = New System.Drawing.Point(202, 0)
-        Me.LayoutControlItem_tbNgayToTrinh.Name = "LayoutControlItem_tbNgayToTrinh"
-        Me.LayoutControlItem_tbNgayToTrinh.OptionsTableLayoutItem.ColumnIndex = 1
-        Me.LayoutControlItem_tbNgayToTrinh.Size = New System.Drawing.Size(202, 24)
-        Me.LayoutControlItem_tbNgayToTrinh.Text = "Ngày Tờ Trình"
-        Me.LayoutControlItem_tbNgayToTrinh.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_tbBanTrinh
         '
         Me.LayoutControlItem_tbBanTrinh.Control = Me.tbBanTrinh
-        Me.LayoutControlItem_tbBanTrinh.Location = New System.Drawing.Point(404, 0)
+        Me.LayoutControlItem_tbBanTrinh.Location = New System.Drawing.Point(407, 0)
         Me.LayoutControlItem_tbBanTrinh.Name = "LayoutControlItem_tbBanTrinh"
         Me.LayoutControlItem_tbBanTrinh.OptionsTableLayoutItem.ColumnIndex = 2
-        Me.LayoutControlItem_tbBanTrinh.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbBanTrinh.Size = New System.Drawing.Size(204, 24)
         Me.LayoutControlItem_tbBanTrinh.Text = "Ban Trình"
         Me.LayoutControlItem_tbBanTrinh.TextSize = New System.Drawing.Size(81, 13)
         '
@@ -829,7 +857,7 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_tbNoiDungTrinh.Name = "LayoutControlItem_tbNoiDungTrinh"
         Me.LayoutControlItem_tbNoiDungTrinh.OptionsTableLayoutItem.ColumnSpan = 4
         Me.LayoutControlItem_tbNoiDungTrinh.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_tbNoiDungTrinh.Size = New System.Drawing.Size(810, 24)
+        Me.LayoutControlItem_tbNoiDungTrinh.Size = New System.Drawing.Size(815, 24)
         Me.LayoutControlItem_tbNoiDungTrinh.Text = "Nội Dung Trình"
         Me.LayoutControlItem_tbNoiDungTrinh.TextSize = New System.Drawing.Size(81, 13)
         '
@@ -839,18 +867,18 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_tbSoNghiQuyet.Location = New System.Drawing.Point(0, 48)
         Me.LayoutControlItem_tbSoNghiQuyet.Name = "LayoutControlItem_tbSoNghiQuyet"
         Me.LayoutControlItem_tbSoNghiQuyet.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_tbSoNghiQuyet.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbSoNghiQuyet.Size = New System.Drawing.Size(203, 24)
         Me.LayoutControlItem_tbSoNghiQuyet.Text = "Nghị Quyết"
         Me.LayoutControlItem_tbSoNghiQuyet.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_tbSoQuyetDinh
         '
         Me.LayoutControlItem_tbSoQuyetDinh.Control = Me.tbSoQuyetDinh
-        Me.LayoutControlItem_tbSoQuyetDinh.Location = New System.Drawing.Point(404, 48)
+        Me.LayoutControlItem_tbSoQuyetDinh.Location = New System.Drawing.Point(407, 48)
         Me.LayoutControlItem_tbSoQuyetDinh.Name = "LayoutControlItem_tbSoQuyetDinh"
         Me.LayoutControlItem_tbSoQuyetDinh.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_tbSoQuyetDinh.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_tbSoQuyetDinh.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbSoQuyetDinh.Size = New System.Drawing.Size(204, 24)
         Me.LayoutControlItem_tbSoQuyetDinh.Text = "QĐ/VB"
         Me.LayoutControlItem_tbSoQuyetDinh.TextSize = New System.Drawing.Size(81, 13)
         '
@@ -860,36 +888,36 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_cbNguoiThucHien.Location = New System.Drawing.Point(0, 72)
         Me.LayoutControlItem_cbNguoiThucHien.Name = "LayoutControlItem_cbNguoiThucHien"
         Me.LayoutControlItem_cbNguoiThucHien.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_cbNguoiThucHien.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_cbNguoiThucHien.Size = New System.Drawing.Size(203, 24)
         Me.LayoutControlItem_cbNguoiThucHien.Text = "Người Thực Hiện"
         Me.LayoutControlItem_cbNguoiThucHien.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_tbNgayNghiQuyet
         '
         Me.LayoutControlItem_tbNgayNghiQuyet.Control = Me.tbNgayNghiQuyet
-        Me.LayoutControlItem_tbNgayNghiQuyet.Location = New System.Drawing.Point(202, 48)
+        Me.LayoutControlItem_tbNgayNghiQuyet.Location = New System.Drawing.Point(203, 48)
         Me.LayoutControlItem_tbNgayNghiQuyet.Name = "LayoutControlItem_tbNgayNghiQuyet"
         Me.LayoutControlItem_tbNgayNghiQuyet.OptionsTableLayoutItem.ColumnIndex = 1
         Me.LayoutControlItem_tbNgayNghiQuyet.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_tbNgayNghiQuyet.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbNgayNghiQuyet.Size = New System.Drawing.Size(204, 24)
         Me.LayoutControlItem_tbNgayNghiQuyet.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_tbNgayNghiQuyet.TextVisible = False
         '
         'LayoutControlItem_tbNgayThucHien
         '
         Me.LayoutControlItem_tbNgayThucHien.Control = Me.tbNgayThucHien
-        Me.LayoutControlItem_tbNgayThucHien.Location = New System.Drawing.Point(202, 72)
+        Me.LayoutControlItem_tbNgayThucHien.Location = New System.Drawing.Point(203, 72)
         Me.LayoutControlItem_tbNgayThucHien.Name = "LayoutControlItem_tbNgayThucHien"
         Me.LayoutControlItem_tbNgayThucHien.OptionsTableLayoutItem.ColumnIndex = 1
         Me.LayoutControlItem_tbNgayThucHien.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_tbNgayThucHien.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbNgayThucHien.Size = New System.Drawing.Size(204, 24)
         Me.LayoutControlItem_tbNgayThucHien.Text = "Ngày Thực Hiện"
         Me.LayoutControlItem_tbNgayThucHien.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_tbNgayQuyetDinh
         '
         Me.LayoutControlItem_tbNgayQuyetDinh.Control = Me.tbNgayQuyetDinh
-        Me.LayoutControlItem_tbNgayQuyetDinh.Location = New System.Drawing.Point(606, 48)
+        Me.LayoutControlItem_tbNgayQuyetDinh.Location = New System.Drawing.Point(611, 48)
         Me.LayoutControlItem_tbNgayQuyetDinh.Name = "LayoutControlItem_tbNgayQuyetDinh"
         Me.LayoutControlItem_tbNgayQuyetDinh.OptionsTableLayoutItem.ColumnIndex = 3
         Me.LayoutControlItem_tbNgayQuyetDinh.OptionsTableLayoutItem.RowIndex = 2
@@ -905,25 +933,25 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_tbGhiChu.OptionsTableLayoutItem.ColumnSpan = 4
         Me.LayoutControlItem_tbGhiChu.OptionsTableLayoutItem.RowIndex = 4
         Me.LayoutControlItem_tbGhiChu.OptionsTableLayoutItem.RowSpan = 2
-        Me.LayoutControlItem_tbGhiChu.Size = New System.Drawing.Size(810, 20)
+        Me.LayoutControlItem_tbGhiChu.Size = New System.Drawing.Size(815, 20)
         Me.LayoutControlItem_tbGhiChu.Text = "Ghi Chú"
         Me.LayoutControlItem_tbGhiChu.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_tbYKienHDTV
         '
         Me.LayoutControlItem_tbYKienHDTV.Control = Me.tbYKienHDTV
-        Me.LayoutControlItem_tbYKienHDTV.Location = New System.Drawing.Point(404, 72)
+        Me.LayoutControlItem_tbYKienHDTV.Location = New System.Drawing.Point(407, 72)
         Me.LayoutControlItem_tbYKienHDTV.Name = "LayoutControlItem_tbYKienHDTV"
         Me.LayoutControlItem_tbYKienHDTV.OptionsTableLayoutItem.ColumnIndex = 2
         Me.LayoutControlItem_tbYKienHDTV.OptionsTableLayoutItem.RowIndex = 3
-        Me.LayoutControlItem_tbYKienHDTV.Size = New System.Drawing.Size(202, 24)
+        Me.LayoutControlItem_tbYKienHDTV.Size = New System.Drawing.Size(204, 24)
         Me.LayoutControlItem_tbYKienHDTV.Text = "Ý Kiến HĐTV"
         Me.LayoutControlItem_tbYKienHDTV.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_tbThoiGianXuLy
         '
         Me.LayoutControlItem_tbThoiGianXuLy.Control = Me.tbThoiGianXuLy
-        Me.LayoutControlItem_tbThoiGianXuLy.Location = New System.Drawing.Point(606, 72)
+        Me.LayoutControlItem_tbThoiGianXuLy.Location = New System.Drawing.Point(611, 72)
         Me.LayoutControlItem_tbThoiGianXuLy.Name = "LayoutControlItem_tbThoiGianXuLy"
         Me.LayoutControlItem_tbThoiGianXuLy.OptionsTableLayoutItem.ColumnIndex = 3
         Me.LayoutControlItem_tbThoiGianXuLy.OptionsTableLayoutItem.RowIndex = 3
@@ -934,13 +962,23 @@ Partial Class XuLyToTrinh
         'LayoutControlItem_tbCaseID
         '
         Me.LayoutControlItem_tbCaseID.Control = Me.tbCaseID
-        Me.LayoutControlItem_tbCaseID.Location = New System.Drawing.Point(606, 0)
+        Me.LayoutControlItem_tbCaseID.Location = New System.Drawing.Point(611, 0)
         Me.LayoutControlItem_tbCaseID.Name = "LayoutControlItem_tbCaseID"
         Me.LayoutControlItem_tbCaseID.OptionsTableLayoutItem.ColumnIndex = 3
         Me.LayoutControlItem_tbCaseID.Size = New System.Drawing.Size(204, 24)
         Me.LayoutControlItem_tbCaseID.Text = "CaseID"
         Me.LayoutControlItem_tbCaseID.TextSize = New System.Drawing.Size(81, 13)
         Me.LayoutControlItem_tbCaseID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        '
+        'LayoutControlItem_tbNgayToTrinh
+        '
+        Me.LayoutControlItem_tbNgayToTrinh.Control = Me.tbNgayToTrinh
+        Me.LayoutControlItem_tbNgayToTrinh.Location = New System.Drawing.Point(203, 0)
+        Me.LayoutControlItem_tbNgayToTrinh.Name = "LayoutControlItem_tbNgayToTrinh"
+        Me.LayoutControlItem_tbNgayToTrinh.OptionsTableLayoutItem.ColumnIndex = 1
+        Me.LayoutControlItem_tbNgayToTrinh.Size = New System.Drawing.Size(204, 24)
+        Me.LayoutControlItem_tbNgayToTrinh.Text = "Ngày Tờ Trình"
+        Me.LayoutControlItem_tbNgayToTrinh.TextSize = New System.Drawing.Size(81, 13)
         '
         'LayoutControlItem_GridControl
         '
@@ -949,7 +987,7 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_GridControl.Name = "LayoutControlItem_GridControl"
         Me.LayoutControlItem_GridControl.OptionsTableLayoutItem.ColumnSpan = 6
         Me.LayoutControlItem_GridControl.OptionsTableLayoutItem.RowIndex = 2
-        Me.LayoutControlItem_GridControl.Size = New System.Drawing.Size(834, 206)
+        Me.LayoutControlItem_GridControl.Size = New System.Drawing.Size(839, 210)
         Me.LayoutControlItem_GridControl.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_GridControl.TextVisible = False
         '
@@ -959,7 +997,7 @@ Partial Class XuLyToTrinh
         Me.LayoutControlItem_btXuLyNhanh.Location = New System.Drawing.Point(0, 140)
         Me.LayoutControlItem_btXuLyNhanh.Name = "LayoutControlItem_btXuLyNhanh"
         Me.LayoutControlItem_btXuLyNhanh.OptionsTableLayoutItem.RowIndex = 1
-        Me.LayoutControlItem_btXuLyNhanh.Size = New System.Drawing.Size(133, 26)
+        Me.LayoutControlItem_btXuLyNhanh.Size = New System.Drawing.Size(134, 26)
         Me.LayoutControlItem_btXuLyNhanh.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem_btXuLyNhanh.TextVisible = False
         '
@@ -972,7 +1010,7 @@ Partial Class XuLyToTrinh
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(854, 436)
+        Me.ClientSize = New System.Drawing.Size(859, 440)
         Me.Controls.Add(Me.LayoutControl_Home)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
@@ -986,6 +1024,8 @@ Partial Class XuLyToTrinh
         CType(Me.tbSoToTrinh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl_Home, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl_Home.ResumeLayout(False)
+        CType(Me.tbNgayToTrinh.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tbNgayToTrinh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbLog.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1004,7 +1044,6 @@ Partial Class XuLyToTrinh
         CType(Me.tbSoNghiQuyet.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbNoiDungTrinh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbBanTrinh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbNgayToTrinh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Root_Home, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_btEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_btDelete, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1013,7 +1052,6 @@ Partial Class XuLyToTrinh
         CType(Me.LayoutControlItem_tbLog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_tbSoToTrinh, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem_tbNgayToTrinh, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_tbBanTrinh, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_tbNoiDungTrinh, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_tbSoNghiQuyet, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1026,6 +1064,7 @@ Partial Class XuLyToTrinh
         CType(Me.LayoutControlItem_tbYKienHDTV, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_tbThoiGianXuLy, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_tbCaseID, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem_tbNgayToTrinh, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_GridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem_btXuLyNhanh, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTimeEdit1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1061,7 +1100,6 @@ Partial Class XuLyToTrinh
     Friend WithEvents tbSoNghiQuyet As DevExpress.XtraEditors.TextEdit
     Friend WithEvents tbNoiDungTrinh As DevExpress.XtraEditors.TextEdit
     Friend WithEvents tbBanTrinh As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents tbNgayToTrinh As DevExpress.XtraEditors.TextEdit
     Friend WithEvents tbSoToTrinh As DevExpress.XtraEditors.TextEdit
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Root_Home As DevExpress.XtraLayout.LayoutControlGroup
@@ -1078,7 +1116,6 @@ Partial Class XuLyToTrinh
     Friend WithEvents btXuLyNhanh As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlGroup1 As DevExpress.XtraLayout.LayoutControlGroup
     Friend WithEvents LayoutControlItem_tbSoToTrinh As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents LayoutControlItem_tbNgayToTrinh As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem_tbBanTrinh As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem_tbNoiDungTrinh As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem_tbSoNghiQuyet As DevExpress.XtraLayout.LayoutControlItem
@@ -1115,4 +1152,6 @@ Partial Class XuLyToTrinh
     Friend WithEvents USER_CREATED As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LAST_USER_MODIFIED As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents REMARKS As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents tbNgayToTrinh As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LayoutControlItem_tbNgayToTrinh As DevExpress.XtraLayout.LayoutControlItem
 End Class

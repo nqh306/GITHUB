@@ -32,6 +32,9 @@
         Me.ribbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.DocumentManager1 = New DevExpress.XtraBars.Docking2010.DocumentManager(Me.components)
         Me.TabbedView1 = New DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(Me.components)
+        Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.bt_User = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.ribbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DocumentManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TabbedView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -40,11 +43,11 @@
         'ribbonControl1
         '
         Me.ribbonControl1.ExpandCollapseItem.Id = 0
-        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.ribbonControl1.SearchEditItem, Me.bt_XuLyToTrinh})
+        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.ribbonControl1.SearchEditItem, Me.bt_XuLyToTrinh, Me.bt_User})
         Me.ribbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl1.MaxItemId = 2
+        Me.ribbonControl1.MaxItemId = 3
         Me.ribbonControl1.Name = "ribbonControl1"
-        Me.ribbonControl1.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.ribbonPage1})
+        Me.ribbonControl1.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.ribbonPage1, Me.RibbonPage2})
         Me.ribbonControl1.Size = New System.Drawing.Size(879, 146)
         '
         'bt_XuLyToTrinh
@@ -63,7 +66,7 @@
         '
         'ribbonPageGroup1
         '
-        Me.ribbonPageGroup1.ItemLinks.Add(Me.bt_XuLyToTrinh)
+        Me.ribbonPageGroup1.ItemLinks.Add(Me.bt_XuLyToTrinh, True)
         Me.ribbonPageGroup1.Name = "ribbonPageGroup1"
         Me.ribbonPageGroup1.Text = "Công Việc"
         '
@@ -73,6 +76,26 @@
         Me.DocumentManager1.MenuManager = Me.ribbonControl1
         Me.DocumentManager1.View = Me.TabbedView1
         Me.DocumentManager1.ViewCollection.AddRange(New DevExpress.XtraBars.Docking2010.Views.BaseView() {Me.TabbedView1})
+        '
+        'RibbonPage2
+        '
+        Me.RibbonPage2.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2})
+        Me.RibbonPage2.Name = "RibbonPage2"
+        Me.RibbonPage2.Text = "Quản trị"
+        '
+        'RibbonPageGroup2
+        '
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.bt_User, True)
+        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
+        Me.RibbonPageGroup2.Text = "Quản trị"
+        '
+        'bt_User
+        '
+        Me.bt_User.Caption = "Tài khoản"
+        Me.bt_User.Id = 2
+        Me.bt_User.ImageOptions.Image = CType(resources.GetObject("bt_User.ImageOptions.Image"), System.Drawing.Image)
+        Me.bt_User.ImageOptions.LargeImage = CType(resources.GetObject("bt_User.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.bt_User.Name = "bt_User"
         '
         'Home
         '
@@ -100,4 +123,7 @@
     Friend WithEvents DocumentManager1 As DevExpress.XtraBars.Docking2010.DocumentManager
     Friend WithEvents TabbedView1 As DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView
     Friend WithEvents bt_XuLyToTrinh As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents bt_User As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPage2 As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class
