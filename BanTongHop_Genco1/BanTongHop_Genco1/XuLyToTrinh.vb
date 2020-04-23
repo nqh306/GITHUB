@@ -7,7 +7,7 @@ Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class XuLyToTrinh
-    Dim USERNAME As String = Environment.UserName
+    Dim USERNAME As String = user_login
     Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
 
     Private Sub XuLyToTrinh_Load(sender As Object, e As EventArgs) Handles MyBase.Load

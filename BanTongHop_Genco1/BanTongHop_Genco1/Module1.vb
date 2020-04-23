@@ -2,6 +2,7 @@
 
 Module Module1
     Public EncryptDecrypt As New Simple3Des("0915330999")
+    Public user_login As String = ""
 
     Public Sub WriteErrorLog(strErrorText As String)
         Dim strPath_Log As String = "D:\App_BanTongHop\"

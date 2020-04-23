@@ -2,6 +2,7 @@
     Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
 
 
+
     ' TODO: Insert code to perform custom authentication using the provided username and password 
     ' (See https://go.microsoft.com/fwlink/?LinkId=35339).  
     ' The custom principal can then be attached to the current thread's principal as follows: 
@@ -21,6 +22,12 @@
                 Exit Sub
             End If
         End If
+
+        user_login = UsernameTextBox.Text
+
+        UsernameTextBox.Text = ""
+        PasswordTextBox.Text = ""
+
         Me.Hide()
         Home.Show()
 

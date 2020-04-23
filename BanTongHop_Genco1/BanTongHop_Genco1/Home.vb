@@ -1,9 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Text
 
-
 Partial Public Class Home
-
     Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
 
     Shared Sub New()
@@ -38,7 +36,8 @@ Partial Public Class Home
     End Sub
 
     Private Sub Home_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        BarEditItem_Username.EditWidth = 100
+        BarEditItem_Username.EditValue = user_login
     End Sub
 
     Private Sub bt_User_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles bt_User.ItemClick
@@ -46,6 +45,7 @@ Partial Public Class Home
     End Sub
 
     Private Sub Home_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        Me.Close()
+        Me.Hide()
+        LoginForm1.Show()
     End Sub
 End Class
