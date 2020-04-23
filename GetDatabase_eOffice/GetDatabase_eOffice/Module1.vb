@@ -189,7 +189,7 @@ Module Module1
                         Dim NGAYTOTRINH As Date = Format(DateTime.ParseExact(ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[5]").Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
 
                         If SOTOTRINH.Length > 0 Then
-                            If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE STATUS_DELETED <> 'Yêu cầu tự động lấy lại' AND NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
+                            If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE (STATUS_DELETED = '' OR STATUS_DELETED IS NULL OR STATUS_DELETED = 'Vĩnh viễn xóa, Không cần tự động lấy lại') AND NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
                                 js.ExecuteScript("document.getElementById('" & ELEMENT_ID & "').click();")
 
 
