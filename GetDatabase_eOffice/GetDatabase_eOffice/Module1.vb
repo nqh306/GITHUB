@@ -34,7 +34,7 @@ Module Module1
             Console.WriteLine("Connected to eOffice")
         End If
 
-        LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
+        'LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
 
         LAY_THONG_TIN_TO_TRINH(ChromeDriver)
 
@@ -254,8 +254,9 @@ Module Module1
                                     Dim DT_NGAYNGHIQUYET As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SONGHIQUYET & "'")
                                     If DT_NGAYNGHIQUYET.Rows.Count > 0 Then
                                         For Each DRR As DataRow In DT_NGAYNGHIQUYET.Rows
-                                            If Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy") > NGAYNGHIQUYET Then
-                                                NGAYNGHIQUYET = Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+
+                                            If DRR("NGAYVANBAN") > NGAYNGHIQUYET Then
+                                                NGAYNGHIQUYET = Format(DRR("NGAYVANBAN"), "dd/MM/yyyy")
                                             End If
                                         Next
                                     End If
@@ -265,8 +266,8 @@ Module Module1
                                     Dim DT_NGAYQUYETDINH As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SOQUYETDINH_VANBAN & "'")
                                     If DT_NGAYQUYETDINH.Rows.Count > 0 Then
                                         For Each DRR As DataRow In DT_NGAYQUYETDINH.Rows
-                                            If Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy") > NGAYQUYETDINH_VANBAN Then
-                                                NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                                            If DRR("NGAYVANBAN") > NGAYQUYETDINH_VANBAN Then
+                                                NGAYQUYETDINH_VANBAN = Format(DRR("NGAYVANBAN"), "dd/MM/yyyy")
                                             End If
                                         Next
                                     End If
