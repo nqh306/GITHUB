@@ -1,26 +1,34 @@
-﻿Imports System.Globalization
-Imports DevExpress.Utils
-Imports DevExpress.XtraEditors
-Imports DevExpress.XtraEditors.Controls
+﻿Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.Repository
-Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class XuLyToTrinh
     Dim USERNAME As String = user_login
-    Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
 
     Private Sub XuLyToTrinh_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WindowsFormsSettings.AllowAutoFilterConditionChange = DevExpress.Utils.DefaultBoolean.False
 
         cbFilterNguoiXuLy.EditWidth = 200
+        Dim FULLNAME As String = SQL_QUERY_TO_STRING(link_folder_database, "SELECT FULLNAME FROM DATABASE_USER WHERE USERNAME = '" & user_login & "'")
+        Dim get_to_combobox As Boolean = False
+
         CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add("Tất cả")
-        CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add("Ngô Quốc Huy")
-        CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add("Hoàng Văn Đạt")
-        CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add("Hoàng Văn Long")
-        CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add("Trương Thị Huyền Trang")
-        CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add("Nguyễn Quang Huy")
-        cbFilterNguoiXuLy.EditValue = "Tất cả"
+        Dim dt As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT DISTINCT NGUOITHUCHIEN FROM DATABASE_EOFFICE ORDER BY NGUOITHUCHIEN")
+        For Each DRR As DataRow In dt.Rows
+            If DRR("NGUOITHUCHIEN").ToString.Length > 0 Then
+                If FULLNAME = DRR("NGUOITHUCHIEN").ToString Then
+                    get_to_combobox = True
+                End If
+                CType(RepositoryItemComboBox_NguoiXuLy, RepositoryItemComboBox).Items.Add(DRR("NGUOITHUCHIEN").ToString)
+
+            End If
+        Next
+
+        If get_to_combobox = False Then
+            cbFilterNguoiXuLy.EditValue = "Tất cả"
+        Else
+            cbFilterNguoiXuLy.EditValue = FULLNAME
+        End If
 
         cbAction.EditWidth = 200
         CType(RepositoryItemComboBox_Action, RepositoryItemComboBox).Items.Add("Tất cả")
@@ -327,5 +335,4 @@ Public Class XuLyToTrinh
         End If
         Load_Database()
     End Sub
-
 End Class

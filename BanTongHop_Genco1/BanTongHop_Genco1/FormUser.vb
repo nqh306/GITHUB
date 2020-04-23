@@ -8,7 +8,7 @@ Imports System.ComponentModel
 
 Partial Public Class FormUser
     Public appPath As String = AppDomain.CurrentDomain.BaseDirectory
-    Public link_database_user As String = "D:\App_BanTongHop\database_bantonghop.txt"
+    Public link_database_user As String = link_folder_database
 
     Private Sub bbiPrintPreview_ItemClick(ByVal sender As Object, ByVal e As ItemClickEventArgs) Handles bbiPrintPreview.ItemClick
         gridControl.ShowRibbonPrintPreview()
@@ -47,20 +47,15 @@ Partial Public Class FormUser
         If admin = "" Then admin = "False"
         Dim status As String = gridView.GetFocusedRowCellValue("STATUS").ToString
         If status = "" Then status = "False"
+        Dim FULLNAME As String = gridView.GetFocusedRowCellValue("FULLNAME").ToString
 
         If SQL_QUERY_TO_INTEGER(link_database_user, "SELECT COUNT(*) FROM DATABASE_USER WHERE USERNAME = '" & gridView.GetFocusedRowCellValue("USERNAME").ToString & "'") = 0 Then
-            SQL_QUERY(link_database_user, True, "INSERT INTO DATABASE_USER(USERNAME, MAKER, CHECKER, ADMIN, STATUS, Password_Str) VALUES ('" & gridView.GetFocusedRowCellValue("USERNAME").ToString & "','" & maker & "','" & checker & "','" & admin & "','" & status & "','" & Password_store_db & "')")
+            SQL_QUERY(link_database_user, True, "INSERT INTO DATABASE_USER(USERNAME, FULLNAME, MAKER, CHECKER, ADMIN, STATUS, Password_Str) VALUES ('" & gridView.GetFocusedRowCellValue("USERNAME").ToString & "','" & FULLNAME & "', '" & maker & "','" & checker & "','" & admin & "','" & status & "','" & Password_store_db & "')")
         Else
-            SQL_QUERY(link_database_user, True, "UPDATE DATABASE_USER SET MAKER = '" & maker & "', CHECKER = '" & checker & "', ADMIN = '" & admin & "', STATUS = '" & status & "' WHERE USERNAME = '" & gridView.GetFocusedRowCellValue("USERNAME").ToString & "'")
+            SQL_QUERY(link_database_user, True, "UPDATE DATABASE_USER SET MAKER = '" & maker & "', FULLNAME = '" & FULLNAME & "', CHECKER = '" & checker & "', ADMIN = '" & admin & "', STATUS = '" & status & "' WHERE USERNAME = '" & gridView.GetFocusedRowCellValue("USERNAME").ToString & "'")
         End If
 
-        'Dim db_need_to_update_pw As DataTable = SQL_QUERY_TO_DATATABLE(link_database_user, "SELECT USERNAME FROM DATABASE_USER WHERE Password_Str IS NULL")
-
-        'For Each Drr As DataRow In db_need_to_update_pw.Rows
-        '    SQL_QUERY(link_database_user, True, "UPDATE DATABASE_USER SET Password_Str = '" & Password_store_db & "' WHERE USERNAME = '" & Drr("USERNAME").ToString & "'")
-        'Next
         MsgBox("Hoàn thành!!!", vbInformation, "Ban Tổng Hợp - EVNGENCO1")
-
     End Sub
 
     Private Sub btDelete_Click(sender As Object, e As EventArgs) Handles btDelete.Click

@@ -1,11 +1,11 @@
-﻿Imports Microsoft.Data.Sqlite.Extensions
+﻿'Imports Microsoft.Data.Sqlite.Extensions
 Imports OpenQA.Selenium
 Imports OpenQA.Selenium.Chrome
 Imports System.Data.SQLite
 
 Module Module1
     Public USERNAME As String = Environment.UserName
-    Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
+    Public link_folder_database As String = "W:\App_BanTongHop\database_bantonghop.txt"
 
     Sub Main()
         Console.WriteLine("WELCOME TO ROBOTIC PROCESS APPLICATION‎ - BAN TONG HOP - EVNGENCO1")
@@ -34,7 +34,7 @@ Module Module1
             Console.WriteLine("Connected to eOffice")
         End If
 
-        'LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
+        LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
 
         LAY_THONG_TIN_TO_TRINH(ChromeDriver)
 
@@ -52,7 +52,7 @@ Module Module1
 
             SQL_QUERY(link_folder_database, False, "CREATE TABLE IF NOT EXISTS DATABASE_EOFFICE(CASEID VARCHAR NOT NULL, SOTOTRINH VARCHAR, NGAYTOTRINH VARCHAR, BANTRINH VARCHAR, NOIDUNGTRINH VARCHAR, SOVANBAN VARCHAR, SONGHIQUYET VARCHAR, NGAYNGHIQUYET VARCHAR, SOQUYETDINH_VANBAN VARCHAR, NGAYQUYETDINH_VANBAN VARCHAR, YKIEN_HDTV VARCHAR, NGAY_YKIEN_HDTV_GANNHAT VARCHAR, NGUOITHUCHIEN VARCHAR, NGAYTHUCHIEN VARCHAR, THOIGIANXULY INTEGER, GHICHU VARCHAR, LOG VARCHAR, STATUS VARCHAR, USER_CREATED VARCHAR, LAST_USER_MODIFIED VARCHAR, REMARKS VARCHAR, STATUS_DELETED VARCHAR)")
 
-            SQL_QUERY(link_folder_database, False, "CREATE TABLE IF NOT EXISTS DATABASE_VANBAN_PHATHANH(CASEID VARCHAR NOT NULL, SOVANBAN VARCHAR, NGAYVANBAN VARCHAR, TRICHYEU VARCHAR, NOINHAN VARCHAR, NGAYPHATHANH VARCHAR, NGUOIDANGKY VARCHAR, USER_CREATED VARCHAR, USER_MODIFIED VARCHAR, REMARK VARCHAR)")
+            SQL_QUERY(link_folder_database, False, "CREATE TABLE IF NOT EXISTS DATABASE_VANBAN_PHATHANH(CASEID VARCHAR NOT NULL, SOVANBAN VARCHAR, NGAYVANBAN DATE, TRICHYEU VARCHAR, NOINHAN VARCHAR, NGAYPHATHANH VARCHAR, NGUOIDANGKY VARCHAR, USER_CREATED VARCHAR, USER_MODIFIED VARCHAR, REMARK VARCHAR)")
 
             Return True
         Catch ex As Exception
@@ -192,7 +192,8 @@ Module Module1
                             If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE STATUS_DELETED <> 'Yêu cầu tự động lấy lại' AND NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
                                 js.ExecuteScript("document.getElementById('" & ELEMENT_ID & "').click();")
 
-                                Dim element_check_click_success As String = "//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & (i * 3) + 6 & "_pnThongTinVanBan']/div[1]/table/tbody/tr/td[1]/div[1]/div/b"
+
+                                Dim element_check_click_success As String = "//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan']/div[1]/table/tbody/tr/td[1]/div[1]/div/b"
                                 Do
 
                                 Loop Until Selenium_Check_Element_Exist(ChromeDriver, By.XPath(element_check_click_success))
@@ -250,11 +251,26 @@ Module Module1
                                 Dim NGAYTHUCHIEN As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
 
                                 If SONGHIQUYET.Length > 0 Then
-                                    NGAYNGHIQUYET = SQL_QUERY_TO_DATE(link_folder_database, "SELECT MAX(NGAYVANBAN) FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN LIKE '%" & SONGHIQUYET & "%' GROUP BY SOVANBAN")
+                                    Dim DT_NGAYNGHIQUYET As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SONGHIQUYET & "'")
+                                    If DT_NGAYNGHIQUYET.Rows.Count > 0 Then
+                                        For Each DRR As DataRow In DT_NGAYNGHIQUYET.Rows
+                                            If Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy") > NGAYNGHIQUYET Then
+                                                NGAYNGHIQUYET = Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                                            End If
+                                        Next
+                                    End If
                                 End If
 
                                 If SOQUYETDINH_VANBAN.Length > 0 Then
-                                    NGAYQUYETDINH_VANBAN = SQL_QUERY_TO_DATE(link_folder_database, "SELECT MAX(NGAYVANBAN) FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN LIKE '%" & SOQUYETDINH_VANBAN & "%' GROUP BY SOVANBAN")
+                                    Dim DT_NGAYQUYETDINH As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SOQUYETDINH_VANBAN & "'")
+                                    If DT_NGAYQUYETDINH.Rows.Count > 0 Then
+                                        For Each DRR As DataRow In DT_NGAYQUYETDINH.Rows
+                                            If Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy") > NGAYQUYETDINH_VANBAN Then
+                                                NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact(DRR("NGAYVANBAN").ToString, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                                            End If
+                                        Next
+                                    End If
+
                                 End If
 
                                 If NGAYNGHIQUYET > NGAYQUYETDINH_VANBAN Then
@@ -353,7 +369,9 @@ Module Module1
                                 Dim STR_STATUS As String = ""
                                 Dim STR_REMARKS As String = ""
 
-                                If SOVANBAN.Length = 0 Then
+                                Dim sovanban_check As String = SONGHIQUYET & SOQUYETDINH_VANBAN
+
+                                If sovanban_check.Length = 0 Then
                                     STR_STATUS = "Chờ giải trình"
                                     STR_REMARKS = "Không ban hành Nghị quyết/Văn bản"
                                 Else
@@ -475,7 +493,7 @@ Module Module1
         Dim TimerStart As DateTime = Now
         Dim showmsg As Boolean = False
         Dim err_msg As String = ""
-        Dim MYCONNECTION As SQLiteConnection
+        Dim MYCONNECTION As New SQLiteConnection
 
         Do
             Try
@@ -542,18 +560,18 @@ Module Module1
         End Try
     End Function
 
-    Public Sub SQLITE_BULK_COPY(DataTable As DataTable, link_database As String, table_name As String)
-        Dim datareader As New DataTableReader(DataTable)
-        Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
-        Dim BulkCopy As SqliteBulkCopy = New SqliteBulkCopy(MYCONNECTION)
-        BulkCopy.DestinationTableName = table_name
-        BulkCopy.ColumnMappings.Clear()
-        For i As Integer = 0 To DataTable.Columns.Count - 1
-            BulkCopy.ColumnMappings.Add(DataTable.Columns(i).ColumnName.ToString(), 0)
-        Next
-        BulkCopy.WriteToServer(datareader)
-        MYCONNECTION.Close()
-    End Sub
+    'Public Sub SQLITE_BULK_COPY(DataTable As DataTable, link_database As String, table_name As String)
+    '    Dim datareader As New DataTableReader(DataTable)
+    '    Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
+    '    Dim BulkCopy As SqliteBulkCopy = New SqliteBulkCopy(MYCONNECTION)
+    '    BulkCopy.DestinationTableName = table_name
+    '    BulkCopy.ColumnMappings.Clear()
+    '    For i As Integer = 0 To DataTable.Columns.Count - 1
+    '        BulkCopy.ColumnMappings.Add(DataTable.Columns(i).ColumnName.ToString(), 0)
+    '    Next
+    '    BulkCopy.WriteToServer(datareader)
+    '    MYCONNECTION.Close()
+    'End Sub
 
     Function huynq_Substring(value As String, startindex As Integer, length As Integer) As String
         Try

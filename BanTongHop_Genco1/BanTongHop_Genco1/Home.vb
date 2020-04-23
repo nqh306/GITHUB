@@ -1,9 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.Text
+Imports DevExpress.XtraBars
 
 Partial Public Class Home
-    Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
-
     Shared Sub New()
         DevExpress.UserSkins.BonusSkins.Register()
     End Sub
@@ -47,5 +46,9 @@ Partial Public Class Home
     Private Sub Home_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Me.Hide()
         LoginForm1.Show()
+    End Sub
+
+    Private Sub BarEditItem_Username_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarEditItem_Username.ItemClick
+        FormChangePW.Show()
     End Sub
 End Class

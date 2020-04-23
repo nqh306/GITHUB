@@ -3,6 +3,7 @@
 Module Module1
     Public EncryptDecrypt As New Simple3Des("0915330999")
     Public user_login As String = ""
+    Public link_folder_database As String = ""
 
     Public Sub WriteErrorLog(strErrorText As String)
         Dim strPath_Log As String = "D:\App_BanTongHop\"
@@ -35,6 +36,17 @@ Module Module1
             WriteErrorLog("Error in WriteErrorLog: " + ex.Message)
         End Try
     End Sub
+
+    Public Function Connect_to_database() As Boolean
+        Try
+            Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_folder_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
+            MYCONNECTION.Open()
+            MYCONNECTION.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Public Sub SQL_QUERY(LINK_DATABASE As String, writelog As Boolean, sql_string As String)
         Dim TimerStart As DateTime = Now
