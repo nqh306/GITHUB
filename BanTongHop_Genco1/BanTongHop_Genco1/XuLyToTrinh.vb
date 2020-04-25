@@ -36,6 +36,11 @@ Public Class XuLyToTrinh
         CType(RepositoryItemComboBox_Action, RepositoryItemComboBox).Items.Add("Đã xử lý")
         cbAction.EditValue = "Tất cả"
 
+        Dim dt2 As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT DISTINCT FULLNAME FROM DATABASE_USER WHERE STATUS != TRUE ORDER BY FULLNAME")
+        For Each DRR As DataRow In dt2.Rows
+            cbNguoiThucHien.Properties.Items.Add(DRR("FULLNAME").ToString)
+        Next
+
     End Sub
 
     Private Sub btLoad_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btLoad.ItemClick
@@ -282,7 +287,7 @@ Public Class XuLyToTrinh
             Exit Sub
         End If
 
-        Dim iRet = MsgBox("Bạn có muốn thêm tờ trình [" & tbSoToTrinh.Text & "] không?", vbQuestion, "Ban Tổng Hợp - EVNGENCO1")
+        Dim iRet = MsgBox("Bạn có muốn thêm tờ trình [" & tbSoToTrinh.Text & "] không?", vbYesNo + vbQuestion, "Ban Tổng Hợp - EVNGENCO1")
         If iRet = vbYes Then
 
             Dim STR_LOG As String = USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & ": Khởi tạo bản ghi"
@@ -335,4 +340,5 @@ Public Class XuLyToTrinh
         End If
         Load_Database()
     End Sub
+
 End Class

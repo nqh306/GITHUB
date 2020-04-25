@@ -48,6 +48,34 @@ Module Module1
         End Try
     End Function
 
+    Public Function SQL_QUERY_TO_BOOLEAN(link_database As String, sql_string As String) As Boolean
+        Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
+
+        Try
+            MYCONNECTION.Open()
+            Dim CMD As New SQLiteCommand
+            CMD.CommandText = sql_string
+            CMD.Connection = MYCONNECTION
+            Dim RDR As SQLiteDataReader = CMD.ExecuteReader
+            Dim DT As New DataTable
+            DT.Load(RDR)
+            RDR.Close()
+            Dim result As Boolean
+            If DT.Rows.Count = 0 Then
+                result = False
+            Else
+                If DT.Rows(0).Item(0).ToString.Length = 0 Then
+                    result = False
+                Else
+                    result = DT.Rows(0).Item(0)
+                End If
+            End If
+            Return result
+        Catch ex As Exception
+            MsgBox(ex.Message, vbCritical)
+            Return Nothing
+        End Try
+    End Function
     Public Sub SQL_QUERY(LINK_DATABASE As String, writelog As Boolean, sql_string As String)
         Dim TimerStart As DateTime = Now
         Dim showmsg As Boolean = False
@@ -89,6 +117,7 @@ Module Module1
 
                 Dim TimeSpent As System.TimeSpan = Now.Subtract(TimerStart)
                 If TimeSpent.TotalSeconds > 60 Then
+                    showmsg = True
                     Exit Do
                 End If
             End Try

@@ -1,4 +1,4 @@
-﻿'Imports Microsoft.Data.Sqlite.Extensions
+﻿Imports Microsoft.Office.Interop
 Imports OpenQA.Selenium
 Imports OpenQA.Selenium.Chrome
 Imports System.Data.SQLite
@@ -34,14 +34,27 @@ Module Module1
             Console.WriteLine("Connected to eOffice")
         End If
 
-        'LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
+        LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
 
         LAY_THONG_TIN_TO_TRINH(ChromeDriver)
 
         ChromeDriver.Quit()
+
+        Dim OutlookApp As New Outlook.Application
+        Dim olMail As Outlook.MailItem
+        olMail = OutlookApp.CreateItem(0)
+        With olMail
+            .To = "huynq91@evngenco1.vn;huynq@evngenco1.vn"
+            .Subject = "[GetDatabase_eOffice] - Notification"
+            .HTMLBody = "Completed - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
+            .Send()
+        End With
+
+
         System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture
         Console.WriteLine("Hoàn thành...")
         Console.ReadLine()
+
     End Sub
 
     Public Function Connect_to_database() As Boolean

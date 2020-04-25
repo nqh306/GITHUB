@@ -17,7 +17,8 @@
                     MsgBox("Mật khẩu cũ và mới không được giống nhau", vbCritical, "Ban Tổng Hợp - EVNGENCO1")
                     Exit Sub
                 Else
-                    SQL_QUERY(link_folder_database, True, "UPDATE DATABASE_USER SET Password_Str = '" & EncryptDecrypt.EncryptData(NewPasswordTextbox.Text) & "' WHERE USERNAME = '" & UsernameTextBox.Text & "'")
+                    Dim newpassword As String = EncryptDecrypt.EncryptData(NewPasswordTextbox.Text)
+                    SQL_QUERY(link_folder_database, True, "UPDATE DATABASE_USER SET Password_Str = '" & newpassword & "' WHERE USERNAME = '" & UsernameTextBox.Text & "'")
                     MsgBox("Hoành thành!!!", vbInformation, "Ban Tổng Hợp - EVNGENCO1")
                 End If
             End If
