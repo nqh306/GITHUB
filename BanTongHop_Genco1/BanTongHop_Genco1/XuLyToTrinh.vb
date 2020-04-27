@@ -341,4 +341,109 @@ Public Class XuLyToTrinh
         Load_Database()
     End Sub
 
+    Private Sub tbNgayNghiQuyet_Validated(sender As Object, e As EventArgs) Handles tbNgayNghiQuyet.Validated
+        Try
+            If tbNgayNghiQuyet.Text = "" Then
+                If tbNgayQuyetDinh.Text = "" Then
+                    tbNgayThucHien.EditValue = ""
+                    tbThoiGianXuLy.EditValue = ""
+                Else
+                    tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                    If tbNgayToTrinh.Text <> "" Then
+                        tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                    End If
+                End If
+            Else
+                If tbNgayQuyetDinh.Text = "" Then
+                    tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                    If tbNgayToTrinh.Text <> "" Then
+                        tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                    End If
+                Else
+                    If DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing) > DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing) Then
+                        tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                        If tbNgayToTrinh.Text <> "" Then
+                            tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                        End If
+                    Else
+                        tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                        If tbNgayToTrinh.Text <> "" Then
+                            tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, vbCritical, "Ban Tổng Hợp - EVNGENCO1")
+        End Try
+    End Sub
+
+    Private Sub tbNgayQuyetDinh_Validated(sender As Object, e As EventArgs) Handles tbNgayQuyetDinh.Validated
+        Try
+            If tbNgayNghiQuyet.Text = "" Then
+                If tbNgayQuyetDinh.Text = "" Then
+                    tbNgayThucHien.EditValue = ""
+                    tbThoiGianXuLy.EditValue = ""
+                Else
+                    tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                    If tbNgayToTrinh.Text <> "" Then
+                        tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                    End If
+                End If
+            Else
+                If tbNgayQuyetDinh.Text = "" Then
+                    tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                    If tbNgayToTrinh.Text <> "" Then
+                        tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                    End If
+                Else
+                    If DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing) > DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing) Then
+                        tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                        If tbNgayToTrinh.Text <> "" Then
+                            tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayNghiQuyet.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                        End If
+                    Else
+                        tbNgayThucHien.EditValue = Format(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                        If tbNgayToTrinh.Text <> "" Then
+                            tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayQuyetDinh.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, vbCritical, "Ban Tổng Hợp - EVNGENCO1")
+        End Try
+    End Sub
+
+    Private Sub tbNgayThucHien_Validated(sender As Object, e As EventArgs) Handles tbNgayThucHien.Validated
+        Try
+            If tbNgayThucHien.Text = "" Then
+                tbThoiGianXuLy.EditValue = ""
+            Else
+                If tbNgayToTrinh.Text = "" Then
+                    tbThoiGianXuLy.EditValue = ""
+                Else
+                    tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayThucHien.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, vbCritical, "Ban Tổng Hợp - EVNGENCO1")
+        End Try
+    End Sub
+
+    Private Sub tbNgayToTrinh_Validated(sender As Object, e As EventArgs) Handles tbNgayToTrinh.Validated
+        Try
+            If tbNgayThucHien.Text = "" Then
+                tbThoiGianXuLy.EditValue = ""
+            Else
+                If tbNgayToTrinh.Text = "" Then
+                    tbThoiGianXuLy.EditValue = ""
+                Else
+                    tbThoiGianXuLy.EditValue = CInt(DateTime.ParseExact(tbNgayThucHien.Text, "dd/MM/yyyy", Nothing).Subtract(DateTime.ParseExact(tbNgayToTrinh.Text, "dd/MM/yyyy", Nothing)).Days)
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, vbCritical, "Ban Tổng Hợp - EVNGENCO1")
+        End Try
+    End Sub
 End Class

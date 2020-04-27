@@ -1,5 +1,5 @@
 ﻿Public Class LoginForm1
-    Dim global_config As String = "W:\App_BanTongHop\app_config.txt"
+    Dim global_config As String = "D:\App_BanTongHop\app_config.txt"
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
 

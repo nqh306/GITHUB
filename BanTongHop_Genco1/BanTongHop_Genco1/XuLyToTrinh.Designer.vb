@@ -337,6 +337,10 @@ Partial Class XuLyToTrinh
         Me.tbNgayToTrinh.Name = "tbNgayToTrinh"
         Me.tbNgayToTrinh.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayToTrinh.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayToTrinh.Properties.DisplayFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayToTrinh.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.tbNgayToTrinh.Properties.EditFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayToTrinh.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.tbNgayToTrinh.Properties.Mask.EditMask = "dd/MM/yyyy"
         Me.tbNgayToTrinh.Size = New System.Drawing.Size(116, 20)
         Me.tbNgayToTrinh.StyleController = Me.LayoutControl_Home
@@ -629,6 +633,10 @@ Partial Class XuLyToTrinh
         Me.tbNgayQuyetDinh.Name = "tbNgayQuyetDinh"
         Me.tbNgayQuyetDinh.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayQuyetDinh.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayQuyetDinh.Properties.DisplayFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayQuyetDinh.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.tbNgayQuyetDinh.Properties.EditFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayQuyetDinh.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.tbNgayQuyetDinh.Properties.Mask.EditMask = "dd/MM/yyyy"
         Me.tbNgayQuyetDinh.Size = New System.Drawing.Size(200, 20)
         Me.tbNgayQuyetDinh.StyleController = Me.LayoutControl_Home
@@ -642,6 +650,10 @@ Partial Class XuLyToTrinh
         Me.tbNgayThucHien.Name = "tbNgayThucHien"
         Me.tbNgayThucHien.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayThucHien.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayThucHien.Properties.DisplayFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayThucHien.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.tbNgayThucHien.Properties.EditFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayThucHien.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.tbNgayThucHien.Properties.Mask.EditMask = "dd/MM/yyyy"
         Me.tbNgayThucHien.Size = New System.Drawing.Size(116, 20)
         Me.tbNgayThucHien.StyleController = Me.LayoutControl_Home
@@ -655,6 +667,10 @@ Partial Class XuLyToTrinh
         Me.tbNgayNghiQuyet.Name = "tbNgayNghiQuyet"
         Me.tbNgayNghiQuyet.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.tbNgayNghiQuyet.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.tbNgayNghiQuyet.Properties.DisplayFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayNghiQuyet.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.tbNgayNghiQuyet.Properties.EditFormat.FormatString = "dd/MM/yyyy"
+        Me.tbNgayNghiQuyet.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.tbNgayNghiQuyet.Properties.Mask.EditMask = "dd/MM/yyyy"
         Me.tbNgayNghiQuyet.Size = New System.Drawing.Size(200, 20)
         Me.tbNgayNghiQuyet.StyleController = Me.LayoutControl_Home
