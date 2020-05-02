@@ -101,4 +101,8 @@ Partial Public Class Home
     Private Sub RepositoryItemButtonEdit1_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles RepositoryItemButtonEdit1.ButtonClick
         FormChangePW.Show()
     End Sub
+
+    Private Sub btBaoCaoThamTra_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btBaoCaoThamTra.ItemClick
+        ShowForm(BaoCaoThamTra)
+    End Sub
 End Class

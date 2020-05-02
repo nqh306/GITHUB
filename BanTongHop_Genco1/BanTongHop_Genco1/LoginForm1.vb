@@ -1,5 +1,4 @@
 ﻿Public Class LoginForm1
-    Dim global_config As String = "D:\App_BanTongHop\app_config.txt"
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
 
@@ -21,6 +20,9 @@
                 MsgBox("Không tìm thấy tài khoản [" & UsernameTextBox.Text & "]", vbCritical, "Ban Tổng Hợp - EVNGENCO1")
                 Exit Sub
             Else
+
+
+
                 Dim password As String = SQL_QUERY_TO_STRING(link_folder_database, "SELECT Password_Str FROM DATABASE_USER WHERE USERNAME = '" & UsernameTextBox.Text & "'")
                 If password <> EncryptDecrypt.EncryptData(PasswordTextBox.Text) Then
                     MsgBox("Mật khẩu không chính xác !!!", vbCritical, "Ban Tổng Hợp - EVNGENCO1")
