@@ -1,4 +1,5 @@
-﻿Imports DevExpress.XtraEditors
+﻿Imports System.ComponentModel
+Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraGrid.Views.Grid
 
@@ -67,24 +68,25 @@ Public Class XuLyToTrinh
     End Sub
 
     Sub Load_Database()
+        GridControl1.DataSource = Nothing
         If cbFilterNguoiXuLy.EditValue.ToString = "Tất cả" Then
             If cbAction.EditValue.ToString = "Tất cả" Then
-                GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL")
+                GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL ORDER BY CAST(SUBSTR(NGAYTOTRINH,7,4) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,4,2) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,1,2) AS INT) DESC, SOTOTRINH ASC")
             Else
                 If cbAction.EditValue.ToString = "Cần xử lý" Then
-                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND STATUS IN ('Chờ xử lý', 'Chờ giải trình')")
+                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND STATUS IN ('Chờ xử lý', 'Chờ giải trình') ORDER BY CAST(SUBSTR(NGAYTOTRINH,7,4) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,4,2) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,1,2) AS INT) DESC, SOTOTRINH ASC")
                 Else
-                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND STATUS = '" & cbAction.EditValue.ToString & "'")
+                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND STATUS = '" & cbAction.EditValue.ToString & "' ORDER BY CAST(SUBSTR(NGAYTOTRINH,7,4) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,4,2) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,1,2) AS INT) DESC, SOTOTRINH ASC")
                 End If
             End If
         Else
             If cbAction.EditValue.ToString = "Tất cả" Then
-                GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND NGUOITHUCHIEN = '" & cbFilterNguoiXuLy.EditValue.ToString & "'")
+                GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND NGUOITHUCHIEN = '" & cbFilterNguoiXuLy.EditValue.ToString & "' ORDER BY CAST(SUBSTR(NGAYTOTRINH,7,4) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,4,2) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,1,2) AS INT) DESC, SOTOTRINH ASC")
             Else
                 If cbAction.EditValue.ToString = "Cần xử lý" Then
-                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND NGUOITHUCHIEN = '" & cbFilterNguoiXuLy.EditValue.ToString & "' AND STATUS IN ('Chờ xử lý', 'Chờ giải trình')")
+                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND NGUOITHUCHIEN = '" & cbFilterNguoiXuLy.EditValue.ToString & "' AND STATUS IN ('Chờ xử lý', 'Chờ giải trình') ORDER BY CAST(SUBSTR(NGAYTOTRINH,7,4) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,4,2) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,1,2) AS INT) DESC, SOTOTRINH ASC")
                 Else
-                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND NGUOITHUCHIEN = '" & cbFilterNguoiXuLy.EditValue.ToString & "' AND STATUS = '" & cbAction.EditValue.ToString & "'")
+                    GridControl1.DataSource = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT * FROM DATABASE_EOFFICE WHERE STATUS_DELETED IS NULL AND NGUOITHUCHIEN = '" & cbFilterNguoiXuLy.EditValue.ToString & "' AND STATUS = '" & cbAction.EditValue.ToString & "' ORDER BY CAST(SUBSTR(NGAYTOTRINH,7,4) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,4,2) AS INT) DESC, CAST(SUBSTR(NGAYTOTRINH,1,2) AS INT) DESC, SOTOTRINH ASC")
                 End If
             End If
         End If
@@ -146,6 +148,11 @@ Public Class XuLyToTrinh
 
     Private Sub btXuLyNhanh_Click(sender As Object, e As EventArgs) Handles btXuLyNhanh.Click
         Try
+            If GridView1.RowCount = 0 Then
+                MsgBox("Chọn tờ trình trước khi xử lý", vbCritical, "Ban Tổng Hợp - EVNGENCO1")
+                Exit Sub
+            End If
+
             For i As Integer = 0 To GridView1.RowCount - 1
                 If GridView1.IsRowSelected(i) = True Then
                     Dim STR_LOG As String = GridView1.GetFocusedRowCellDisplayText("LOG").ToString & Chr(10) & USERNAME & "_" & Now.ToString("dd/MM/yyyy hh:mm:ss") & "- Chuyển trạng thái tờ trình sang [Đã xử lý]"
@@ -263,12 +270,12 @@ Public Class XuLyToTrinh
                         Exit Sub
                     Else
                         SQL_QUERY(link_folder_database, True, "UPDATE DATABASE_EOFFICE SET LOG = '" & STR_LOG & "', STATUS = 'Đã xử lý' WHERE CASEID = '" & tbCaseID.Text & "'")
-                        MsgBox("Hoàn thành!!!", MsgBoxStyle.Information, "Ban Tổng Hợp - EVNGENCO1")
+                        MsgBox("Đã cập nhật thông tin cho tờ trinh [" & tbSoToTrinh.Text & "] !!!", MsgBoxStyle.Information, "Ban Tổng Hợp - EVNGENCO1")
                         Load_Database()
                         Exit Sub
                     End If
                 Else
-                    MsgBox("Không có thông tin được cập nhật cho tờ trình [" & tbSoToTrinh.Text & "]", MsgBoxStyle.Critical, "Ban Tổng Hợp - EVNGENCO1")
+                    MsgBox("Hoàn thành!!!", MsgBoxStyle.Information, "Ban Tổng Hợp - EVNGENCO1")
                     Exit Sub
                 End If
             End If

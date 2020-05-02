@@ -34,21 +34,21 @@ Module Module1
             Console.WriteLine("Connected to eOffice")
         End If
 
-        LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
+        'LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver)
 
         LAY_THONG_TIN_TO_TRINH(ChromeDriver)
 
         ChromeDriver.Quit()
 
-        Dim OutlookApp As New Outlook.Application
-        Dim olMail As Outlook.MailItem
-        olMail = OutlookApp.CreateItem(0)
-        With olMail
-            .To = "huynq91@evngenco1.vn;huynq@evngenco1.vn"
-            .Subject = "[GetDatabase_eOffice] - Notification"
-            .HTMLBody = "Completed - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
-            .Send()
-        End With
+        'Dim OutlookApp As New Outlook.Application
+        'Dim olMail As Outlook.MailItem
+        'olMail = OutlookApp.CreateItem(0)
+        'With olMail
+        '    .To = "huynq91@evngenco1.vn;huynq@evngenco1.vn"
+        '    .Subject = "[GetDatabase_eOffice] - Notification"
+        '    .HTMLBody = "Completed - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
+        '    .Send()
+        'End With
 
 
         System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture
@@ -106,16 +106,32 @@ Module Module1
 
             Dim js As IJavaScriptExecutor = TryCast(ChromeDriver, IJavaScriptExecutor)
 
-            Dim check_load_all_record As String = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[6]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
+            Dim check_load_all_record As String = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
 
-            js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[4]/div[2]/div/div[2]/div/div[3]/span/span[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
-            js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[1]/div/ul/li[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+            'js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[5]/div[2]/div/div[2]/div/div[3]/span/span[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+            'js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[1]/div/ul/li[6]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+
+            'js.ExecuteScript("var xPathRes = document.evaluate ('//html/body/form/div[6]/div[2]/div/div[2]/div/div[4]/span/span[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+            'js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[1]/div/ul/li[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+
+            '/html/body/form/div[4]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]
+            '//*[@id="ctl00_cpmain_RadDropDownNoiPhatHanh_DropDown"]/div/ul/li[6]
+            '/html/body/form/div[1]/div/ul/li[6]
+
+            '/html/body/form/div[1]/div/ul/li[1]
+            '//*[@id="ctl00_cpmain_RadDropDownNoiPhatHanh"]/span/span[1]
+            '/html/body/form/div[5]/div[2]/div/div[2]/div/div[3]/span/span[1]
 
             Dim tongsorecord As String = ""
             Do
-                tongsorecord = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[5]/div[2]/div/div[2]/div/div[6]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
-            Loop Until tongsorecord <> check_load_all_record And tongsorecord <> ""
+                Try
+                    tongsorecord = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[6]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
+                Catch ex As Exception
 
+                End Try
+
+            Loop Until tongsorecord <> check_load_all_record And tongsorecord <> ""
+            '/html/body/form/div[6]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]
             Dim tongsotrang As String = ""
 
             For i As Integer = 1 To Len(Replace(tongsorecord, " ", ""))
@@ -133,8 +149,9 @@ Module Module1
 
             For sotrang As Integer = 1 To CInt(tongsotrang)
                 If sotrang > 1 Then
-                    js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[5]/div[2]/div/div[2]/div/div[6]/div/table/tbody/tr/td/table/tbody/tr/td/div[3]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+                    js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[6]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[3]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
                     Do
+                        '/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/table/tbody/tr/td/table/tbody/tr/td/div[3]/input[1]
 
                     Loop Until Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content = document.getElementsByClassName('rgCurrentPage')[0].children[0].innerHTML;;return content;") = Format(sotrang, "0")
                 End If
@@ -214,10 +231,20 @@ Module Module1
                                 Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & sotrang & "_" & i
 
                                 Dim BANTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[2]/strong").Text
+                                '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00__0"]/td[2]/strong
+                                '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl04_lbl_SOKYHIEU"]
+
 
                                 Dim NOIDUNGTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[2]/div").Text
 
                                 Dim SOVANBAN As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/div[1]/table/tbody/tr/td[1]/div[1]/div/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+
+                                '/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[23]/td[2]/div/div/div/div/div[1]/div[1]/table/tbody/tr/td[1]/div[1]/div/a
+                                '/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/div[1]/table/tbody/tr/td[1]/div[1]/div/a
+                                '/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[24]/td[2]/div/div/div/div/div[1]/div[1]/table/tbody/tr/td[1]/div[1]/div/a
+                                '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl72_pnThongTinVanBan"]/div[1]/table/tbody/tr/td[1]/div[1]/div/a[1]
+
+
                                 Dim SONGHIQUYET As String = ""
                                 Dim SOQUYETDINH_VANBAN As String = ""
 
@@ -408,8 +435,7 @@ Module Module1
                                 End If
 
                                 SOTOTRINH = Replace(Replace(SOTOTRINH, Chr(34), ""), "'", "")
-                                BANTRINH = Replace(Replace(SOTOTRINH, Chr(34), ""), "'", "")
-                                NOIDUNGTRINH = Replace(Replace(NOIDUNGTRINH, Chr(34), ""), "'", "")
+                                BANTRINH = Replace(Replace(BANTRINH, Chr(34), ""), "'", "")
                                 NOIDUNGTRINH = Replace(Replace(NOIDUNGTRINH, Chr(34), ""), "'", "")
                                 YKIEN_HDTV = Replace(Replace(YKIEN_HDTV, Chr(34), ""), "'", "")
                                 GHICHU = Replace(Replace(GHICHU, Chr(34), ""), "'", "")
