@@ -5,7 +5,7 @@ Imports System.Data.SQLite
 
 Module Module1
     Public USERNAME As String = Environment.UserName
-    Public link_folder_database As String = "W:\App_BanTongHop\database_bantonghop.txt"
+    Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
 
     Sub Main()
         Console.WriteLine("WELCOME TO ROBOTIC PROCESS APPLICATION‎ - BAN TONG HOP - EVNGENCO1")
