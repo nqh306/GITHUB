@@ -111,6 +111,11 @@ Module Module1
 
             ChromeDriver.Navigate().GoToUrl("http://eoffice.evngenco1.vn/")
 
+            Do
+
+            Loop Until Selenium_Check_Element_Exist(ChromeDriver, By.Id("txtUserName")) = True
+
+
             ChromeDriver.FindElementById("txtUserName").SendKeys("huynq91")
             ChromeDriver.FindElementById("txtPassword").SendKeys("Admin@1")
             ChromeDriver.FindElementById("btclientLogin").Click()
@@ -351,30 +356,27 @@ Module Module1
 
 
                                     For j As Integer = 1 To 10
-                                        NGUOITHUCHIEN = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[9]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
-
-                                        'var content =document.evaluate('//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl72_pnThongTinVanBan"]/table/tbody/tr[9]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;alert(content);
-                                        '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl72_pnThongTinVanBan"]/table/tbody/tr[9]/td[2]/div
+                                        NGUOITHUCHIEN = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
 
                                         Select Case NGUOITHUCHIEN
                                             Case "Hoàng Văn Long"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
                                                 GHICHU = Replace(GHICHU, "&nbsp;", "")
                                                 Exit For
                                             Case "Nguyễn Quang Huy"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
                                                 GHICHU = Replace(GHICHU, "&nbsp;", "")
                                                 Exit For
                                             Case "Hoàng Văn Đạt"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
                                                 GHICHU = Replace(GHICHU, "&nbsp;", "")
                                                 Exit For
                                             Case "Trương Thị Huyền Trang"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
                                                 GHICHU = Replace(GHICHU, "&nbsp;", "")
                                                 Exit For
                                             Case "Ngô Quốc Huy"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
                                                 GHICHU = Replace(GHICHU, "&nbsp;", "")
                                                 Exit For
                                         End Select
