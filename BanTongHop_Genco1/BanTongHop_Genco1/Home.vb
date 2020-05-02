@@ -55,6 +55,7 @@ Partial Public Class Home
 
 
     Sub Check_user_access()
+        btBaoCaoThamTra.Visibility = BarItemVisibility.Never
 
         If SQL_QUERY_TO_BOOLEAN(link_folder_database, "SELECT ADMIN FROM DATABASE_USER WHERE USERNAME = '" & user_login & "'") = True Then
             bt_User.Enabled = True

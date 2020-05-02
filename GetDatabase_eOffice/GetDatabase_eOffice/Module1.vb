@@ -5,9 +5,9 @@ Imports System.Data.SQLite
 
 Module Module1
     Public USERNAME As String = Environment.UserName
-    Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
-    Public folder_backup As String = "D:\App_BanTongHop\BACKUP\"
-    Public str_log_file As String = "D:\App_BanTongHop\LOG\IMPORT\import_log_" & Now.ToString("yyyyMMdd_hhmmss") & ".txt"
+    Public link_folder_database As String = "W:\App_BanTongHop\database_bantonghop.txt"
+    Public folder_backup As String = "W:\App_BanTongHop\BACKUP\"
+    Public str_log_file As String = "W:\App_BanTongHop\LOG\IMPORT\import_log_" & Now.ToString("yyyyMMdd_hhmmss") & ".txt"
 
     Public Sub Console_WriteLine(strLogfile As String, strLog As String)
         Try
@@ -60,6 +60,8 @@ Module Module1
 
         ChromeDriver.Quit()
 
+        Console_WriteLine(str_log_file, "Hoàn thành...")
+
         Dim OutlookApp As New Outlook.Application
         Dim olMail As Outlook.MailItem
         olMail = OutlookApp.CreateItem(0)
@@ -70,11 +72,7 @@ Module Module1
             .Attachments.Add(str_log_file, Outlook.OlAttachmentType.olByValue)
             .Send()
         End With
-
-
         System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture
-        Console_WriteLine(str_log_file, "Hoàn thành...")
-
     End Sub
 
     Public Function Connect_to_database() As Boolean
@@ -353,7 +351,10 @@ Module Module1
 
 
                                     For j As Integer = 1 To 10
-                                        NGUOITHUCHIEN = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & (i + 1) * 2 & "]/td[2]/div/div/div/div/div[1]/table/tbody/tr[" & j & "]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                        NGUOITHUCHIEN = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[9]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+
+                                        'var content =document.evaluate('//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl72_pnThongTinVanBan"]/table/tbody/tr[9]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;alert(content);
+                                        '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl72_pnThongTinVanBan"]/table/tbody/tr[9]/td[2]/div
 
                                         Select Case NGUOITHUCHIEN
                                             Case "Hoàng Văn Long"
@@ -625,19 +626,6 @@ Module Module1
             Call MsgBox("Contact To Administrator !!!" & Chr(10) & Chr(10) & ex.Message, vbCritical)
         End Try
     End Function
-
-    'Public Sub SQLITE_BULK_COPY(DataTable As DataTable, link_database As String, table_name As String)
-    '    Dim datareader As New DataTableReader(DataTable)
-    '    Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
-    '    Dim BulkCopy As SqliteBulkCopy = New SqliteBulkCopy(MYCONNECTION)
-    '    BulkCopy.DestinationTableName = table_name
-    '    BulkCopy.ColumnMappings.Clear()
-    '    For i As Integer = 0 To DataTable.Columns.Count - 1
-    '        BulkCopy.ColumnMappings.Add(DataTable.Columns(i).ColumnName.ToString(), 0)
-    '    Next
-    '    BulkCopy.WriteToServer(datareader)
-    '    MYCONNECTION.Close()
-    'End Sub
 
     Function huynq_Substring(value As String, startindex As Integer, length As Integer) As String
         Try
