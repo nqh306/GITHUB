@@ -36,13 +36,14 @@
         Me.bt_User = New DevExpress.XtraBars.BarButtonItem()
         Me.BarEditItem_Username = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemButtonEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.btBaoCaoThamTra = New DevExpress.XtraBars.BarButtonItem()
         Me.ribbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.ribbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.DocumentManager1 = New DevExpress.XtraBars.Docking2010.DocumentManager(Me.components)
         Me.TabbedView1 = New DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(Me.components)
-        Me.btBaoCaoThamTra = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem_Report = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.ribbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemButtonEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DocumentManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,9 +53,9 @@
         'ribbonControl1
         '
         Me.ribbonControl1.ExpandCollapseItem.Id = 0
-        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.ribbonControl1.SearchEditItem, Me.bt_XuLyToTrinh, Me.bt_User, Me.BarEditItem_Username, Me.btBaoCaoThamTra})
+        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.ribbonControl1.SearchEditItem, Me.bt_XuLyToTrinh, Me.bt_User, Me.BarEditItem_Username, Me.btBaoCaoThamTra, Me.BarButtonItem_Report})
         Me.ribbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl1.MaxItemId = 5
+        Me.ribbonControl1.MaxItemId = 6
         Me.ribbonControl1.Name = "ribbonControl1"
         Me.ribbonControl1.PageHeaderItemLinks.Add(Me.BarEditItem_Username)
         Me.ribbonControl1.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.ribbonPage1, Me.RibbonPage2})
@@ -90,6 +91,14 @@
         Me.RepositoryItemButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, EditorButtonImageOptions2, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject5, SerializableAppearanceObject6, SerializableAppearanceObject7, SerializableAppearanceObject8, "", Nothing, Nothing, DevExpress.Utils.ToolTipAnchor.[Default])})
         Me.RepositoryItemButtonEdit1.Name = "RepositoryItemButtonEdit1"
         '
+        'btBaoCaoThamTra
+        '
+        Me.btBaoCaoThamTra.Caption = "Báo cáo thẩm tra"
+        Me.btBaoCaoThamTra.Id = 4
+        Me.btBaoCaoThamTra.ImageOptions.Image = CType(resources.GetObject("btBaoCaoThamTra.ImageOptions.Image"), System.Drawing.Image)
+        Me.btBaoCaoThamTra.ImageOptions.LargeImage = CType(resources.GetObject("btBaoCaoThamTra.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.btBaoCaoThamTra.Name = "btBaoCaoThamTra"
+        '
         'ribbonPage1
         '
         Me.ribbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.ribbonPageGroup1})
@@ -100,6 +109,7 @@
         '
         Me.ribbonPageGroup1.ItemLinks.Add(Me.btBaoCaoThamTra, True)
         Me.ribbonPageGroup1.ItemLinks.Add(Me.bt_XuLyToTrinh, True)
+        Me.ribbonPageGroup1.ItemLinks.Add(Me.BarButtonItem_Report, True)
         Me.ribbonPageGroup1.Name = "ribbonPageGroup1"
         Me.ribbonPageGroup1.Text = "Công Việc"
         '
@@ -122,13 +132,13 @@
         Me.DocumentManager1.View = Me.TabbedView1
         Me.DocumentManager1.ViewCollection.AddRange(New DevExpress.XtraBars.Docking2010.Views.BaseView() {Me.TabbedView1})
         '
-        'btBaoCaoThamTra
+        'BarButtonItem_Report
         '
-        Me.btBaoCaoThamTra.Caption = "Báo cáo thẩm tra"
-        Me.btBaoCaoThamTra.Id = 4
-        Me.btBaoCaoThamTra.ImageOptions.Image = CType(resources.GetObject("btBaoCaoThamTra.ImageOptions.Image"), System.Drawing.Image)
-        Me.btBaoCaoThamTra.ImageOptions.LargeImage = CType(resources.GetObject("btBaoCaoThamTra.ImageOptions.LargeImage"), System.Drawing.Image)
-        Me.btBaoCaoThamTra.Name = "btBaoCaoThamTra"
+        Me.BarButtonItem_Report.Caption = "Báo Cáo"
+        Me.BarButtonItem_Report.Id = 5
+        Me.BarButtonItem_Report.ImageOptions.Image = CType(resources.GetObject("BarButtonItem_Report.ImageOptions.Image"), System.Drawing.Image)
+        Me.BarButtonItem_Report.ImageOptions.LargeImage = CType(resources.GetObject("BarButtonItem_Report.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.BarButtonItem_Report.Name = "BarButtonItem_Report"
         '
         'Home
         '
@@ -164,4 +174,5 @@
     Friend WithEvents BarEditItem_Username As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemButtonEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
     Friend WithEvents btBaoCaoThamTra As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem_Report As DevExpress.XtraBars.BarButtonItem
 End Class

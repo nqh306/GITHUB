@@ -106,4 +106,8 @@ Partial Public Class Home
     Private Sub btBaoCaoThamTra_ItemClick(sender As Object, e As ItemClickEventArgs) Handles btBaoCaoThamTra.ItemClick
         ShowForm(BaoCaoThamTra)
     End Sub
+
+    Private Sub BarButtonItem_Report_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem_Report.ItemClick
+        ShowForm(FromReport)
+    End Sub
 End Class

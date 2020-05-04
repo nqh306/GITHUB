@@ -4,7 +4,8 @@ Module Module1
     Public EncryptDecrypt As New Simple3Des("0915330999")
     Public user_login As String = ""
     Public link_folder_database As String = ""
-    Public global_config As String = "D:\App_BanTongHop\app_config.txt"
+    Public global_config As String = "W:\App_BanTongHop\app_config.txt"
+    Public appPath As String = AppDomain.CurrentDomain.BaseDirectory
 
     Public Sub WriteErrorLog(strErrorText As String)
         Dim strPath_Log As String = "W:\App_BanTongHop\"

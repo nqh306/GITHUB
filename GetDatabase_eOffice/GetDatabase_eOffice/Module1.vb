@@ -5,14 +5,21 @@ Imports System.Data.SQLite
 
 Module Module1
     Public USERNAME As String = Environment.UserName
-    Public link_folder_database As String = "D:\App_BanTongHop\database_bantonghop.txt"
-    Public folder_backup As String = "D:\App_BanTongHop\BACKUP\"
-    Public str_log_file As String = "D:\App_BanTongHop\LOG\IMPORT\import_log_" & Now.ToString("yyyyMMdd_hhmmss") & ".txt"
+    Public appPath As String = AppDomain.CurrentDomain.BaseDirectory
+    Public local_config As String = appPath & "Local_Config.txt"
+
+    Public str_log_file As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'folder_log_file'") & "import_log_" & Now.ToString("yyyyMMdd_hhmmss") & ".txt"
+    Public link_folder_database As String = SQL_QUERY_TO_STRING(local_config, True, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'link_folder_database'")
+    Public folder_backup As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'folder_backup'")
+    Public eOffice_Username As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'eOffice_Username'")
+    Public eOffice_Password As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'eOffice_Password'")
+    Public eOffice_Link_HomePage As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'eOffice_Link_HomePage'")
+    Public eOffice_Link_VB_PhatHanh As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'eOffice_Link_VB_PhatHanh'")
+    Public eOffice_Link_ToTrinh As String = SQL_QUERY_TO_STRING(local_config, False, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'eOffice_Link_ToTrinh'")
 
     Public Sub Console_WriteLine(strLogfile As String, strLog As String)
         Try
             Console.WriteLine(strLog)
-
             System.IO.File.AppendAllText(strLogfile, (DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") & Convert.ToString(" - ")) + strLog + vbLf + vbLf)
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -48,19 +55,19 @@ Module Module1
         Dim str_body_email As String = ""
         Dim str_subject_email As String = ""
 
-        'If LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver) = False Then
-        '    str_body_email = "Không thể lấy dữ liệu [VĂN BẢN PHÁT HÀNH] từ hệ thống eOffice - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
-        'Else
-        '    If LAY_THONG_TIN_TO_TRINH(ChromeDriver) = False Then
-        '        str_body_email = "Không thể lấy dữ liệu [XỬ LÝ TỜ TRÌNH] từ hệ thống eOffice - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
-        '    Else
-        If LAYTHONGTIN_TOTRINH_DANGTHEODOI(ChromeDriver) = False Then
-            str_body_email = "Không thể lấy dữ liệu [TỜ TRÌNH ĐANG THEO DÕI] từ hệ thống eOffice - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
+        If LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver) = False Then
+            str_body_email = "Không thể lấy dữ liệu [VĂN BẢN PHÁT HÀNH] từ hệ thống eOffice - " & Now.ToString("dd/MM/yyyy hh:mm:ss tt")
         Else
-            str_body_email = "Lấy dữ liệu từ eOffice THÀNH CÔNG - " & Now.ToString("dd/MM/yyyy hh:mm:ss")
+            If LAY_THONG_TIN_TO_TRINH(ChromeDriver) = False Then
+                str_body_email = "Không thể lấy dữ liệu [XỬ LÝ TỜ TRÌNH] từ hệ thống eOffice - " & Now.ToString("dd/MM/yyyy hh:mm:ss tt")
+            Else
+                If LAYTHONGTIN_TOTRINH_DANGTHEODOI(ChromeDriver) = False Then
+                    str_body_email = "Không thể lấy dữ liệu [TỜ TRÌNH ĐANG THEO DÕI] từ hệ thống eOffice - " & Now.ToString("dd/MM/yyyy hh:mm:ss tt")
+                Else
+                    str_body_email = "Lấy dữ liệu từ eOffice THÀNH CÔNG - " & Now.ToString("dd/MM/yyyy hh:mm:ss tt")
+                End If
+            End If
         End If
-        'End If
-        'End If
 
         ChromeDriver.Quit()
 
@@ -70,8 +77,8 @@ Module Module1
         Dim olMail As Outlook.MailItem
         olMail = OutlookApp.CreateItem(0)
         With olMail
-            .To = "huynq91@evngenco1.vn"
-            .Subject = "[GetDatabase_eOffice] - Notification"
+            .To = SQL_QUERY_TO_STRING(local_config, True, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'Email_To'")
+            .Subject = SQL_QUERY_TO_STRING(local_config, True, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = 'Email_Subject'")
             .HTMLBody = str_body_email
             .Attachments.Add(str_log_file, Outlook.OlAttachmentType.olByValue)
             .Send()
@@ -115,15 +122,15 @@ Module Module1
 
             ChromeDriver = New ChromeDriver(service, driver_option, TimeSpan.FromMinutes(3))
 
-            ChromeDriver.Navigate().GoToUrl("http://eoffice.evngenco1.vn/")
+            ChromeDriver.Navigate().GoToUrl(eOffice_Link_HomePage)
 
             Do
 
             Loop Until Selenium_Check_Element_Exist(ChromeDriver, By.Id("txtUserName")) = True
 
 
-            ChromeDriver.FindElementById("txtUserName").SendKeys("huynq91")
-            ChromeDriver.FindElementById("txtPassword").SendKeys("Admin@1")
+            ChromeDriver.FindElementById("txtUserName").SendKeys(eOffice_Username)
+            ChromeDriver.FindElementById("txtPassword").SendKeys(eOffice_Password)
             ChromeDriver.FindElementById("btclientLogin").Click()
 
             Return ChromeDriver
@@ -135,7 +142,7 @@ Module Module1
 
     Public Function LAY_THONG_TIN_VAN_BAN_PHAT_HANH(ChromeDriver As ChromeDriver) As Boolean
         Try
-            ChromeDriver.Navigate().GoToUrl("https://eoffice.evngenco1.vn/vbdi_vanthu_phathanh.aspx")
+            ChromeDriver.Navigate().GoToUrl(eOffice_Link_VB_PhatHanh)
 
             Dim js As IJavaScriptExecutor = TryCast(ChromeDriver, IJavaScriptExecutor)
 
@@ -165,7 +172,6 @@ Module Module1
                 End Try
 
             Loop Until tongsorecord <> check_load_all_record And tongsorecord <> ""
-            '/html/body/form/div[6]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[5]
             Dim tongsotrang As String = ""
 
             For i As Integer = 1 To Len(Replace(tongsorecord, " ", ""))
@@ -185,7 +191,6 @@ Module Module1
                 If sotrang > 1 Then
                     js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[6]/div[2]/div/div[2]/div/div[7]/div/table/tbody/tr/td/table/tbody/tr/td/div[3]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
                     Do
-                        '/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/table/tbody/tr/td/table/tbody/tr/td/div[3]/input[1]
 
                     Loop Until Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content = document.getElementsByClassName('rgCurrentPage')[0].children[0].innerHTML;;return content;") = Format(sotrang, "0")
                 End If
@@ -198,9 +203,7 @@ Module Module1
                         If InStr(SOVANBAN, "/", CompareMethod.Binary) > 0 Then
                             Dim NGAYVANBAN As String = Selenium_Get_Text_Element(ChromeDriver, By.XPath("//*[@id='ctl00_cpmain_RadGrid_ctl00__" & i & "']/td[3]"))
 
-                            'Dim NGAYVANBAN As Date = Format(DateTime.ParseExact(NGAYVANBAN2, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-
-                            If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_VANBAN_PHATHANH WHERE NGAYVANBAN = '" & NGAYVANBAN & "' AND [SOVANBAN] LIKE '%" & SOVANBAN & "%'") = 0 Then
+                            If SQL_QUERY_TO_INTEGER(link_folder_database, True, "SELECT COUNT(*) FROM DATABASE_VANBAN_PHATHANH WHERE NGAYVANBAN = '" & NGAYVANBAN & "' AND [SOVANBAN] LIKE '%" & SOVANBAN & "%'") = 0 Then
                                 Dim CASEID As String = "VB_" & Now.ToString("yyyyMMddhhmmss") & "_" & sotrang & "_" & i
                                 Dim TRICHYEU As String = Selenium_Get_Text_Element(ChromeDriver, By.XPath("//*[@id='ctl00_cpmain_RadGrid_ctl00__" & i & "']/td[4]/div/div[2]"))
                                 TRICHYEU = Replace(Replace(TRICHYEU, Chr(34), ""), "'", "")
@@ -228,7 +231,7 @@ Module Module1
 
     Public Function LAY_THONG_TIN_TO_TRINH(ChromeDriver As ChromeDriver) As Boolean
         Try
-            ChromeDriver.Navigate().GoToUrl("https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-ket")
+            ChromeDriver.Navigate().GoToUrl(eOffice_Link_ToTrinh)
 
             Do
 
@@ -237,266 +240,289 @@ Module Module1
             Dim js As IJavaScriptExecutor = TryCast(ChromeDriver, IJavaScriptExecutor)
             js.ExecuteScript("document.getElementById('ctl00_cpmain_ctl00_RadGrid_ctl00_ctl03_ctl01_PageSizeComboBox_Input').setAttribute('value', '100')")
 
-            For sotrang As Integer = 1 To 100
-                If Selenium_Check_Element_Exist(ChromeDriver, By.XPath("//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_Pager']/tbody/tr/td/table/tbody/tr/td/div[2]/a[" & sotrang & "]/span")) = True Then
-                    If sotrang > 1 Then
-                        js.ExecuteScript("var xPathRes = document.evaluate ('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/table/tbody/tr/td/table/tbody/tr/td/div[2]/a[" & sotrang & "]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
 
-                        Do
+            Dim tongsorecord As String = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_Pager" & Chr(34) & "]/tbody/tr/td/table/tbody/tr/td/div[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
+            Dim tongsotrang As String = ""
 
-                        Loop Until Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content = document.getElementsByClassName('rgCurrentPage')[0].children[0].innerHTML;;return content;") = Format(sotrang, "0")
-
-                    End If
-
-                    For i As Integer = 0 To 99
-                        Dim ELEMENT_ID As String = "ctl00_cpmain_ctl00_RadGrid_ctl00__" & i
-
-                        If Selenium_Check_Element_Exist(ChromeDriver, By.Id(ELEMENT_ID)) = True Then
-                            Dim SOTOTRINH As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content = document.getElementById('ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(4 + (i * 3), "00") & "_lbl_SOKYHIEU').innerHTML; return content;"))
-                            Dim NGAYTOTRINH As Date = Format(DateTime.ParseExact(ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[5]").Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-
-                            If SOTOTRINH.Length > 0 Then
-                                If SQL_QUERY_TO_INTEGER(link_folder_database, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE (STATUS_DELETED = '' OR STATUS_DELETED IS NULL OR STATUS_DELETED = 'Vĩnh viễn xóa, Không cần tự động lấy lại') AND NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
-                                    js.ExecuteScript("document.getElementById('" & ELEMENT_ID & "').click();")
-
-
-                                    Dim element_check_click_success As String = "//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan']/div[1]/table/tbody/tr/td[1]/div[1]/div/b"
-                                    Do
-
-                                    Loop Until Selenium_Check_Element_Exist(ChromeDriver, By.XPath(element_check_click_success))
-
-                                    Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & sotrang & "_" & i
-
-                                    Dim BANTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[2]/strong").Text
-                                    Dim NOIDUNGTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[2]/div").Text
-
-                                    Dim SOVANBAN As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/div[1]/table/tbody/tr/td[1]/div[1]/div/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
-
-                                    '//*[@id="ctl00_cpmain_ctl00_RadGrid_ctl00_ctl09_pnThongTinVanBan"]/div[1]/table/tbody/tr/td[1]/div[1]/div/a
-
-
-
-                                    Dim SONGHIQUYET As String = ""
-                                    Dim SOQUYETDINH_VANBAN As String = ""
-
-                                    If InStr(SOVANBAN, "/NQ", CompareMethod.Binary) > 0 Then
-                                        SONGHIQUYET = Trim(SOVANBAN)
-                                    Else
-                                        If InStr(SOVANBAN, "/", CompareMethod.Binary) > 0 And InStr(UCase(SOVANBAN), "V/V", CompareMethod.Binary) = 0 Then
-                                            SOQUYETDINH_VANBAN = Trim(SOVANBAN)
-                                        End If
-                                    End If
-
-
-                                    For j As Integer = 2 To 10
-                                        Dim SOVANBAN_CON As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/div[1]/table/tbody/tr/td[1]/div[1]/div/a[" & j & "]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
-                                        If SOVANBAN_CON.Length > 0 Then
-                                            If SOVANBAN.Length = 0 Then
-                                                SOVANBAN = Trim(SOVANBAN_CON)
-                                            Else
-                                                SOVANBAN = SOVANBAN & ";" & Trim(SOVANBAN_CON)
-                                            End If
-
-                                            If InStr(SOVANBAN_CON, "/NQ", CompareMethod.Binary) > 0 Then
-                                                If SONGHIQUYET.Length = 0 Then
-                                                    SONGHIQUYET = Trim(SOVANBAN_CON)
-                                                Else
-                                                    SONGHIQUYET = SONGHIQUYET & ";" & Trim(SOVANBAN_CON)
-                                                End If
-                                            Else
-                                                If InStr(SOVANBAN_CON, "/", CompareMethod.Binary) > 0 And InStr(UCase(SOVANBAN_CON), "V/V", CompareMethod.Binary) = 0 Then
-                                                    If SOQUYETDINH_VANBAN.Length = 0 Then
-                                                        SOQUYETDINH_VANBAN = SOVANBAN_CON
-                                                    Else
-                                                        SOQUYETDINH_VANBAN = SOQUYETDINH_VANBAN & ";" & SOVANBAN_CON
-                                                    End If
-                                                End If
-                                            End If
-
-                                        Else
-                                            Exit For
-                                        End If
-                                    Next
-                                    Dim NGAYNGHIQUYET As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-                                    Dim NGAYQUYETDINH_VANBAN As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-                                    Dim NGAYTHUCHIEN As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-
-                                    If SONGHIQUYET.Length > 0 Then
-                                        Dim DT_NGAYNGHIQUYET As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SONGHIQUYET & "'")
-                                        If DT_NGAYNGHIQUYET.Rows.Count > 0 Then
-                                            For Each DRR As DataRow In DT_NGAYNGHIQUYET.Rows
-
-                                                If DRR("NGAYVANBAN") > NGAYNGHIQUYET Then
-                                                    NGAYNGHIQUYET = Format(DRR("NGAYVANBAN"), "dd/MM/yyyy")
-                                                End If
-                                            Next
-                                        End If
-                                    End If
-
-                                    If SOQUYETDINH_VANBAN.Length > 0 Then
-                                        Dim DT_NGAYQUYETDINH As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SOQUYETDINH_VANBAN & "'")
-                                        If DT_NGAYQUYETDINH.Rows.Count > 0 Then
-                                            For Each DRR As DataRow In DT_NGAYQUYETDINH.Rows
-                                                If DRR("NGAYVANBAN") > NGAYQUYETDINH_VANBAN Then
-                                                    NGAYQUYETDINH_VANBAN = Format(DRR("NGAYVANBAN"), "dd/MM/yyyy")
-                                                End If
-                                            Next
-                                        End If
-
-                                    End If
-
-                                    If NGAYNGHIQUYET > NGAYQUYETDINH_VANBAN Then
-                                        NGAYTHUCHIEN = NGAYNGHIQUYET
-                                    Else
-                                        NGAYTHUCHIEN = NGAYQUYETDINH_VANBAN
-                                    End If
-
-                                    Dim THOIGIANXULY As Integer
-                                    If NGAYTHUCHIEN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
-                                    Else
-                                        THOIGIANXULY = CInt(NGAYTHUCHIEN.Subtract(NGAYTOTRINH).Days)
-                                    End If
-
-                                    Dim NGUOITHUCHIEN As String = ""
-                                    Dim GHICHU As String = ""
-
-
-                                    For j As Integer = 1 To 10
-                                        NGUOITHUCHIEN = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
-
-                                        Select Case NGUOITHUCHIEN
-                                            Case "Hoàng Văn Long"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
-                                                GHICHU = Replace(GHICHU, "&nbsp;", "")
-                                                Exit For
-                                            Case "Nguyễn Quang Huy"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
-                                                GHICHU = Replace(GHICHU, "&nbsp;", "")
-                                                Exit For
-                                            Case "Hoàng Văn Đạt"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
-                                                GHICHU = Replace(GHICHU, "&nbsp;", "")
-                                                Exit For
-                                            Case "Trương Thị Huyền Trang"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
-                                                GHICHU = Replace(GHICHU, "&nbsp;", "")
-                                                Exit For
-                                            Case "Ngô Quốc Huy"
-                                                GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
-                                                GHICHU = Replace(GHICHU, "&nbsp;", "")
-                                                Exit For
-                                        End Select
-                                    Next
-
-                                    If Not GHICHU Is Nothing Then
-                                        If GHICHU.Length > 0 Then
-                                            GHICHU = Edit_GhiChu_BanTongHop(GHICHU)
-                                        End If
-                                    End If
-
-                                    Dim YKIEN_HDTV As String = ""
-                                    Dim NGAY_YKIEN_HDTV_GANNHAT As Date = "01/01/1900"
-
-                                    For stt_hdtv As Integer = 1 To 100
-                                        If Selenium_Check_Element_Exist(ChromeDriver, By.XPath("//*[@id='" & ELEMENT_ID & "']/td[3]/table/tbody/tr[" & stt_hdtv & "]/td[1]")) = True Then
-                                            Dim TVHDTV_NAME As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[3]/table/tbody/tr[" & stt_hdtv & "]/td[1]").Text
-                                            Dim YKIEN_TVHDTV As String = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & Format(((i + 1) * 2) - 1, "0") & "]/td[3]/table/tbody/tr[" & stt_hdtv & "]/td[2]/p', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
-
-                                            If YKIEN_HDTV.Length = 0 Then
-                                                YKIEN_HDTV = "- " & TVHDTV_NAME & Chr(10) & YKIEN_TVHDTV
-                                            Else
-                                                YKIEN_HDTV = YKIEN_HDTV & Chr(10) & "- " & TVHDTV_NAME & Chr(10) & YKIEN_TVHDTV
-                                            End If
-
-                                            If YKIEN_TVHDTV.Length > 0 Then
-                                                Dim NGAYYKIEN As String = ""
-
-                                                For m As Integer = Len(YKIEN_TVHDTV) To 1 Step -1
-                                                    If huynq_Substring(YKIEN_TVHDTV, m, Len(TVHDTV_NAME) + 1) = "[" & TVHDTV_NAME Then
-                                                        For n As Integer = m To Len(YKIEN_TVHDTV)
-                                                            If huynq_isnumeric(huynq_Substring(YKIEN_TVHDTV, n, 1)) = True Then
-                                                                NGAYYKIEN = huynq_Substring(YKIEN_TVHDTV, n, 10)
-                                                                Exit For
-                                                            End If
-                                                        Next
-                                                    End If
-                                                    If NGAYYKIEN.Length > 0 Then
-                                                        If Format(DateTime.ParseExact(NGAYYKIEN, "dd/MM/yyyy", Nothing), "dd/MM/yyyy") > NGAY_YKIEN_HDTV_GANNHAT Then
-                                                            NGAY_YKIEN_HDTV_GANNHAT = Format(DateTime.ParseExact(NGAYYKIEN, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-                                                        End If
-                                                        Exit For
-                                                    End If
-                                                Next
-                                            End If
-
-                                            YKIEN_HDTV = Replace(YKIEN_HDTV, "<br>", " ")
-
-                                        Else
-                                            Exit For
-                                        End If
-                                    Next
-
-                                    Dim STR_LOG As String = USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & ": Khởi tạo bản ghi"
-
-                                    Dim STR_STATUS As String = ""
-                                    Dim STR_REMARKS As String = ""
-
-                                    Dim sovanban_check As String = SONGHIQUYET & SOQUYETDINH_VANBAN
-
-                                    If sovanban_check.Length = 0 Then
-                                        STR_STATUS = "Chờ giải trình"
-                                        STR_REMARKS = "Không ban hành Nghị quyết/Văn bản"
-                                    Else
-                                        If THOIGIANXULY < 0 Then
-                                            STR_STATUS = "Chờ giải trình"
-                                            STR_REMARKS = "Thời gian xử lý không đạt yêu cầu"
-                                        Else
-                                            If THOIGIANXULY > 15 Then
-                                                STR_STATUS = "Chờ giải trình"
-                                                STR_REMARKS = "Thời gian xử lý không đạt yêu cầu"
-                                            Else
-                                                If (SONGHIQUYET.Length > 0 And NGAYNGHIQUYET = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")) Or (SOQUYETDINH_VANBAN.Length > 0 And NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")) Then
-                                                    STR_STATUS = "Chờ giải trình"
-                                                    STR_REMARKS = "Không tìm thấy thông tin văn bản đã ban hành"
-                                                Else
-                                                    STR_STATUS = "Chờ xử lý"
-                                                End If
-                                            End If
-                                        End If
-                                    End If
-
-                                    SOTOTRINH = Replace(Replace(SOTOTRINH, Chr(34), ""), "'", "")
-                                    BANTRINH = Replace(Replace(BANTRINH, Chr(34), ""), "'", "")
-                                    NOIDUNGTRINH = Replace(Replace(NOIDUNGTRINH, Chr(34), ""), "'", "")
-                                    YKIEN_HDTV = Replace(Replace(YKIEN_HDTV, Chr(34), ""), "'", "")
-                                    GHICHU = Replace(Replace(GHICHU, Chr(34), ""), "'", "")
-
-                                    If NGAYNGHIQUYET = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
-                                        If NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
-                                            SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, SOQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
-                                                        "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
-                                        Else
-                                            SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, SOQUYETDINH_VANBAN, NGAYQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
-                                                        "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & NGAYQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
-                                        End If
-                                    Else
-                                        If NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
-                                            SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, NGAYNGHIQUYET, SOQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
-                                                        "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & NGAYNGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
-                                        Else
-                                            SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, NGAYNGHIQUYET, SOQUYETDINH_VANBAN, NGAYQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
-                                                        "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & NGAYNGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & NGAYQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
-                                        End If
-                                    End If
-                                End If
-                            End If
+            For i As Integer = 1 To Len(Replace(tongsorecord, " ", ""))
+                If huynq_Substring(Replace(tongsorecord, " ", ""), i, 1) = "/" Then
+                    For m = i + 1 To Len(Replace(tongsorecord, " ", ""))
+                        If huynq_isnumeric(huynq_Substring(Replace(tongsorecord, " ", ""), m, 1)) = True Then
+                            tongsotrang = tongsotrang & huynq_Substring(Replace(tongsorecord, " ", ""), m, 1)
                         Else
                             Exit For
                         End If
                     Next
-                Else
                     Exit For
                 End If
+            Next
+
+
+            For sotrang As Integer = 1 To CInt(tongsotrang)
+                'If Selenium_Check_Element_Exist(ChromeDriver, By.XPath("//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_Pager']/tbody/tr/td/table/tbody/tr/td/div[2]/a[" & sotrang & "]/span")) = True Then
+                If sotrang > 1 Then
+                    js.ExecuteScript("var xPathRes = document.evaluate ('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_Pager" & Chr(34) & "]/tbody/tr/td/table/tbody/tr/td/div[3]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);xPathRes.singleNodeValue.click();")
+                    Do
+
+                    Loop Until Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content = document.getElementsByClassName('rgCurrentPage')[0].children[0].innerHTML;;return content;") = Format(sotrang, "0")
+
+                End If
+
+                For i As Integer = 0 To 99
+                    Dim ELEMENT_ID As String = "ctl00_cpmain_ctl00_RadGrid_ctl00__" & i
+
+                    If Selenium_Check_Element_Exist(ChromeDriver, By.Id(ELEMENT_ID)) = True Then
+                        Dim SOTOTRINH As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content = document.getElementById('ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(4 + (i * 3), "00") & "_lbl_SOKYHIEU').innerHTML; return content;"))
+                        Dim NGAYTOTRINH As Date = Format(DateTime.ParseExact(ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[5]").Text, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+
+                        If SOTOTRINH.Length > 0 Then
+                            If SQL_QUERY_TO_INTEGER(link_folder_database, True, "SELECT COUNT(*) FROM DATABASE_EOFFICE WHERE (STATUS_DELETED = '' OR STATUS_DELETED IS NULL OR STATUS_DELETED = 'Vĩnh viễn xóa, Không cần tự động lấy lại') AND NGAYTOTRINH = '" & NGAYTOTRINH & "' AND [SOTOTRINH] = '" & SOTOTRINH & "'") = 0 Then
+                                js.ExecuteScript("document.getElementById('" & ELEMENT_ID & "').click();")
+
+
+                                Dim element_check_click_success As String = "//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan']/div[1]/table/tbody/tr/td[1]/div[1]/div/b"
+                                Do
+
+                                Loop Until Selenium_Check_Element_Exist(ChromeDriver, By.XPath(element_check_click_success))
+
+                                Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & sotrang & "_" & i
+
+                                Dim BANTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[2]/strong").Text
+                                Dim NOIDUNGTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[2]/div").Text
+
+                                Dim SOVANBAN As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/div[1]/table/tbody/tr/td[1]/div[1]/div/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+
+                                Dim SONGHIQUYET As String = ""
+                                Dim SOQUYETDINH_VANBAN As String = ""
+
+                                If InStr(SOVANBAN, "/NQ", CompareMethod.Binary) > 0 Then
+                                    SONGHIQUYET = Trim(SOVANBAN)
+                                Else
+                                    If InStr(SOVANBAN, "/", CompareMethod.Binary) > 0 And InStr(UCase(SOVANBAN), "V/V", CompareMethod.Binary) = 0 Then
+                                        SOQUYETDINH_VANBAN = Trim(SOVANBAN)
+                                    End If
+                                End If
+
+
+                                For j As Integer = 2 To 10
+                                    Dim SOVANBAN_CON As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/div[1]/table/tbody/tr/td[1]/div[1]/div/a[" & j & "]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+                                    If SOVANBAN_CON.Length > 0 Then
+                                        If SOVANBAN.Length = 0 Then
+                                            SOVANBAN = Trim(SOVANBAN_CON)
+                                        Else
+                                            SOVANBAN = SOVANBAN & ";" & Trim(SOVANBAN_CON)
+                                        End If
+
+                                        If InStr(SOVANBAN_CON, "/NQ", CompareMethod.Binary) > 0 Then
+                                            If SONGHIQUYET.Length = 0 Then
+                                                SONGHIQUYET = Trim(SOVANBAN_CON)
+                                            Else
+                                                SONGHIQUYET = SONGHIQUYET & ";" & Trim(SOVANBAN_CON)
+                                            End If
+                                        Else
+                                            If InStr(SOVANBAN_CON, "/", CompareMethod.Binary) > 0 And InStr(UCase(SOVANBAN_CON), "V/V", CompareMethod.Binary) = 0 Then
+                                                If SOQUYETDINH_VANBAN.Length = 0 Then
+                                                    SOQUYETDINH_VANBAN = SOVANBAN_CON
+                                                Else
+                                                    SOQUYETDINH_VANBAN = SOQUYETDINH_VANBAN & ";" & SOVANBAN_CON
+                                                End If
+                                            End If
+                                        End If
+
+                                    Else
+                                        Exit For
+                                    End If
+                                Next
+                                Dim NGAYNGHIQUYET As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                                Dim NGAYQUYETDINH_VANBAN As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                                Dim NGAYTHUCHIEN As Date = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+
+                                If SONGHIQUYET.Length > 0 Then
+                                    Dim DT_NGAYNGHIQUYET As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SONGHIQUYET & "'")
+                                    If DT_NGAYNGHIQUYET.Rows.Count > 0 Then
+                                        For Each DRR As DataRow In DT_NGAYNGHIQUYET.Rows
+
+                                            If DRR("NGAYVANBAN") > NGAYNGHIQUYET Then
+                                                NGAYNGHIQUYET = Format(DRR("NGAYVANBAN"), "dd/MM/yyyy")
+                                            End If
+                                        Next
+                                    End If
+                                End If
+
+                                If SOQUYETDINH_VANBAN.Length > 0 Then
+                                    Dim DT_NGAYQUYETDINH As DataTable = SQL_QUERY_TO_DATATABLE(link_folder_database, "SELECT NGAYVANBAN FROM DATABASE_VANBAN_PHATHANH WHERE SOVANBAN = '" & SOQUYETDINH_VANBAN & "'")
+                                    If DT_NGAYQUYETDINH.Rows.Count > 0 Then
+                                        For Each DRR As DataRow In DT_NGAYQUYETDINH.Rows
+                                            If DRR("NGAYVANBAN") > NGAYQUYETDINH_VANBAN Then
+                                                NGAYQUYETDINH_VANBAN = Format(DRR("NGAYVANBAN"), "dd/MM/yyyy")
+                                            End If
+                                        Next
+                                    End If
+
+                                End If
+
+                                If NGAYNGHIQUYET > NGAYQUYETDINH_VANBAN Then
+                                    NGAYTHUCHIEN = NGAYNGHIQUYET
+                                Else
+                                    NGAYTHUCHIEN = NGAYQUYETDINH_VANBAN
+                                End If
+
+                                Dim THOIGIANXULY As Integer
+                                If NGAYTHUCHIEN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
+                                Else
+                                    THOIGIANXULY = CInt(NGAYTHUCHIEN.Subtract(NGAYTOTRINH).Days)
+                                End If
+
+                                Dim NGUOITHUCHIEN As String = ""
+                                Dim GHICHU As String = ""
+
+
+                                For j As Integer = 1 To 10
+                                    NGUOITHUCHIEN = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[2]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+
+                                    If NGUOITHUCHIEN <> "" Then
+                                        Dim find_NGUOITHUCHIEN As Integer = SQL_QUERY_TO_INTEGER(link_folder_database, False, "SELECT COUNT(*) FROM DATABASE_USER WHERE FULLNAME LIKE '%" & NGUOITHUCHIEN & "%'")
+
+                                        If find_NGUOITHUCHIEN > 0 Then
+                                            GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
+                                            GHICHU = Replace(GHICHU, "&nbsp;", "")
+                                            Exit For
+                                        End If
+
+                                        'Select Case NGUOITHUCHIEN
+                                        '    Case "Hoàng Văn Long"
+                                        '        GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
+                                        '        GHICHU = Replace(GHICHU, "&nbsp;", "")
+                                        '        Exit For
+                                        '    Case "Nguyễn Quang Huy"
+                                        '        GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
+                                        '        GHICHU = Replace(GHICHU, "&nbsp;", "")
+                                        '        Exit For
+                                        '    Case "Hoàng Văn Đạt"
+                                        '        GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
+                                        '        GHICHU = Replace(GHICHU, "&nbsp;", "")
+                                        '        Exit For
+                                        '    Case "Trương Thị Huyền Trang"
+                                        '        GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
+                                        '        GHICHU = Replace(GHICHU, "&nbsp;", "")
+                                        '        Exit For
+                                        '    Case "Ngô Quốc Huy"
+                                        '        GHICHU = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format(((i * 3) + 6), "00") & "_pnThongTinVanBan" & Chr(34) & "]/table/tbody/tr[" & j & "]/td[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;;return content;"))
+                                        '        GHICHU = Replace(GHICHU, "&nbsp;", "")
+                                        '        Exit For
+                                        'End Select
+                                    End If
+                                Next
+
+                                If Not GHICHU Is Nothing Then
+                                    If GHICHU.Length > 0 Then
+                                        GHICHU = Edit_GhiChu_BanTongHop(GHICHU)
+                                    End If
+                                End If
+
+                                Dim YKIEN_HDTV As String = ""
+                                Dim NGAY_YKIEN_HDTV_GANNHAT As Date = "01/01/1900"
+
+                                For stt_hdtv As Integer = 1 To 100
+                                    If Selenium_Check_Element_Exist(ChromeDriver, By.XPath("//*[@id='" & ELEMENT_ID & "']/td[3]/table/tbody/tr[" & stt_hdtv & "]/td[1]")) = True Then
+                                        Dim TVHDTV_NAME As String = ChromeDriver.FindElementByXPath("//*[@id='" & ELEMENT_ID & "']/td[3]/table/tbody/tr[" & stt_hdtv & "]/td[1]").Text
+                                        Dim YKIEN_TVHDTV As String = Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('/html/body/form/div[4]/div[2]/div/div[2]/div/div[2]/div[6]/div[1]/div[2]/div/div/div[2]/table/tbody/tr[" & Format(((i + 1) * 2) - 1, "0") & "]/td[3]/table/tbody/tr[" & stt_hdtv & "]/td[2]/p', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;")
+
+                                        If YKIEN_HDTV.Length = 0 Then
+                                            YKIEN_HDTV = "- " & TVHDTV_NAME & Chr(10) & YKIEN_TVHDTV
+                                        Else
+                                            YKIEN_HDTV = YKIEN_HDTV & Chr(10) & "- " & TVHDTV_NAME & Chr(10) & YKIEN_TVHDTV
+                                        End If
+
+                                        If YKIEN_TVHDTV.Length > 0 Then
+                                            Dim NGAYYKIEN As String = ""
+
+                                            For m As Integer = Len(YKIEN_TVHDTV) To 1 Step -1
+                                                If huynq_Substring(YKIEN_TVHDTV, m, Len(TVHDTV_NAME) + 1) = "[" & TVHDTV_NAME Then
+                                                    For n As Integer = m To Len(YKIEN_TVHDTV)
+                                                        If huynq_isnumeric(huynq_Substring(YKIEN_TVHDTV, n, 1)) = True Then
+                                                            NGAYYKIEN = huynq_Substring(YKIEN_TVHDTV, n, 10)
+                                                            Exit For
+                                                        End If
+                                                    Next
+                                                End If
+                                                If NGAYYKIEN.Length > 0 Then
+                                                    If Format(DateTime.ParseExact(NGAYYKIEN, "dd/MM/yyyy", Nothing), "dd/MM/yyyy") > NGAY_YKIEN_HDTV_GANNHAT Then
+                                                        NGAY_YKIEN_HDTV_GANNHAT = Format(DateTime.ParseExact(NGAYYKIEN, "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                                                    End If
+                                                    Exit For
+                                                End If
+                                            Next
+                                        End If
+
+                                        YKIEN_HDTV = Replace(YKIEN_HDTV, "<br>", " ")
+
+                                    Else
+                                        Exit For
+                                    End If
+                                Next
+
+                                Dim STR_LOG As String = USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & ": Khởi tạo bản ghi"
+
+                                Dim STR_STATUS As String = ""
+                                Dim STR_REMARKS As String = ""
+
+                                Dim sovanban_check As String = SONGHIQUYET & SOQUYETDINH_VANBAN
+
+                                If sovanban_check.Length = 0 Then
+                                    STR_STATUS = "Chờ giải trình"
+                                    STR_REMARKS = "Không ban hành Nghị quyết/Văn bản"
+                                Else
+                                    If THOIGIANXULY < 0 Then
+                                        STR_STATUS = "Chờ giải trình"
+                                        STR_REMARKS = "Thời gian xử lý không đạt yêu cầu"
+                                    Else
+                                        If THOIGIANXULY > 15 Then
+                                            STR_STATUS = "Chờ giải trình"
+                                            STR_REMARKS = "Thời gian xử lý không đạt yêu cầu"
+                                        Else
+                                            If (SONGHIQUYET.Length > 0 And NGAYNGHIQUYET = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")) Or (SOQUYETDINH_VANBAN.Length > 0 And NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")) Then
+                                                STR_STATUS = "Chờ giải trình"
+                                                STR_REMARKS = "Không tìm thấy thông tin văn bản đã ban hành"
+                                            Else
+                                                STR_STATUS = "Chờ xử lý"
+                                            End If
+                                        End If
+                                    End If
+                                End If
+
+                                SOTOTRINH = Replace(Replace(SOTOTRINH, Chr(34), ""), "'", "")
+                                BANTRINH = Replace(Replace(BANTRINH, Chr(34), ""), "'", "")
+                                NOIDUNGTRINH = Replace(Replace(NOIDUNGTRINH, Chr(34), ""), "'", "")
+                                YKIEN_HDTV = Replace(Replace(YKIEN_HDTV, Chr(34), ""), "'", "")
+                                GHICHU = Replace(Replace(GHICHU, Chr(34), ""), "'", "")
+
+                                If NGAYNGHIQUYET = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
+                                    If NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
+                                        SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, SOQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
+                                                    "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
+                                    Else
+                                        SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, SOQUYETDINH_VANBAN, NGAYQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
+                                                    "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & NGAYQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
+                                    End If
+                                Else
+                                    If NGAYQUYETDINH_VANBAN = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy") Then
+                                        SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, NGAYNGHIQUYET, SOQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
+                                                    "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & NGAYNGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
+                                    Else
+                                        SQL_QUERY(link_folder_database, True, "INSERT INTO DATABASE_EOFFICE(CASEID, SOTOTRINH, NGAYTOTRINH, BANTRINH, NOIDUNGTRINH, SOVANBAN, SONGHIQUYET, NGAYNGHIQUYET, SOQUYETDINH_VANBAN, NGAYQUYETDINH_VANBAN, YKIEN_HDTV, NGAY_YKIEN_HDTV_GANNHAT, NGUOITHUCHIEN, NGAYTHUCHIEN, THOIGIANXULY, GHICHU, LOG, STATUS, USER_CREATED, LAST_USER_MODIFIED, REMARKS) " &
+                                                    "VALUES ('" & CASEID & "', '" & SOTOTRINH & "', '" & NGAYTOTRINH & "', '" & BANTRINH & "', '" & NOIDUNGTRINH & "', '" & SOVANBAN & "', '" & SONGHIQUYET & "', '" & NGAYNGHIQUYET & "', '" & SOQUYETDINH_VANBAN & "', '" & NGAYQUYETDINH_VANBAN & "', '" & YKIEN_HDTV & "', '" & NGAY_YKIEN_HDTV_GANNHAT & "', '" & NGUOITHUCHIEN & "', '" & NGAYTHUCHIEN & "', " & THOIGIANXULY & ", '" & GHICHU & "', '" & STR_LOG & "', '" & STR_STATUS & "', '" & USERNAME & "_" & Now.ToString("yyyy/MM/dd hh:mm:ss") & "', '', '" & STR_REMARKS & "')")
+                                    End If
+                                End If
+                            End If
+                        End If
+                    Else
+                        Exit For
+                    End If
+                Next
+                'Else
+                '    Exit For
+                'End If
             Next
             Return True
         Catch ex As Exception
@@ -509,27 +535,31 @@ Module Module1
 
         Try
             SQL_QUERY(link_folder_database, True, "DELETE FROM DATABASE_TOTRINH_THEODOI")
-            SQL_QUERY(link_folder_database, False, "vacumm")
-            Dim STR_URL As String = ""
-            Dim STR_PERSON As String = ""
-            For i = 1 To 5
-                Select Case i
-                    Case 1
-                        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-252"
-                        STR_PERSON = "Hoàng Văn Long"
-                    Case 2
-                        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-468"
-                        STR_PERSON = "Nguyễn Quang Huy"
-                    Case 3
-                        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-425"
-                        STR_PERSON = "Trương Thị Huyền Trang"
-                    Case 4
-                        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-456"
-                        STR_PERSON = "Ngô Quốc Huy"
-                    Case 5
-                        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-442"
-                        STR_PERSON = "Hoàng Văn Đạt"
-                End Select
+            SQL_QUERY(link_folder_database, False, "vacuum")
+
+            Dim dt As DataTable = SQL_QUERY_TO_DATATABLE(local_config, "SELECT * FROM CONFIG WHERE Field_Name LIKE 'eOffice_User_XuLyToTrinh_%'")
+
+            For Each drr As DataRow In dt.Rows
+                'Select Case i
+                '    Case 1
+                '        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-252"
+                '        STR_PERSON = "Hoàng Văn Long"
+                '    Case 2
+                '        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-468"
+                '        STR_PERSON = "Nguyễn Quang Huy"
+                '    Case 3
+                '        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-425"
+                '        STR_PERSON = "Trương Thị Huyền Trang"
+                '    Case 4
+                '        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-456"
+                '        STR_PERSON = "Ngô Quốc Huy"
+                '    Case 5
+                '        STR_URL = "https://eoffice.evngenco1.vn/hdtv_smartbox.aspx?id=hdtv-vbde-td-442"
+                '        STR_PERSON = "Hoàng Văn Đạt"
+                'End Select
+
+                Dim STR_URL As String = SQL_QUERY_TO_STRING(local_config, True, "SELECT Field_Value_1 FROM CONFIG WHERE Field_Name = '" & drr("Field_Name").ToString & "'")
+                Dim STR_PERSON As String = SQL_QUERY_TO_STRING(local_config, True, "SELECT Field_Value_2 FROM CONFIG WHERE Field_Name = '" & drr("Field_Name").ToString & "'")
 
                 ChromeDriver.Navigate().GoToUrl(STR_URL)
 
@@ -549,11 +579,16 @@ Module Module1
                         If Selenium_Check_Element_Exist(ChromeDriver, By.Id(elementID)) = False Then
                             Exit For
                         Else
-                            Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & i & "_" & j
+                            Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & j
                             Dim SOTOTRINH As String = ChromeDriver.FindElementById("ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format((j * 3) + 4, "00") & "_lbl_SOKYHIEU").Text
                             Dim NGAYTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00__" & j & "']/td[4]").Text
                             Dim BANTRINH As String = ChromeDriver.FindElementById("ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format((j * 3) + 4, "00") & "_lbl_c6").Text
-                            Dim NOIDUNGTRINH As String = ChromeDriver.FindElementById(elementID).Text
+                            Dim NOIDUNGTRINH As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00__" & j & Chr(34) & "]/td[1]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+
+                            NOIDUNGTRINH = Replace(NOIDUNGTRINH, Chr(13), "")
+                            NOIDUNGTRINH = Replace(NOIDUNGTRINH, Chr(160), "")
+                            NOIDUNGTRINH = Replace(NOIDUNGTRINH, Chr(10), "")
+                            NOIDUNGTRINH = Trim(NOIDUNGTRINH)
 
                             Dim YKIEN_HDTV As String = ""
                             Dim NGAY_YKIEN_HDTV_GANNHAT As Date = "01/01/1900"
@@ -615,11 +650,16 @@ Module Module1
                         If Selenium_Check_Element_Exist(ChromeDriver, By.Id(elementID)) = False Then
                             Exit For
                         Else
-                            Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & i & "_" & j
+                            Dim CASEID As String = Now.ToString("yyyyMMddhhmmss") & "_" & j
                             Dim SOTOTRINH As String = ChromeDriver.FindElementById("ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format((j * 3) + 4, "00") & "_lbl_SOKYHIEU").Text
                             Dim NGAYTRINH As String = ChromeDriver.FindElementByXPath("//*[@id='ctl00_cpmain_ctl00_RadGrid_ctl00__" & j & "']/td[4]").Text
                             Dim BANTRINH As String = ChromeDriver.FindElementById("ctl00_cpmain_ctl00_RadGrid_ctl00_ctl" & Format((j * 3) + 4, "00") & "_lbl_c6").Text
-                            Dim NOIDUNGTRINH As String = ChromeDriver.FindElementById(elementID).Text
+                            Dim NOIDUNGTRINH As String = Trim(Selenium_JavaScriptExecute_ToString(ChromeDriver, "var content =document.evaluate('//*[@id=" & Chr(34) & "ctl00_cpmain_ctl00_RadGrid_ctl00__" & j & Chr(34) & "]/td[1]/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;return content;"))
+
+                            NOIDUNGTRINH = Replace(NOIDUNGTRINH, Chr(13), "")
+                            NOIDUNGTRINH = Replace(NOIDUNGTRINH, Chr(160), "")
+                            NOIDUNGTRINH = Replace(NOIDUNGTRINH, Chr(10), "")
+                            NOIDUNGTRINH = Trim(NOIDUNGTRINH)
 
                             Dim YKIEN_HDTV As String = ""
                             Dim NGAY_YKIEN_HDTV_GANNHAT As Date = "01/01/1900"
@@ -682,38 +722,36 @@ Module Module1
         End Try
     End Function
 
-
-    Public Function SQL_QUERY_TO_DATE(link_database As String, sql_string As String) As DateTime
+    Public Function SQL_QUERY_TO_STRING(link_database As String, writelog As Boolean, sql_string As String) As String
+        Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
+        MYCONNECTION.Open()
         Try
-            Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
-            MYCONNECTION.Open()
-
             Dim CMD As New SQLiteCommand
             CMD.CommandText = sql_string
             CMD.Connection = MYCONNECTION
             Dim RDR As SQLiteDataReader = CMD.ExecuteReader
             Dim DT As New DataTable
-            Dim result As DateTime
             DT.Load(RDR)
             RDR.Close()
+            Dim result As String = ""
             If DT.Rows.Count > 0 Then
-                If DT.Rows(0).Item(0) <> "" Then
-                    result = DT.Rows(0).Item(0)
-                Else
-                    result = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
-                End If
-            Else
-                result = Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+                result = DT.Rows(0).Item(0).ToString
             End If
-            Console_WriteLine(str_log_file, "[SQL_QUERY_TO_DATE] - '" & sql_string & "'" & Chr(10) & "Result: " & result)
+            If writelog = True Then
+                Console_WriteLine(str_log_file, "[SQL_QUERY_TO_STRING] - '" & sql_string & "' - Result: " & result)
+            End If
+            MYCONNECTION.Close()
             Return result
         Catch ex As Exception
-            Console_WriteLine(str_log_file, "[SQL_QUERY_TO_DATE] - '" & sql_string & "'" & Chr(10) & "Error Message: " & ex.Message)
-            Return Format(DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", Nothing), "dd/MM/yyyy")
+            MYCONNECTION.Close()
+            If writelog = True Then
+                Console_WriteLine(str_log_file, "[SQL_QUERY_TO_STRING] - '" & sql_string & "' - Error Message: " & ex.Message)
+            End If
+            Return Nothing
         End Try
     End Function
 
-    Public Function SQL_QUERY_TO_INTEGER(link_database As String, sql_string As String) As Integer
+    Public Function SQL_QUERY_TO_INTEGER(link_database As String, writelog As Boolean, sql_string As String) As Integer
         Try
             Dim MYCONNECTION As New SQLiteConnection("DataSource=" & link_database & ";version=3;new=False;datetimeformat=CurrentCulture;")
             MYCONNECTION.Open()
@@ -735,10 +773,16 @@ Module Module1
                     result = CInt(DT.Rows(0).Item(0).ToString)
                 End If
             End If
-            Console_WriteLine(str_log_file, "[SQL_QUERY_TO_INTEGER] - '" & sql_string & "' - Result: " & result)
+            If writelog = True Then
+                Console_WriteLine(str_log_file, "[SQL_QUERY_TO_INTEGER] - '" & sql_string & "' - Result: " & result)
+            End If
+
             Return result
         Catch ex As Exception
-            Console_WriteLine(str_log_file, "[SQL_QUERY_TO_INTEGER] - '" & sql_string & "' - Error Message: " & ex.Message)
+            If writelog = True Then
+                Console_WriteLine(str_log_file, "[SQL_QUERY_TO_INTEGER] - '" & sql_string & "' - Error Message: " & ex.Message)
+            End If
+
             Return Nothing
         End Try
     End Function
